@@ -1,30 +1,94 @@
 # Hawkins Frequency
 
-A fan-made retro **Heathkit H-89** green-phosphor terminal that chats
-Stranger Things lore, powered by Google Gemini. Styled after a real 1980s
-Heathkit H-89 all-in-one computer — charcoal plastic chassis, recessed CRT
-bezel, scanlines, slow vertical-hold roll, and a branded orange/blue
-Heathkit badge. Built with TanStack Start, React 19, Vite 7, and
-Tailwind v4.
+A fan-made retro **Heathkit H-89** green-phosphor terminal that lets kids
+and adults explore *Stranger Things* lore safely and at the right depth,
+powered by Google Gemini 2.5 Flash. Styled after a real 1980s Heathkit
+H-89 all-in-one computer — charcoal plastic chassis, recessed CRT bezel,
+scanlines, slow vertical-hold roll, blinking cursor, and a branded
+orange/blue Heathkit badge. Built with TanStack Start, React 19, Vite 7,
+and Tailwind v4.
+
+## Why this exists
+
+My nephew Noah is a young kid who desperately wanted to watch Netflix's
+*Stranger Things*. My sister (Noah's mom) started Season 1 with him to
+gauge what he could handle, and they hit a wall: Noah kept pausing the
+show to ask questions, and she was often at a loss for the right words.
+
+Noah is too little for the unpredictable nature of open-ended AI — he
+needs a tool where he (or his mom) can get age-appropriate answers.
+Meanwhile his mom wanted her *own* device to explore deep lore and the
+origin story without risking spoilers for either of them.
+
+So I opened Google's Vertex AI and built this — a fan-made application
+on Gemini 2.5 Flash, dressed up like an 80s Heathkit terminal to drop
+them straight into the world of the show.
 
 ## Summary
 
 Hawkins Frequency boots like a period-correct terminal ("PROPERTY OF
 HAWKINS MIDDLE SCHOOL — HEATHKIT TERMINAL H-89"), asks you to pick a
-companion (Eleven or Dustin), confirms your spoiler clearance by season
-(1–5 or *The First Shadow*), and then streams in-character lore answers
-from Gemini. The whole experience runs client-side: there is no backend,
-no database, and no analytics. You bring your own Google Gemini API key
-and it stays in your browser tab.
+companion (Eleven for kids, Dustin for adults), confirms your spoiler
+clearance by season (1–5 or *The First Shadow*), then streams
+in-character lore answers character-by-character like an old CRT. The
+whole experience runs client-side: there is no backend, no database, and
+no analytics. You bring your own Google Gemini API key and it stays in
+your browser tab.
 
-Highlights:
+## Capabilities
 
-- Period-accurate Heathkit H-89 chassis and CRT styling
-- Two in-character guides — Eleven (kid-safe) and Dustin (full lore)
-- Per-season spoiler gating with a clearance prompt
-- Streaming responses with a typewriter cadence
-- Strict BYOK security model (see below)
-- Footer IP / legal notice rendered on every screen
+### 🧇 Child Mode — persona inspired by Eleven (for Noah)
+
+A strict safety layer overrides standard model behavior:
+
+- **Reality Check Protocol** — hard-coded logic that clarifies monsters
+  are "real in the show" but explicitly cannot enter his house.
+- **Safety Filter** — zero-tolerance for disturbing descriptions. Scary
+  requests are redirected and graphic imagery is replaced with safe,
+  elementary observations.
+- **Heroism Framing** — pivots scary answers to focus on how the friends
+  protect each other rather than on the danger itself.
+- **Syntactic Alignment** — vocabulary is constrained to Eleven's
+  simple, fragmented Season 1 speech patterns.
+- **Total Topic Lock** — refuses real-world discussion (news, cast,
+  creators) to keep 100% immersion in the story. (Adult Mode shares
+  this lock.)
+
+### 🧢 Adult Mode — persona inspired by Dustin (for Noah's mom)
+
+Built for logic and depth:
+
+- **Spoiler Firewall** — a dynamic "Season State" check verifies the
+  user's watch progress before every session and blocks future plot
+  leaks. (Child Mode shares this strict firewall.)
+- **History Recall** — selecting Season 5 unlocks the complete archive
+  of every previous season, so an adult mid-Volume 1 can ask "wait, who
+  was that guy again?" and get instant Seasons 1–4 context without
+  leaving the interface. (Eleven also has this encyclopedic memory.)
+- **Deep Lore Integration** — discussion of the stage play *The First
+  Shadow* is unlocked for theory-crafting toward the final season.
+  (Child Mode can access this too, age-appropriately.)
+- **Tonal Shift** — high-detail responses with scientific analogies and
+  D&D metaphors tuned to an adult fan.
+
+### 🔄 Mode switching
+
+A **RESET** protocol allows seamless hand-offs between Noah (Child Mode)
+and his mom (Adult Mode) on the same device.
+
+### 🔦 80s terminal experience
+
+- Authentic **Heathkit H-89** charcoal-plastic chassis with realistic
+  shading, recessed CRT bezel, and a period-correct orange/blue Heathkit
+  H-89 brand badge.
+- **CRT scanline overlay**, slow vertical-hold roll, subtle flicker, and
+  green-phosphor glow.
+- **Slim, era-appropriate blinking cursor** (replaced the original
+  block cursor).
+- **Character-by-character output rendering** so responses appear one
+  character at a time like an old Heathkit terminal.
+- **Clearer input placeholder text** for more intuitive onboarding.
+- Persistent **IP / legal footer** on every screen.
 
 ## IP / Legal Footer
 
@@ -92,12 +156,13 @@ bun run build
 
 - `src/routes/` — TanStack Start file-based routes (`__root.tsx`, `index.tsx`)
 - `src/components/` — `BootSequence`, `ChatInterface`, `SettingsModal`, `SpoilerCheck`
-- `src/hooks/useGeminiChat.ts` — reads the key from `sessionStorage` and
-  instantiates `@google/genai` per session
+- `src/hooks/useGeminiChat.ts` — reads the key from `sessionStorage`,
+  instantiates `@google/genai` per session, and applies the Child/Adult
+  persona + safety/spoiler system prompts
 - `src/lib/apiKeyStorage.ts` — the only place that touches storage; the
   single source of truth for the session-only policy
-- `src/styles.css` — Heathkit H-89 chassis, CRT bezel, scanlines, and the
-  `.crt-footer` IP notice styling
+- `src/styles.css` — Heathkit H-89 chassis, CRT bezel, scanlines,
+  blinking cursor, and the `.crt-footer` IP notice styling
 
 ## License
 
