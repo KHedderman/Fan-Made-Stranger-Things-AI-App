@@ -30,6 +30,7 @@ Live: <https://fanstrangerthings.app>
 - [Build](#build)
 - [Project layout](#project-layout)
 - [Known limitations](#known-limitations)
+- [Accessibility](#accessibility)
 - [License](#license)
 
 ---
@@ -433,9 +434,11 @@ bun run format      # prettier
   no usage metrics out of the box.
 - **No multi-user accounts.** Each browser tab is its own session.
   Conversation history is not persisted across tabs or reloads.
-- **Motion-heavy CRT effects.** Scanlines, vertical-hold roll, and
-  flicker can affect users with vestibular sensitivity. A
-  `prefers-reduced-motion` opt-out is on the future-improvements list.
+- **Motion-heavy CRT effects, with an opt-out.** Scanlines,
+  vertical-hold roll, flicker, and the blinking REC dot can affect
+  users with vestibular sensitivity. The app honors the OS-level
+  `prefers-reduced-motion` setting and disables those animations
+  automatically when it is enabled.
 - **Heathkit H-89 aesthetic only.** Not a faithful emulator — no HDOS
   prompt, no keyboard remap, no serial protocol. The status strip
   (`HEATHKIT H-89 · HDOS 2.0 · 9600 BAUD · ONLINE`) is period-correct
