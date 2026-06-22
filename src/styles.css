@@ -143,7 +143,7 @@
   }
 }
 
-/* === Hawkins Frequency — Heathkit H-19 Green Phosphor CRT === */
+/* === Hawkins Frequency — Heathkit H-89 Green Phosphor CRT === */
 :root {
     --phosphor: #33ff66;
     --phosphor-dim: rgba(51, 255, 102, 0.55);
@@ -168,7 +168,7 @@ body {
     -webkit-font-smoothing: antialiased;
 }
 
-/* === Heathkit H-19 gray plastic chassis === */
+/* === Heathkit H-89 gray plastic chassis === */
 .crt-case {
     position: fixed;
     inset: 0;

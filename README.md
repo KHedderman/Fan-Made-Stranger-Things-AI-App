@@ -1,6 +1,6 @@
 # Hawkins Frequency
 
-A fan-made retro Heathkit-H19-style green-phosphor terminal that chats
+A fan-made retro Heathkit-H89-style green-phosphor terminal that chats
 Stranger Things lore, powered by Google Gemini. Built with TanStack Start,
 React 19, Vite 7, and Tailwind v4.
 
