@@ -99,8 +99,12 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
         content:
           "Fan-made Stranger Things AI app: retro Heathkit H-89 terminal, kid-safe Eleven mode, deep-lore Dustin mode, per-season spoiler firewall. BYOK Google Gemini.",
       },
-      { property: "og:image", content: "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/eadb3999-cad0-46bc-9c7b-f78758ab681d/id-preview-cc24fbfd--2f9672cb-1be7-4623-ad10-bdf1f5bca0f7.lovable.app-1782161459281.png" },
-      { name: "twitter:image", content: "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/eadb3999-cad0-46bc-9c7b-f78758ab681d/id-preview-cc24fbfd--2f9672cb-1be7-4623-ad10-bdf1f5bca0f7.lovable.app-1782161459281.png" },
+      { property: "og:image", content: "https://fanstrangerthings.app/og-image.png" },
+      { property: "og:image:width", content: "1920" },
+      { property: "og:image:height", content: "1080" },
+      { property: "og:image:alt", content: "Heathkit H-89 green-phosphor terminal showing the fan-made Stranger Things AI boot screen with CHILD and ADULT mode buttons." },
+      { name: "twitter:image", content: "https://fanstrangerthings.app/og-image.png" },
+      { name: "twitter:image:alt", content: "Heathkit H-89 green-phosphor terminal showing the fan-made Stranger Things AI boot screen with CHILD and ADULT mode buttons." },
     ],
     links: [
       { rel: "preconnect", href: "https://fonts.googleapis.com" },
