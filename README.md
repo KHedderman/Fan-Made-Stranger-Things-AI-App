@@ -200,6 +200,71 @@ The key handling is deliberately strict and **isolated per visitor**:
 If no key is present, the terminal posts a non-blocking system notice
 pointing you to the SETTINGS modal instead of failing silently.
 
+## Keep your info safe — user checklist
+
+This app is BYOK (bring your own key), so the security of your Google
+Gemini key is mostly in your hands. Follow these rules and your key
+stays yours.
+
+**Before you paste your key**
+
+1. **Confirm the URL.** Only paste your key on
+   `https://fanstrangerthings.app` (or a localhost copy you built
+   yourself). Check for the padlock and the exact domain — phishing
+   clones are the #1 way BYOK keys get stolen.
+2. **Use a dedicated key, not your "main" Google Cloud key.** In
+   [Google AI Studio](https://aistudio.google.com/app/apikey), create a
+   *new* API key just for this app. If it ever leaks, you can revoke
+   that one key without touching anything else.
+3. **Set a spending cap / quota in Google Cloud.** Even though the free
+   tier covers casual use, go to your Google Cloud project for that key
+   and set a daily quota or a billing alert. This caps the blast radius
+   if a key ever escapes.
+4. **Never paste your key into chat, screenshots, GitHub issues, or
+   Discord.** If you share a screenshot of the SETTINGS modal, the key
+   input is masked — keep it that way.
+
+**While you're using the app**
+
+5. **Don't use it on a shared or public computer** (library, hotel
+   lobby, classroom) unless you plan to close the tab when you're done.
+   The key lives in `sessionStorage`, which is wiped on tab close — but
+   only if you actually close the tab.
+6. **Use the RESET / clear-key button when you're finished** on any
+   device that isn't exclusively yours. The SETTINGS modal has a
+   "Clear key" action that wipes the key immediately.
+7. **Keep your browser and extensions trustworthy.** A malicious
+   browser extension with "read all site data" permission can read any
+   key any web app stores — that is true of every BYOK tool on the
+   internet, not just this one. Audit your extensions.
+8. **Don't fork the repo and hardcode your key into the source.** The
+   app is designed so the key is only ever entered at runtime in the
+   browser. If you commit a key to a fork, GitHub's secret scanner (and
+   bots) will find it within minutes.
+
+**If you think your key leaked**
+
+9. **Revoke it immediately** at
+   <https://aistudio.google.com/app/apikey> — delete the key, then
+   generate a new one. Revocation is instant.
+10. **Check your Google Cloud billing** for unexpected usage on that
+    key's project and file a billing dispute with Google if needed.
+11. **Clear the app's storage** for `fanstrangerthings.app` in your
+    browser's site settings, then paste the new key.
+
+**What this app will never do**
+
+- Ask you to email, DM, or paste your key anywhere outside the
+  SETTINGS modal.
+- Send your key to any server owned by this project — there is no
+  such server.
+- Store your key in `localStorage`, cookies, or any cross-tab
+  location.
+- Log, analyze, or transmit your prompts or Gemini's responses
+  anywhere other than directly between your browser and Google.
+
+
+
 ## Cost — what to expect
 
 This app does not bill you. Google bills you (or doesn't, if you stay in
