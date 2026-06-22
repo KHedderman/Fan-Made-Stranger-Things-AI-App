@@ -28,7 +28,7 @@ Get a free key at [Google AI Studio](https://aistudio.google.com/app/apikey).
 
 ## Model
 
-Chat uses `gemini-3.5-flash` for a good balance of latency and quality.
+Chat uses `gemini-2.5-flash` for a good balance of latency and quality.
 
 ## Run locally
 
