@@ -221,16 +221,39 @@ function Index() {
     };
 
     return (
-        <div className="relative w-full h-screen bg-black text-2xl md:text-3xl p-4 overflow-hidden crt-glow">
-            <div className="scanline" />
-            <button
-                onClick={() => setSettingsOpen(true)}
-                className="absolute top-3 right-3 z-[150] border-2 border-current px-3 py-1 text-base md:text-lg hover:bg-green-900/50"
-                aria-label="Open settings"
-            >
-                [ ⚙ SETTINGS{hasApiKey ? '' : ' • KEY NEEDED'} ]
-            </button>
-            <main className="w-full h-full max-w-4xl mx-auto flex flex-col">{renderContent()}</main>
+        <div className="crt-shell text-xl sm:text-2xl md:text-3xl">
+            {/* CRT effects layered above content */}
+            <div className="scanlines-static" aria-hidden />
+            <div className="scanline-roll" aria-hidden />
+
+            <div className="crt-flicker h-full w-full flex flex-col">
+                {/* Top status strip — SETTINGS docked here */}
+                <header className="crt-status grid grid-cols-[minmax(0,1fr)_auto] sm:flex sm:items-center sm:justify-between">
+                    <div className="flex min-w-0 items-center gap-3 truncate">
+                        <span className="rec-dot" aria-hidden />
+                        <span className="truncate">
+                            HEATHKIT&nbsp;H-19 · HAWKINS&nbsp;FREQUENCY · CH&nbsp;104.7
+                        </span>
+                    </div>
+                    <div className="flex shrink-0 items-center gap-3">
+                        <span className="hidden sm:inline opacity-70">
+                            KEY: {hasApiKey ? 'OK' : 'MISSING'}
+                        </span>
+                        <button
+                            onClick={() => setSettingsOpen(true)}
+                            className="border border-current px-2 py-0.5 hover:bg-[rgba(51,255,102,0.15)] transition-colors"
+                            aria-label="Open settings"
+                        >
+                            [ ⚙ SETTINGS{hasApiKey ? '' : ' · KEY NEEDED'} ]
+                        </button>
+                    </div>
+                </header>
+
+                <main className="crt-content mx-auto w-full max-w-5xl flex-1 flex flex-col">
+                    {renderContent()}
+                </main>
+            </div>
+
             <SettingsModal open={settingsOpen} onClose={() => setSettingsOpen(false)} />
         </div>
     );
