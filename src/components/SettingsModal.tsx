@@ -1,5 +1,13 @@
 import React, { useEffect, useState } from 'react';
-import { getApiKey, setApiKey, clearApiKey } from '../lib/apiKeyStorage';
+import {
+    getApiKey,
+    setApiKey,
+    clearApiKey,
+    getModel,
+    setModel,
+    SUPPORTED_MODELS,
+    type GeminiModelId,
+} from '../lib/apiKeyStorage';
 
 interface SettingsModalProps {
     open: boolean;
@@ -10,10 +18,12 @@ const SettingsModal: React.FC<SettingsModalProps> = ({ open, onClose }) => {
     const [value, setValue] = useState('');
     const [reveal, setReveal] = useState(false);
     const [saved, setSaved] = useState(false);
+    const [model, setModelState] = useState<GeminiModelId>(getModel());
 
     useEffect(() => {
         if (open) {
             setValue(getApiKey() ?? '');
+            setModelState(getModel());
             setSaved(false);
         }
     }, [open]);
@@ -24,9 +34,11 @@ const SettingsModal: React.FC<SettingsModalProps> = ({ open, onClose }) => {
         e.preventDefault();
         if (!value.trim()) return;
         setApiKey(value);
+        setModel(model);
         setSaved(true);
         setTimeout(() => onClose(), 600);
     };
+
 
     const handleClear = () => {
         clearApiKey();
