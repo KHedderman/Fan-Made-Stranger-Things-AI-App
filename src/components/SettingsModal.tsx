@@ -115,23 +115,48 @@ const SettingsModal: React.FC<SettingsModalProps> = ({ open, onClose }) => {
                         </div>
                     </fieldset>
 
-                    <p className="text-base md:text-lg text-green-500/90 leading-snug">
-                        For your security, your API key is stored only in this browser session.
-                        It will be cleared automatically when you close this tab.
-                    </p>
-
-                    <p className="text-base md:text-lg">
-                        Get a free API key at{' '}
-                        <a
-                            href="https://aistudio.google.com/app/apikey"
-                            target="_blank"
-                            rel="noreferrer noopener"
-                            className="underline hover:bg-green-900/50"
-                        >
-                            Google AI Studio
-                        </a>
-                        .
-                    </p>
+                    <div className="border-2 border-current p-3 space-y-2 text-base md:text-lg leading-snug text-green-500/90">
+                        <p>
+                            <span className="text-green-300">/// YOUR KEY, YOUR SESSION ///</span>
+                        </p>
+                        <p>
+                            Your API key is stored ONLY in this browser tab's session memory.
+                            It is never sent to any Hawkins Frequency server, never written to
+                            disk, never shared across tabs or visitors, and is wiped the moment
+                            you close this tab. Other people using the app cannot see or reuse
+                            your key — each visitor must bring their own.
+                        </p>
+                        <p>
+                            <span className="text-green-300">/// COST ///</span> Google AI
+                            Studio offers a generous free tier for{' '}
+                            <code>gemini-2.5-flash</code> that covers casual chat (rate-limited
+                            per minute/day, no card required). Beyond the free tier, typical
+                            chat turns cost a small fraction of a cent each at current Gemini
+                            2.5 Flash pricing — a long evening of questions is usually well
+                            under $1. Check{' '}
+                            <a
+                                href="https://ai.google.dev/pricing"
+                                target="_blank"
+                                rel="noreferrer noopener"
+                                className="underline hover:bg-green-900/50"
+                            >
+                                Google's current pricing
+                            </a>{' '}
+                            for exact rates.
+                        </p>
+                        <p>
+                            Get a free API key at{' '}
+                            <a
+                                href="https://aistudio.google.com/app/apikey"
+                                target="_blank"
+                                rel="noreferrer noopener"
+                                className="underline hover:bg-green-900/50"
+                            >
+                                Google AI Studio
+                            </a>
+                            .
+                        </p>
+                    </div>
 
                     <div className="flex flex-wrap gap-3 pt-2">
                         <button
