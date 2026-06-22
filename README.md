@@ -1,4 +1,4 @@
-# Hawkins Frequency — Fan-Made Stranger Things AI App
+# Fan-Made Stranger Things AI App
 
 A fan-made *Stranger Things* AI app, styled as a retro **Heathkit H-89**
 green-phosphor terminal, that lets kids and adults explore the show's
