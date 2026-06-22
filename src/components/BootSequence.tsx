@@ -8,8 +8,8 @@ interface BootSequenceProps {
 
 const bootLines = [
     "° . * . ° . * . ° . * . °",
-    "/// HAWKINS MIDDLE A.V. CLUB ///",
-    "/// HEATHKIT TERMINAL 84-K ///",
+    "/// PROPERTY OF HAWKINS MIDDLE SCHOOL ///",
+    "/// HEATHKIT TERMINAL H-89 ///",
     "/// ENCRYPTED CHANNEL OPEN ///",
     "° . * . ° . * . ° . * . °",
     "",
