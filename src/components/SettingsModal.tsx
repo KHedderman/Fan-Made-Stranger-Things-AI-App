@@ -83,19 +83,19 @@ const SettingsModal: React.FC<SettingsModalProps> = ({ open, onClose }) => {
                     </label>
 
                     <p className="text-base md:text-lg text-green-500/90 leading-snug">
-                        Your API key is stored only in your local browser and is never shared with
-                        the application developer or any server.
+                        For your security, your API key is stored only in this browser session.
+                        It will be cleared automatically when you close this tab.
                     </p>
 
                     <p className="text-base md:text-lg">
-                        Get a free key at{' '}
+                        Get a free API key at{' '}
                         <a
                             href="https://aistudio.google.com/app/apikey"
                             target="_blank"
                             rel="noreferrer noopener"
                             className="underline hover:bg-green-900/50"
                         >
-                            aistudio.google.com/app/apikey
+                            Google AI Studio
                         </a>
                         .
                     </p>
