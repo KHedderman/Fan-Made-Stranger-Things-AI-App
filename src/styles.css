@@ -175,12 +175,12 @@ body {
     padding: clamp(18px, 2.6vmin, 34px) clamp(28px, 4vmin, 60px) clamp(34px, 5vmin, 64px);
     background:
         /* top highlight */
-        radial-gradient(ellipse 130% 55% at 50% -15%, rgba(255, 255, 255, 0.22), transparent 65%),
+        radial-gradient(ellipse 130% 55% at 50% -15%, rgba(255, 255, 255, 0.18), transparent 65%),
         /* faint molded grain */
         repeating-linear-gradient(135deg,
-            rgba(0, 0, 0, 0.025) 0 2px,
+            rgba(0, 0, 0, 0.03) 0 2px,
             rgba(255, 255, 255, 0.025) 2px 4px),
-        linear-gradient(180deg, #b6b5af 0%, #9d9c96 55%, #84837e 100%);
+        linear-gradient(180deg, #a8a8a4 0%, #8e8e8a 55%, #757571 100%);
     box-shadow:
         0 30px 80px rgba(0, 0, 0, 0.7),
         0 8px 20px rgba(0, 0, 0, 0.45),
