@@ -32,7 +32,7 @@ export const useGeminiChat = () => {
         const ai = new GoogleGenAI({ apiKey: key });
         const systemInstruction = getSystemInstruction(mode, season);
         return ai.chats.create({
-            model: 'gemini-2.5-flash',
+            model: 'gemini-3.5-flash',
             config: {
                 systemInstruction,
                 temperature: 0.6,
