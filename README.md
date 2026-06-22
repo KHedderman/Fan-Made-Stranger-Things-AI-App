@@ -5,8 +5,33 @@ green-phosphor terminal, that lets kids and adults explore the show's
 lore safely and at the right depth — powered by Google Gemini 2.5 Flash.
 Styled after a real 1980s Heathkit H-89 all-in-one computer: charcoal
 plastic chassis, recessed CRT bezel, scanlines, slow vertical-hold roll,
-blinking cursor, and a branded orange/blue Heathkit badge. Built with
-TanStack Start, React 19, Vite 7, and Tailwind v4.
+blinking cursor, and a branded orange/blue Heathkit badge.
+
+Live: <https://fanstrangerthings.app>
+
+---
+
+## Table of contents
+
+- [Why this exists](#why-this-exists)
+- [Summary](#summary)
+- [Screenshots](#screenshots)
+- [Capabilities](#capabilities)
+- [How to use the app](#how-to-use-the-app)
+- [Example prompts](#example-prompts)
+- [Bring Your Own Key (BYOK) — session-only security model](#bring-your-own-key-byok--session-only-security-model)
+- [Cost — what to expect](#cost--what-to-expect)
+- [Safety, supervision, and trademarks](#safety-supervision-and-trademarks)
+- [IP / Legal Footer](#ip--legal-footer)
+- [Tech stack](#tech-stack)
+- [Architecture / How it works](#architecture--how-it-works)
+- [Run locally](#run-locally)
+- [Build](#build)
+- [Project layout](#project-layout)
+- [Known limitations](#known-limitations)
+- [License](#license)
+
+---
 
 ## Why this exists
 
@@ -21,19 +46,39 @@ Meanwhile his mom wanted her *own* device to explore deep lore and the
 origin story without risking spoilers for either of them.
 
 So I opened Google's Vertex AI and built this — a fan-made application
-on Gemini 2.5 Flash, dressed up like an 80s Heathkit terminal to drop
-them straight into the world of the show.
+on Gemini 2.5 Flash, dressed up like an 80s Heathkit H-89 terminal to
+drop them straight into the world of the show.
 
 ## Summary
 
-Hawkins Frequency boots like a period-correct terminal ("PROPERTY OF
-HAWKINS MIDDLE SCHOOL — HEATHKIT TERMINAL H-89"), asks you to pick a
+The app boots like a period-correct terminal
+(`HEATHKIT H-89 · HDOS 2.0 · 9600 BAUD · ONLINE`), asks you to pick a
 companion (Eleven for kids, Dustin for adults), confirms your spoiler
 clearance by season (1–5 or *The First Shadow*), then streams
 in-character lore answers character-by-character like an old CRT. The
 whole experience runs client-side: there is no backend, no database, and
 no analytics. You bring your own Google Gemini API key and it stays in
 your browser tab.
+
+## Screenshots
+
+> Drop PNGs into `screenshots/` with the filenames below and they'll
+> render here automatically.
+
+| Step | Image |
+| --- | --- |
+| 1. Boot screen & mode select | `screenshots/01-boot.png` |
+| 2. Eleven (Child Mode) — season select | `screenshots/02-eleven-season.png` |
+| 3. Eleven answering a kid-safe question | `screenshots/03-eleven-chat.png` |
+| 4. Dustin (Adult Mode) — season select | `screenshots/04-dustin-season.png` |
+| 5. Dustin answering a deep-lore question | `screenshots/05-dustin-chat.png` |
+| 6. SETTINGS modal (BYOK + cost note) | `screenshots/06-settings.png` |
+
+Embed inline once added, for example:
+
+```md
+![Boot screen](screenshots/01-boot.png)
+```
 
 ## Capabilities
 
@@ -75,7 +120,7 @@ Built for logic and depth:
 
 A **RESET** protocol allows seamless hand-offs between Noah (Child Mode)
 and his mom (Adult Mode) on the same device. Type `reset` in the input
-to return to the boot screen.
+at any time to return to the boot screen.
 
 ### 🔦 80s terminal experience
 
@@ -84,12 +129,48 @@ to return to the boot screen.
   H-89 brand badge.
 - **CRT scanline overlay**, slow vertical-hold roll, subtle flicker, and
   green-phosphor glow.
-- **Slim, era-appropriate blinking cursor** (replaced the original
-  block cursor).
+- **Slim, era-appropriate blinking cursor**.
 - **Character-by-character output rendering** so responses appear one
   character at a time like an old Heathkit terminal.
 - **Clearer input placeholder text** for more intuitive onboarding.
 - Persistent **IP / legal footer** on every screen.
+
+## How to use the app
+
+1. Open <https://fanstrangerthings.app> (or run locally — see
+   [Run locally](#run-locally)).
+2. Click **`[ ⚙ SETTINGS ]`** in the top-right of the status strip.
+3. Paste your Google Gemini API key (get one free at
+   [Google AI Studio](https://aistudio.google.com/app/apikey)) and
+   **`[ SAVE ]`**. The key lives in this browser tab only.
+4. On the boot screen, choose **`🧇 ELEVEN`** (kid-safe) or
+   **`🧢 DUSTIN`** (full lore).
+5. When the companion asks, type the highest season you've watched —
+   `1`, `2`, `3`, `4`, `5`, or `first shadow`. This sets your spoiler
+   firewall.
+6. Ask any *Stranger Things* question. The terminal will type the answer
+   one character at a time.
+7. To switch users / personas, type **`reset`** to return to the boot
+   screen.
+
+## Example prompts
+
+### 🧇 Eleven (Child Mode)
+
+- *"Is the Demogorgon real?"*
+- *"What is the Upside Down?"*
+- *"How does Eleven keep her friends safe?"*
+- *"What is a Demodog?"*
+- *"Why does Eleven get nosebleeds?"*
+
+### 🧢 Dustin (Adult Mode)
+
+- *"What's the connection between Vecna and Henry Creel?"*
+- *"Explain the Mind Flayer's hive-mind in D&D terms."*
+- *"Wait, who was Bob again and what happened to him?"* (great
+  History Recall test on Season 5 clearance)
+- *"What does *The First Shadow* set up for Season 5?"*
+- *"Recap the Russian plotline from Season 3."*
 
 ## Bring Your Own Key (BYOK) — session-only security model
 
@@ -103,10 +184,11 @@ The key handling is deliberately strict and **isolated per visitor**:
   and is wiped the moment that tab is closed.
 - **Never written to `localStorage`.** No "remember me", no long-lived
   persistence.
-- **Never sent to any Hawkins Frequency server or database.** There is
-  no server component that sees the key — requests go browser → Google
+- **Never sent to any project-owned server or database.** There is no
+  server component that sees the key — requests go browser → Google
   directly.
-- **Never hardcoded in the source.** Search the repo; you will not find one.
+- **Never hardcoded in the source.** Search the repo; you will not find
+  one.
 - **Not shared across tabs, visitors, or devices.** Every person who
   opens the app gets their own empty session and must paste their own
   key. One visitor cannot see, reuse, or trigger billing on another
@@ -117,12 +199,10 @@ The key handling is deliberately strict and **isolated per visitor**:
 If no key is present, the terminal posts a non-blocking system notice
 pointing you to the SETTINGS modal instead of failing silently.
 
-Get a free key at [Google AI Studio](https://aistudio.google.com/app/apikey).
-
 ## Cost — what to expect
 
-Hawkins Frequency does not bill you. Google bills you (or doesn't, if
-you stay in the free tier) for the model calls your key makes.
+This app does not bill you. Google bills you (or doesn't, if you stay in
+the free tier) for the model calls your key makes.
 
 - **Free tier (recommended for almost everyone).** Google AI Studio
   offers a free tier on `gemini-2.5-flash` with per-minute and per-day
@@ -160,47 +240,143 @@ affiliation with the rights holders. The exact text is:
 > marks are the property of their respective owners. This project is
 > provided for educational and non-commercial purposes only.
 
-The footer lives in `src/routes/index.tsx` inside the `<footer
-className="crt-footer">` element and is styled by the `.crt-footer` rule
-in `src/styles.css`. It must remain visible — do not remove or hide it.
+The footer lives in `src/routes/index.tsx` inside the
+`<footer className="crt-footer">` element and is styled by the
+`.crt-footer` rule in `src/styles.css`. It must remain visible — do not
+remove or hide it.
 
-## Model
+## Tech stack
 
-Chat uses `gemini-2.5-flash` for a good balance of latency and quality.
+- **Framework:** [TanStack Start](https://tanstack.com/start) v1 (full-stack React framework, file-based routing)
+- **UI:** [React 19](https://react.dev) + [TypeScript](https://www.typescriptlang.org/)
+- **Build tool:** [Vite 7](https://vitejs.dev)
+- **Styling:** [Tailwind CSS v4](https://tailwindcss.com) with CSS-variable design tokens in `src/styles.css`
+- **AI SDK:** [`@google/genai`](https://www.npmjs.com/package/@google/genai) calling Gemini directly from the browser
+- **Model:** `gemini-2.5-flash`
+- **UI primitives:** [shadcn/ui](https://ui.shadcn.com) on [Radix UI](https://www.radix-ui.com)
+- **Routing:** [TanStack Router](https://tanstack.com/router) (file-based, type-safe)
+- **Data:** [TanStack Query](https://tanstack.com/query) (configured; not heavily used — this app is largely stateless)
+- **Validation:** [Zod](https://zod.dev)
+- **Package manager:** [Bun](https://bun.sh) (npm/pnpm also work)
+- **Font:** [VT323](https://fonts.google.com/specimen/VT323) for the CRT terminal look
+- **Backend:** none — the app is fully client-side
+
+## Architecture / How it works
+
+```
+┌─────────────────────────────────────────────┐
+│  Visitor's browser tab                      │
+│                                             │
+│   sessionStorage  ← Gemini API key (only)   │
+│        │                                    │
+│        ▼                                    │
+│   @google/genai SDK                         │
+│        │                                    │
+│        │  HTTPS                             │
+└────────┼────────────────────────────────────┘
+         ▼
+   Google Gemini API  (gemini-2.5-flash)
+```
+
+- The static app is served from Lovable hosting (or your own host).
+- There is no backend owned by this project. Nothing on a server sees
+  the user's key, prompts, or responses.
+- The system prompt (`src/constants.ts`) selects the Eleven or Dustin
+  persona, injects the safety/spoiler rules, and pins the season
+  clearance level.
+- Responses stream back token-by-token; the UI renders them one
+  character at a time for the CRT typewriter effect.
+- Typing `reset` clears the in-memory chat handle and returns the user
+  to the boot screen.
 
 ## Run locally
 
-Requirements: [Bun](https://bun.sh) (or npm/pnpm).
+Requirements: [Bun](https://bun.sh) (or npm/pnpm) and Node-compatible
+TypeScript tooling.
 
 ```bash
-bun install
-bun run dev
+# 1. Clone the repo
+git clone https://github.com/<your-account>/<repo-name>.git
+cd <repo-name>
+
+# 2. Install dependencies
+bun install   # or: npm install / pnpm install
+
+# 3. Start the dev server
+bun run dev   # or: npm run dev / pnpm dev
 ```
 
-The app starts on `http://localhost:8080`. Open SETTINGS in the top-right
-status strip, paste your Gemini key, and start a session.
+The app starts on `http://localhost:8080`.
+
+1. Open the URL in your browser.
+2. Click **`[ ⚙ SETTINGS ]`** (top right).
+3. Paste a Gemini key from
+   <https://aistudio.google.com/app/apikey> and save.
+4. Pick a mode and start asking questions.
 
 ## Build
 
 ```bash
-bun run build
+bun run build       # production build
+bun run preview     # serve the production build locally
+bun run lint        # eslint
+bun run format      # prettier
 ```
 
 ## Project layout
 
-- `src/routes/` — TanStack Start file-based routes (`__root.tsx`, `index.tsx`)
-- `src/components/` — `BootSequence`, `ChatInterface`, `SettingsModal`, `SpoilerCheck`
-- `src/hooks/useGeminiChat.ts` — reads the key from `sessionStorage`,
-  instantiates `@google/genai` per session, and applies the Child/Adult
-  persona + safety/spoiler system prompts
-- `src/lib/apiKeyStorage.ts` — the only place that touches storage; the
-  single source of truth for the session-only policy
-- `src/constants.ts` — Eleven/Dustin personas, safety layer, and
-  per-season spoiler firewall (including Season 5 History Recall)
-- `src/styles.css` — Heathkit H-89 chassis, CRT bezel, scanlines,
-  blinking cursor, and the `.crt-footer` IP notice styling
+```
+.
+├── LICENSE                      Fan-project license + trademark disclaimer
+├── README.md                    This file
+├── package.json                 Dependencies, scripts
+├── vite.config.ts               Vite + TanStack Start config
+├── tsconfig.json                TypeScript config
+├── src/
+│   ├── routes/                  TanStack Start file-based routes
+│   │   ├── __root.tsx           App shell + sitewide head metadata
+│   │   └── index.tsx            Home route + boot/chat/footer layout
+│   ├── components/
+│   │   ├── BootSequence.tsx     Boot screen + mode select
+│   │   ├── ChatInterface.tsx    Streaming chat UI w/ blinking cursor
+│   │   ├── SettingsModal.tsx    BYOK key entry, cost note, safety note
+│   │   ├── SpoilerCheck.tsx     Season clearance UI helpers
+│   │   ├── icons.tsx
+│   │   └── ui/                  shadcn/ui primitives
+│   ├── hooks/
+│   │   └── useGeminiChat.ts     Reads key from sessionStorage, builds
+│   │                            the Eleven/Dustin chat session
+│   ├── lib/
+│   │   ├── apiKeyStorage.ts     Single source of truth for BYOK policy
+│   │   ├── utils.ts
+│   │   └── error-*.ts           Error reporting helpers
+│   ├── constants.ts             Eleven/Dustin personas, safety layer,
+│   │                            per-season spoiler firewall
+│   ├── styles.css               H-89 chassis, CRT bezel, scanlines,
+│   │                            blinking cursor, .crt-footer styling
+│   └── types.ts                 Mode/Season/Message/AppState types
+└── screenshots/                 (drop screenshots here — see Screenshots)
+```
+
+## Known limitations
+
+- **Best-effort safety, not certified safety.** Child Mode's
+  guardrails are prompt-based and depend on Gemini behaving as
+  instructed. Adult supervision is recommended for young children.
+- **No analytics / no telemetry.** Intentional — but it means there are
+  no usage metrics out of the box.
+- **No multi-user accounts.** Each browser tab is its own session.
+  Conversation history is not persisted across tabs or reloads.
+- **Motion-heavy CRT effects.** Scanlines, vertical-hold roll, and
+  flicker can affect users with vestibular sensitivity. A
+  `prefers-reduced-motion` opt-out is on the future-improvements list.
+- **Heathkit H-89 aesthetic only.** Not a faithful emulator — no HDOS
+  prompt, no keyboard remap, no serial protocol. The status strip
+  (`HEATHKIT H-89 · HDOS 2.0 · 9600 BAUD · ONLINE`) is period-correct
+  flavor, not an emulated environment.
 
 ## License
 
 See [`LICENSE`](./LICENSE). Fan project for non-commercial, educational
-use only.
+use only. The in-app IP/legal footer must remain visible in any
+deployment or derivative work.
