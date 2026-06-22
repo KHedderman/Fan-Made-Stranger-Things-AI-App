@@ -1,12 +1,12 @@
-# Hawkins Frequency
+# Hawkins Frequency — Fan-Made Stranger Things AI App
 
-A fan-made retro **Heathkit H-89** green-phosphor terminal that lets kids
-and adults explore *Stranger Things* lore safely and at the right depth,
-powered by Google Gemini 2.5 Flash. Styled after a real 1980s Heathkit
-H-89 all-in-one computer — charcoal plastic chassis, recessed CRT bezel,
-scanlines, slow vertical-hold roll, blinking cursor, and a branded
-orange/blue Heathkit badge. Built with TanStack Start, React 19, Vite 7,
-and Tailwind v4.
+A fan-made *Stranger Things* AI app, styled as a retro **Heathkit H-89**
+green-phosphor terminal, that lets kids and adults explore the show's
+lore safely and at the right depth — powered by Google Gemini 2.5 Flash.
+Styled after a real 1980s Heathkit H-89 all-in-one computer: charcoal
+plastic chassis, recessed CRT bezel, scanlines, slow vertical-hold roll,
+blinking cursor, and a branded orange/blue Heathkit badge. Built with
+TanStack Start, React 19, Vite 7, and Tailwind v4.
 
 ## Why this exists
 
