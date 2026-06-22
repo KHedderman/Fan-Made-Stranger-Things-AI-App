@@ -74,7 +74,8 @@ Built for logic and depth:
 ### 🔄 Mode switching
 
 A **RESET** protocol allows seamless hand-offs between Noah (Child Mode)
-and his mom (Adult Mode) on the same device.
+and his mom (Adult Mode) on the same device. Type `reset` in the input
+to return to the boot screen.
 
 ### 🔦 80s terminal experience
 
@@ -90,6 +91,64 @@ and his mom (Adult Mode) on the same device.
 - **Clearer input placeholder text** for more intuitive onboarding.
 - Persistent **IP / legal footer** on every screen.
 
+## Bring Your Own Key (BYOK) — session-only security model
+
+This project never ships an API key and never proxies your traffic. You
+supply your own Google Gemini key through the in-app **SETTINGS** modal
+and it is used to call Google's API directly from your browser.
+
+The key handling is deliberately strict and **isolated per visitor**:
+
+- **Stored in `sessionStorage` only.** It lives in a single browser tab
+  and is wiped the moment that tab is closed.
+- **Never written to `localStorage`.** No "remember me", no long-lived
+  persistence.
+- **Never sent to any Hawkins Frequency server or database.** There is
+  no server component that sees the key — requests go browser → Google
+  directly.
+- **Never hardcoded in the source.** Search the repo; you will not find one.
+- **Not shared across tabs, visitors, or devices.** Every person who
+  opens the app gets their own empty session and must paste their own
+  key. One visitor cannot see, reuse, or trigger billing on another
+  visitor's key.
+- **Not visible to other users of the app.** There is no shared state.
+  Your key cannot be exfiltrated by someone else loading the site.
+
+If no key is present, the terminal posts a non-blocking system notice
+pointing you to the SETTINGS modal instead of failing silently.
+
+Get a free key at [Google AI Studio](https://aistudio.google.com/app/apikey).
+
+## Cost — what to expect
+
+Hawkins Frequency does not bill you. Google bills you (or doesn't, if
+you stay in the free tier) for the model calls your key makes.
+
+- **Free tier (recommended for almost everyone).** Google AI Studio
+  offers a free tier on `gemini-2.5-flash` with per-minute and per-day
+  rate limits and no credit card required. Casual chatting — a few
+  questions here and there — comfortably fits inside the free tier.
+- **Paid tier (if you exceed the free limits).** At current Gemini 2.5
+  Flash pricing, a typical chat turn (a short question + a few
+  paragraphs of answer) costs a small fraction of a cent. A long
+  evening of heavy back-and-forth is usually well under $1. Pricing
+  changes — always check Google's current rates at
+  <https://ai.google.dev/pricing>.
+
+The cost note is also surfaced inside the app's SETTINGS modal so
+visitors see it before they paste a key.
+
+## Safety, supervision, and trademarks
+
+- **Adult supervision recommended.** Child Mode's safety rules are a
+  best-effort prompt layer on a third-party LLM (Google Gemini). They
+  are strong, but no LLM safety layer is perfect. An adult should sit
+  with a young child the first few times they use it.
+- **Fan project, not affiliated.** Not endorsed by or connected to
+  Netflix, the Stranger Things production team, or Heathkit. All
+  trademarks belong to their respective owners. See `LICENSE` and the
+  in-app footer.
+
 ## IP / Legal Footer
 
 Every screen of the app renders a persistent footer disclaiming any
@@ -104,31 +163,6 @@ affiliation with the rights holders. The exact text is:
 The footer lives in `src/routes/index.tsx` inside the `<footer
 className="crt-footer">` element and is styled by the `.crt-footer` rule
 in `src/styles.css`. It must remain visible — do not remove or hide it.
-Heathkit and the H-89 chassis design are likewise referenced for
-historical/aesthetic homage only; all trademarks belong to their
-respective owners.
-
-## Bring Your Own Key (BYOK) — session-only security model
-
-This project never ships an API key and never proxies your traffic. You
-supply your own Google Gemini key through the in-app **SETTINGS** modal
-and it is used to call Google's API directly from your browser.
-
-The key handling is deliberately strict:
-
-- **Stored in `sessionStorage` only.** It lives in a single browser tab
-  and is wiped the moment that tab is closed.
-- **Never written to `localStorage`.** No "remember me", no long-lived
-  persistence.
-- **Never sent to any backend or database.** There is no server
-  component that sees the key — requests go browser → Google.
-- **Never hardcoded in the source.** Search the repo; you will not find one.
-- **Not shared across tabs.** Each tab is its own session.
-
-If no key is present, the terminal posts a non-blocking system notice
-pointing you to the SETTINGS modal instead of failing silently.
-
-Get a free key at [Google AI Studio](https://aistudio.google.com/app/apikey).
 
 ## Model
 
@@ -161,10 +195,12 @@ bun run build
   persona + safety/spoiler system prompts
 - `src/lib/apiKeyStorage.ts` — the only place that touches storage; the
   single source of truth for the session-only policy
+- `src/constants.ts` — Eleven/Dustin personas, safety layer, and
+  per-season spoiler firewall (including Season 5 History Recall)
 - `src/styles.css` — Heathkit H-89 chassis, CRT bezel, scanlines,
   blinking cursor, and the `.crt-footer` IP notice styling
 
 ## License
 
-Fan project, not affiliated with Netflix or the Duffer Brothers. See the
-in-app footer above for the full IP notice.
+See [`LICENSE`](./LICENSE). Fan project for non-commercial, educational
+use only.
