@@ -77,13 +77,13 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "Hawkins Frequency — Fan-Made Stranger Things AI App" },
+      { title: "Fan-Made Stranger Things AI App" },
       {
         name: "description",
         content:
           "A fan-made Stranger Things AI app styled as a retro Heathkit H-89 terminal. Chat as Eleven (kid-safe) or Dustin (full lore), pick your season for spoiler-safe answers, and bring your own Google Gemini key — stored only in your browser.",
       },
-      { property: "og:title", content: "Hawkins Frequency — Fan-Made Stranger Things AI App" },
+      { property: "og:title", content: "Fan-Made Stranger Things AI App" },
       {
         property: "og:description",
         content:
@@ -91,9 +91,9 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       },
       { property: "og:type", content: "website" },
       { property: "og:url", content: "https://fanstrangerthings.app" },
-      { property: "og:site_name", content: "Hawkins Frequency — Fan-Made Stranger Things AI App" },
+      { property: "og:site_name", content: "Fan-Made Stranger Things AI App" },
       { name: "twitter:card", content: "summary_large_image" },
-      { name: "twitter:title", content: "Hawkins Frequency — Fan-Made Stranger Things AI App" },
+      { name: "twitter:title", content: "Fan-Made Stranger Things AI App" },
       {
         name: "twitter:description",
         content:
