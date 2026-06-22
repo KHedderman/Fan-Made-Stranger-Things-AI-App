@@ -20,6 +20,7 @@ Live: <https://fanstrangerthings.app>
 - [How to use the app](#how-to-use-the-app)
 - [Example prompts](#example-prompts)
 - [Bring Your Own Key (BYOK) — session-only security model](#bring-your-own-key-byok--session-only-security-model)
+- [Keep your info safe — user checklist](#keep-your-info-safe--user-checklist)
 - [Cost — what to expect](#cost--what-to-expect)
 - [Safety, supervision, and trademarks](#safety-supervision-and-trademarks)
 - [IP / Legal Footer](#ip--legal-footer)
