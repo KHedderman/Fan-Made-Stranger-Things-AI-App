@@ -2,7 +2,7 @@ import { useEffect, useState, useCallback } from 'react';
 import { GoogleGenAI, type Chat } from '@google/genai';
 import { getSystemInstruction } from '../constants';
 import type { Mode, Season } from '../types';
-import { getApiKey } from '../lib/apiKeyStorage';
+import { getApiKey, getModel } from '../lib/apiKeyStorage';
 
 export class MissingApiKeyError extends Error {
     constructor() {
@@ -32,7 +32,7 @@ export const useGeminiChat = () => {
         const ai = new GoogleGenAI({ apiKey: key });
         const systemInstruction = getSystemInstruction(mode, season);
         return ai.chats.create({
-            model: 'gemini-2.5-flash',
+            model: getModel(),
             config: {
                 systemInstruction,
                 temperature: 0.6,
