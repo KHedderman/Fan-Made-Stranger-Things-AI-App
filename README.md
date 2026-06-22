@@ -64,6 +64,23 @@ your browser tab.
 
 ## Screenshots
 
+### Live demo (video)
+
+A ~13 second screen recording of the live app — boot sequence,
+scanline roll, blinking REC dot, and Heathkit power LED, captured
+straight from <https://fanstrangerthings.app>.
+
+![Boot screen — Heathkit H-89 green-phosphor terminal](public/og-image.png)
+
+▶ **[Download / view the demo MP4](public/demo.mp4)** (1.5 MB,
+1920×1080, no audio)
+
+GitHub renders MP4s inline on the file page; on the README itself
+they appear as a download link. The same file is served live at
+<https://fanstrangerthings.app/demo.mp4>.
+
+### Additional screenshots
+
 > Drop PNGs into `screenshots/` with the filenames below and they'll
 > render here automatically.
 
