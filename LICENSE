@@ -1,0 +1,51 @@
+Hawkins Frequency — Fan Project License
+Copyright (c) 2026 Hawkins Frequency contributors
+
+This is an unofficial, fan-made application. It is not affiliated with,
+endorsed by, or connected to Netflix, Inc., the Stranger Things production
+team, or Heathkit. All "Stranger Things" characters, names, logos, related
+marks, and the "Heathkit" and "H-89" marks are the property of their
+respective owners and are referenced here solely for non-commercial,
+educational, and homage purposes.
+
+Permission is hereby granted to any person obtaining a copy of this
+software and associated source files (the "Software") to view, run, fork,
+and modify the Software for personal, non-commercial, and educational use,
+subject to the following conditions:
+
+1. The Software, and any derivative work based on it, may NOT be used for
+   commercial purposes, sold, sublicensed, or offered as a paid product or
+   service.
+
+2. The in-app IP/legal footer (rendered by the `<footer className="crt-footer">`
+   element in `src/routes/index.tsx`) and the equivalent notice in this
+   LICENSE file must remain visible and unmodified in any distribution or
+   deployment of the Software or any derivative work.
+
+3. Above copyright notice, this permission notice, and the disclaimer below
+   must be included in all copies or substantial portions of the Software.
+
+4. Nothing in this license grants any right in the third-party trademarks
+   referenced above. Users of derivative works must respect the rights of
+   Netflix, Inc., Heathkit, and any other rights holders, and must promptly
+   comply with any takedown or modification request from those rights
+   holders.
+
+5. Each end user of any deployment supplies their own Google Gemini API
+   key. The maintainers of the Software accept no responsibility for any
+   charges, quota usage, or account actions incurred on a user's Google
+   account.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE, AND NONINFRINGEMENT. IN NO EVENT SHALL
+THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES, OR
+OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT, OR OTHERWISE,
+ARISING FROM, OUT OF, OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
+OTHER DEALINGS IN THE SOFTWARE.
+
+AI safety note: the Child Mode safety layer is a best-effort prompt-based
+guardrail on a third-party large language model (Google Gemini). It is not
+a substitute for adult supervision, and the maintainers make no guarantee
+that every response will be age-appropriate. Adult supervision of any
+child using this Software is recommended.
