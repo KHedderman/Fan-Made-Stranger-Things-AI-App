@@ -173,8 +173,26 @@ body {
     position: fixed;
     inset: 0;
     padding: clamp(18px, 2.6vmin, 34px) clamp(28px, 4vmin, 60px) clamp(34px, 5vmin, 64px);
-    /* Flat charcoal gray chassis — no gradients, no highlights */
-    background: #3a3a3c;
+    /* Charcoal plastic chassis with subtle realistic shading:
+       - top-light highlight (overhead room light)
+       - darker falloff at bottom and side edges
+       - faint molded plastic grain */
+    background:
+        /* fine plastic grain / noise */
+        repeating-linear-gradient(127deg,
+            rgba(255, 255, 255, 0.012) 0 1px,
+            rgba(0, 0, 0, 0.025) 1px 2px),
+        /* left edge shadow */
+        linear-gradient(90deg, rgba(0, 0, 0, 0.35) 0%, transparent 12%, transparent 88%, rgba(0, 0, 0, 0.35) 100%),
+        /* top highlight + bottom shadow */
+        linear-gradient(180deg,
+            rgba(255, 255, 255, 0.10) 0%,
+            rgba(255, 255, 255, 0.03) 8%,
+            transparent 35%,
+            rgba(0, 0, 0, 0.25) 80%,
+            rgba(0, 0, 0, 0.45) 100%),
+        /* base color */
+        #3a3a3c;
     overflow: hidden;
     isolation: isolate;
 }
