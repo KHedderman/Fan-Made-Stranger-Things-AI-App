@@ -1,5 +1,13 @@
 import React, { useEffect, useState } from 'react';
-import { getApiKey, setApiKey, clearApiKey } from '../lib/apiKeyStorage';
+import {
+    getApiKey,
+    setApiKey,
+    clearApiKey,
+    getModel,
+    setModel,
+    SUPPORTED_MODELS,
+    type GeminiModelId,
+} from '../lib/apiKeyStorage';
 
 interface SettingsModalProps {
     open: boolean;
@@ -10,10 +18,12 @@ const SettingsModal: React.FC<SettingsModalProps> = ({ open, onClose }) => {
     const [value, setValue] = useState('');
     const [reveal, setReveal] = useState(false);
     const [saved, setSaved] = useState(false);
+    const [model, setModelState] = useState<GeminiModelId>(getModel());
 
     useEffect(() => {
         if (open) {
             setValue(getApiKey() ?? '');
+            setModelState(getModel());
             setSaved(false);
         }
     }, [open]);
@@ -24,9 +34,11 @@ const SettingsModal: React.FC<SettingsModalProps> = ({ open, onClose }) => {
         e.preventDefault();
         if (!value.trim()) return;
         setApiKey(value);
+        setModel(model);
         setSaved(true);
         setTimeout(() => onClose(), 600);
     };
+
 
     const handleClear = () => {
         clearApiKey();
@@ -81,6 +93,27 @@ const SettingsModal: React.FC<SettingsModalProps> = ({ open, onClose }) => {
                             </button>
                         </div>
                     </label>
+
+                    <fieldset className="border-2 border-current p-3">
+                        <legend className="px-2">MODEL</legend>
+                        <div className="space-y-2">
+                            {SUPPORTED_MODELS.map((m) => (
+                                <label key={m.id} className="flex items-start gap-2 cursor-pointer">
+                                    <input
+                                        type="radio"
+                                        name="gemini-model"
+                                        value={m.id}
+                                        checked={model === m.id}
+                                        onChange={() => setModelState(m.id)}
+                                        className="mt-1 accent-green-400"
+                                    />
+                                    <span className="text-base md:text-lg leading-snug">
+                                        {m.label}
+                                    </span>
+                                </label>
+                            ))}
+                        </div>
+                    </fieldset>
 
                     <p className="text-base md:text-lg text-green-500/90 leading-snug">
                         For your security, your API key is stored only in this browser session.
