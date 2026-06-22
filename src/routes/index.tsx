@@ -221,50 +221,68 @@ function Index() {
     };
 
     return (
-        <div className="crt-shell text-xl sm:text-2xl md:text-3xl">
-            {/* CRT effects layered above content */}
-            <div className="scanlines-static" aria-hidden />
-            <div className="scanline-roll" aria-hidden />
+        <div className="crt-case text-xl sm:text-2xl md:text-3xl">
+            {/* Beige Heathkit chassis vents */}
+            <div className="crt-vents crt-vents-left" aria-hidden>
+                <span /><span /><span /><span /><span /><span />
+            </div>
+            <div className="crt-vents crt-vents-right" aria-hidden>
+                <span /><span /><span /><span /><span /><span />
+            </div>
 
-            <div className="crt-flicker h-full w-full flex flex-col">
-                {/* Top status strip — SETTINGS docked here */}
-                <header className="crt-status grid grid-cols-[minmax(0,1fr)_auto] sm:flex sm:items-center sm:justify-between">
-                    <div className="flex min-w-0 items-center gap-3 truncate">
-                        <span className="rec-dot" aria-hidden />
-                        <span className="truncate">
-                            HEATHKIT&nbsp;H-19 · HAWKINS&nbsp;FREQUENCY · CH&nbsp;104.7
-                        </span>
-                    </div>
-                    <div className="flex shrink-0 items-center gap-3">
-                        <span className="hidden sm:inline opacity-70">
-                            KEY: {hasApiKey ? 'OK' : 'MISSING'}
-                        </span>
-                        <button
-                            onClick={() => setSettingsOpen(true)}
-                            className="border border-current px-2 py-0.5 hover:bg-[rgba(51,255,102,0.15)] transition-colors"
-                            aria-label="Open settings"
-                        >
-                            [ ⚙ SETTINGS{hasApiKey ? '' : ' · KEY NEEDED'} ]
-                        </button>
-                    </div>
-                </header>
+            <div className="crt-shell">
+                {/* CRT effects layered above content, scoped to the screen */}
+                <div className="scanlines-static" aria-hidden />
+                <div className="scanline-roll" aria-hidden />
 
-                <main className="crt-content mx-auto w-full max-w-5xl flex-1 flex flex-col">
-                    {renderContent()}
-                </main>
+                <div className="crt-flicker h-full w-full flex flex-col">
+                    {/* Top status strip — SETTINGS docked here */}
+                    <header className="crt-status grid grid-cols-[minmax(0,1fr)_auto] sm:flex sm:items-center sm:justify-between">
+                        <div className="flex min-w-0 items-center gap-3 truncate">
+                            <span className="rec-dot" aria-hidden />
+                            <span className="truncate">
+                                HEATHKIT&nbsp;H-19 · HAWKINS&nbsp;FREQUENCY · CH&nbsp;104.7
+                            </span>
+                        </div>
+                        <div className="flex shrink-0 items-center gap-3">
+                            <span className="hidden sm:inline opacity-70">
+                                KEY: {hasApiKey ? 'OK' : 'MISSING'}
+                            </span>
+                            <button
+                                onClick={() => setSettingsOpen(true)}
+                                className="border border-current px-2 py-0.5 hover:bg-[rgba(51,255,102,0.15)] transition-colors"
+                                aria-label="Open settings"
+                            >
+                                [ ⚙ SETTINGS{hasApiKey ? '' : ' · KEY NEEDED'} ]
+                            </button>
+                        </div>
+                    </header>
 
-                <footer className="crt-footer">
-                    <p>
-                        This is an unofficial, fan-made application and is not affiliated with,
-                        endorsed by, or connected to Netflix, Inc. or the Stranger Things
-                        production team. All Stranger Things characters, logos, and related marks
-                        are the property of their respective owners. This project is provided for
-                        educational and non-commercial purposes only.
-                    </p>
-                </footer>
+                    <main className="crt-content mx-auto w-full max-w-5xl flex-1 flex flex-col">
+                        {renderContent()}
+                    </main>
+
+                    <footer className="crt-footer">
+                        <p>
+                            This is an unofficial, fan-made application and is not affiliated with,
+                            endorsed by, or connected to Netflix, Inc. or the Stranger Things
+                            production team. All Stranger Things characters, logos, and related
+                            marks are the property of their respective owners. This project is
+                            provided for educational and non-commercial purposes only.
+                        </p>
+                    </footer>
+                </div>
+            </div>
+
+            {/* Heathkit brand badge on bezel */}
+            <div className="crt-badge" aria-hidden>
+                <span className="crt-badge-power" />
+                <span className="crt-badge-brand">Heathkit</span>
+                <span className="crt-badge-model">H-19</span>
             </div>
 
             <SettingsModal open={settingsOpen} onClose={() => setSettingsOpen(false)} />
         </div>
     );
 }
+
