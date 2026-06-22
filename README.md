@@ -51,6 +51,15 @@ So I opened Google's Vertex AI and built this — a fan-made application
 on Gemini 2.5 Flash, dressed up like an 80s Heathkit H-89 terminal to
 drop them straight into the world of the show.
 
+The original build story, written while *Stranger Things* Season 5 was
+airing, lives on LinkedIn:
+
+- Part 1 — [the problem and the idea](https://www.linkedin.com/feed/update/urn:li:activity:7402420934424338433/)
+- Part 2 — [the build in Vertex AI](https://www.linkedin.com/feed/update/urn:li:activity:7402864384060108801/)
+
+This repo is the open-source rebuild in Lovable, with BYOK support so
+anyone can run it on their own Google API key.
+
 ## Summary
 
 The app boots like a period-correct terminal
