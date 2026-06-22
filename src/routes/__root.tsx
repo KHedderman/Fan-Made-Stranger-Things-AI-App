@@ -77,27 +77,27 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "Hawkins Frequency — Stranger Things Lore Terminal" },
+      { title: "Hawkins Frequency — Fan-Made Stranger Things AI App" },
       {
         name: "description",
         content:
-          "A fan-made retro Heathkit H-89 terminal for Stranger Things fans. Chat as Eleven (kid-safe) or Dustin (full lore), pick your season for spoiler-safe answers, and bring your own Google Gemini key — stored only in your browser.",
+          "A fan-made Stranger Things AI app styled as a retro Heathkit H-89 terminal. Chat as Eleven (kid-safe) or Dustin (full lore), pick your season for spoiler-safe answers, and bring your own Google Gemini key — stored only in your browser.",
       },
-      { property: "og:title", content: "Hawkins Frequency — Stranger Things Lore Terminal" },
+      { property: "og:title", content: "Hawkins Frequency — Fan-Made Stranger Things AI App" },
       {
         property: "og:description",
         content:
-          "Retro Heathkit H-89 terminal that chats Stranger Things lore. Kid-safe Eleven mode, deep-lore Dustin mode, per-season spoiler firewall. BYOK Google Gemini.",
+          "Fan-made Stranger Things AI app: retro Heathkit H-89 terminal, kid-safe Eleven mode, deep-lore Dustin mode, per-season spoiler firewall. BYOK Google Gemini.",
       },
       { property: "og:type", content: "website" },
       { property: "og:url", content: "https://fanstrangerthings.app" },
-      { property: "og:site_name", content: "Hawkins Frequency" },
+      { property: "og:site_name", content: "Hawkins Frequency — Fan-Made Stranger Things AI App" },
       { name: "twitter:card", content: "summary_large_image" },
-      { name: "twitter:title", content: "Hawkins Frequency — Stranger Things Lore Terminal" },
+      { name: "twitter:title", content: "Hawkins Frequency — Fan-Made Stranger Things AI App" },
       {
         name: "twitter:description",
         content:
-          "Retro Heathkit H-89 terminal that chats Stranger Things lore. Kid-safe Eleven mode, deep-lore Dustin mode, per-season spoiler firewall. BYOK Google Gemini.",
+          "Fan-made Stranger Things AI app: retro Heathkit H-89 terminal, kid-safe Eleven mode, deep-lore Dustin mode, per-season spoiler firewall. BYOK Google Gemini.",
       },
       { property: "og:image", content: "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/eadb3999-cad0-46bc-9c7b-f78758ab681d/id-preview-cc24fbfd--2f9672cb-1be7-4623-ad10-bdf1f5bca0f7.lovable.app-1782161459281.png" },
       { name: "twitter:image", content: "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/eadb3999-cad0-46bc-9c7b-f78758ab681d/id-preview-cc24fbfd--2f9672cb-1be7-4623-ad10-bdf1f5bca0f7.lovable.app-1782161459281.png" },
