@@ -192,25 +192,25 @@ body {
     isolation: isolate;
 }
 
-/* Recessed CRT screen — heavily rounded like the H-89/H-19 tube */
+/* Recessed CRT screen — H-89 molded gray bezel with soft dark inset */
 .crt-shell {
     position: absolute;
     inset: clamp(18px, 2.6vmin, 34px) clamp(28px, 4vmin, 60px)
            clamp(60px, 7vmin, 86px) clamp(28px, 4vmin, 60px);
-    /* Tube shape: pronounced rounding */
+    /* tube shape: pronounced rounding */
     border-radius: clamp(36px, 5vmin, 60px);
     background:
         radial-gradient(ellipse at center, #061410 0%, #020604 60%, #000 100%);
     overflow: hidden;
     isolation: isolate;
-    /* Deep molded recess with dark inner bezel + soft cast shadow on plastic */
+    /* Molded gray plastic bezel hugging the tube: a soft inner shadow on the
+       chassis surrounds the dark glass, no brown wood-style trim rings. */
     box-shadow:
-        /* dark inner trim */
-        0 0 0 8px #1c1c1a,
-        /* outer plastic recess shadow rings */
-        0 0 0 10px rgba(255, 255, 255, 0.18),
-        0 0 0 22px #44443f,
-        0 0 30px 22px rgba(0, 0, 0, 0.45),
+        /* dark glass perimeter (very thin) */
+        0 0 0 2px #0a0a0a,
+        /* soft dark molded recess shadow on the gray plastic */
+        0 0 24px 6px rgba(0, 0, 0, 0.55),
+        0 0 60px 18px rgba(0, 0, 0, 0.35),
         /* tube glass inner shading */
         inset 0 0 0 2px rgba(0, 0, 0, 0.9),
         inset 0 18px 50px rgba(0, 0, 0, 0.9),
