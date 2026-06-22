@@ -233,7 +233,7 @@ function Index() {
                         <div className="flex min-w-0 items-center gap-3 truncate">
                             <span className="rec-dot" aria-hidden />
                             <span className="truncate">
-                                HEATHKIT&nbsp;H-19 · HAWKINS&nbsp;FREQUENCY · CH&nbsp;104.7
+                                HEATHKIT&nbsp;H-89 · HAWKINS&nbsp;FREQUENCY · CH&nbsp;104.7
                             </span>
                         </div>
                         <div className="flex shrink-0 items-center gap-3">
@@ -270,7 +270,7 @@ function Index() {
             <div className="crt-badge" aria-hidden>
                 <span className="crt-badge-power" />
                 <span className="crt-badge-brand">Heathkit</span>
-                <span className="crt-badge-model">H-19</span>
+                <span className="crt-badge-model">H-89</span>
             </div>
 
             <SettingsModal open={settingsOpen} onClose={() => setSettingsOpen(false)} />

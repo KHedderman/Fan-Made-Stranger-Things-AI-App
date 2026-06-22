@@ -143,7 +143,7 @@
   }
 }
 
-/* === Hawkins Frequency — Heathkit H-19 Green Phosphor CRT === */
+/* === Hawkins Frequency — Heathkit H-89 Green Phosphor CRT === */
 :root {
     --phosphor: #33ff66;
     --phosphor-dim: rgba(51, 255, 102, 0.55);
@@ -168,53 +168,27 @@ body {
     -webkit-font-smoothing: antialiased;
 }
 
-/* === Heathkit H-19 gray plastic chassis === */
+/* === Heathkit H-89 gray plastic chassis === */
 .crt-case {
     position: fixed;
     inset: 0;
     padding: clamp(18px, 2.6vmin, 34px) clamp(28px, 4vmin, 60px) clamp(34px, 5vmin, 64px);
-    background:
-        /* top highlight */
-        radial-gradient(ellipse 130% 55% at 50% -15%, rgba(255, 255, 255, 0.18), transparent 65%),
-        /* faint molded grain */
-        repeating-linear-gradient(135deg,
-            rgba(0, 0, 0, 0.03) 0 2px,
-            rgba(255, 255, 255, 0.025) 2px 4px),
-        linear-gradient(180deg, #a8a8a4 0%, #8e8e8a 55%, #757571 100%);
-    box-shadow:
-        0 30px 80px rgba(0, 0, 0, 0.7),
-        0 8px 20px rgba(0, 0, 0, 0.45),
-        inset 0 2px 0 rgba(255, 255, 255, 0.45),
-        inset 0 -10px 18px rgba(40, 40, 40, 0.5),
-        inset 10px 0 22px rgba(60, 60, 60, 0.3),
-        inset -10px 0 22px rgba(60, 60, 60, 0.3);
+    /* Flat charcoal gray chassis — no gradients, no highlights */
+    background: #3a3a3c;
     overflow: hidden;
     isolation: isolate;
 }
 
-/* Recessed CRT screen — H-89 molded gray bezel with soft dark inset */
+/* Flat charcoal border around the screen — no bevel, no recess shadow */
 .crt-shell {
     position: absolute;
     inset: clamp(18px, 2.6vmin, 34px) clamp(28px, 4vmin, 60px)
            clamp(60px, 7vmin, 86px) clamp(28px, 4vmin, 60px);
-    /* tube shape: pronounced rounding */
     border-radius: clamp(36px, 5vmin, 60px);
     background:
         radial-gradient(ellipse at center, #061410 0%, #020604 60%, #000 100%);
     overflow: hidden;
     isolation: isolate;
-    /* Molded gray plastic bezel hugging the tube: a soft inner shadow on the
-       chassis surrounds the dark glass, no brown wood-style trim rings. */
-    box-shadow:
-        /* dark glass perimeter (very thin) */
-        0 0 0 2px #0a0a0a,
-        /* soft dark molded recess shadow on the gray plastic */
-        0 0 24px 6px rgba(0, 0, 0, 0.55),
-        0 0 60px 18px rgba(0, 0, 0, 0.35),
-        /* tube glass inner shading */
-        inset 0 0 0 2px rgba(0, 0, 0, 0.9),
-        inset 0 18px 50px rgba(0, 0, 0, 0.9),
-        inset 0 -14px 36px rgba(0, 0, 0, 0.8);
 }
 
 /* Subtle inner bezel ring at the screen edge */
