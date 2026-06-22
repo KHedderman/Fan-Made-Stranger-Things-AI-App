@@ -14,7 +14,7 @@ const spoilerLevels = {
     '2': "Up to Season 2: The Mind Flayer is a big shadow monster. Max and Billy are new. Bob is Joyce's friend.",
     '3': "Up to Season 3: The Starcourt Mall. The monster is made of goo (Meat Flayer). There are Russians under the mall.",
     '4': "Up to Season 4: A new monster named Vecna. A new friend named Eddie.",
-    '5': "Up to Season 5: Only officially confirmed news. No leaks or fan theories presented as fact.",
+    '5': "Up to Season 5: Only officially confirmed news. No leaks or fan theories presented as fact. HISTORY RECALL UNLOCKED: the user has watched every prior season, so you may freely recap and reference any character, event, or plot point from Seasons 1, 2, 3, and 4 to help them remember context (e.g. 'Wait, who was that guy again?'). Treat yourself as the full Seasons 1-5 archive.",
     'First Shadow': "Up to The First Shadow: Henry Creel's story when he was a boy in 1959."
 };
 
