@@ -91,6 +91,12 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary" },
+      { name: "twitter:title", content: "Hawkins Frequency" },
+      { name: "description", content: "Gemini Secret Keeper is an open-source application that enables secure, private AI chat interactions using your own Google Gemini API key." },
+      { property: "og:description", content: "Gemini Secret Keeper is an open-source application that enables secure, private AI chat interactions using your own Google Gemini API key." },
+      { name: "twitter:description", content: "Gemini Secret Keeper is an open-source application that enables secure, private AI chat interactions using your own Google Gemini API key." },
+      { property: "og:image", content: "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/eadb3999-cad0-46bc-9c7b-f78758ab681d/id-preview-cc24fbfd--2f9672cb-1be7-4623-ad10-bdf1f5bca0f7.lovable.app-1782161459281.png" },
+      { name: "twitter:image", content: "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/eadb3999-cad0-46bc-9c7b-f78758ab681d/id-preview-cc24fbfd--2f9672cb-1be7-4623-ad10-bdf1f5bca0f7.lovable.app-1782161459281.png" },
     ],
     links: [
       { rel: "preconnect", href: "https://fonts.googleapis.com" },
