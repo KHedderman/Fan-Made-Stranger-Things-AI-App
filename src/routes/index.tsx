@@ -222,14 +222,6 @@ function Index() {
 
     return (
         <div className="crt-case text-xl sm:text-2xl md:text-3xl">
-            {/* Beige Heathkit chassis vents */}
-            <div className="crt-vents crt-vents-left" aria-hidden>
-                <span /><span /><span /><span /><span /><span />
-            </div>
-            <div className="crt-vents crt-vents-right" aria-hidden>
-                <span /><span /><span /><span /><span /><span />
-            </div>
-
             <div className="crt-shell">
                 {/* CRT effects layered above content, scoped to the screen */}
                 <div className="scanlines-static" aria-hidden />
