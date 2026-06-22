@@ -10,18 +10,21 @@ import SettingsModal from '../components/SettingsModal';
 export const Route = createFileRoute('/')({
     head: () => ({
         meta: [
-            { title: 'Hawkins Frequency — Stranger Things Lore Companion' },
+            { title: 'Hawkins Frequency — Stranger Things Lore Terminal' },
             {
                 name: 'description',
                 content:
-                    'A fan-made retro terminal that chats Stranger Things lore. Bring your own Google Gemini API key — stored only in your browser.',
+                    'A fan-made retro Heathkit H-89 terminal for Stranger Things fans. Chat as Eleven (kid-safe) or Dustin (full lore), pick your season for spoiler-safe answers, and bring your own Google Gemini key — stored only in your browser.',
             },
-            { property: 'og:title', content: 'Hawkins Frequency' },
+            { property: 'og:title', content: 'Hawkins Frequency — Stranger Things Lore Terminal' },
             {
                 property: 'og:description',
-                content: 'Fan-made Stranger Things lore companion. BYOK Gemini.',
+                content:
+                    'Retro Heathkit H-89 terminal that chats Stranger Things lore. Kid-safe Eleven mode, deep-lore Dustin mode, per-season spoiler firewall. BYOK Google Gemini.',
             },
+            { property: 'og:url', content: 'https://fanstrangerthings.app' },
         ],
+        links: [{ rel: 'canonical', href: 'https://fanstrangerthings.app' }],
     }),
     component: Index,
 });

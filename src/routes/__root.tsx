@@ -77,24 +77,28 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "Hawkins Frequency" },
+      { title: "Hawkins Frequency — Stranger Things Lore Terminal" },
       {
         name: "description",
         content:
-          "A fan-made Stranger Things lore companion. Bring your own Google Gemini API key.",
+          "A fan-made retro Heathkit H-89 terminal for Stranger Things fans. Chat as Eleven (kid-safe) or Dustin (full lore), pick your season for spoiler-safe answers, and bring your own Google Gemini key — stored only in your browser.",
       },
-      { property: "og:title", content: "Hawkins Frequency" },
+      { property: "og:title", content: "Hawkins Frequency — Stranger Things Lore Terminal" },
       {
         property: "og:description",
         content:
-          "A fan-made Stranger Things lore companion. Bring your own Google Gemini API key.",
+          "Retro Heathkit H-89 terminal that chats Stranger Things lore. Kid-safe Eleven mode, deep-lore Dustin mode, per-season spoiler firewall. BYOK Google Gemini.",
       },
       { property: "og:type", content: "website" },
-      { name: "twitter:card", content: "summary" },
-      { name: "twitter:title", content: "Hawkins Frequency" },
-      { name: "description", content: "Gemini Secret Keeper is an open-source application that enables secure, private AI chat interactions using your own Google Gemini API key." },
-      { property: "og:description", content: "Gemini Secret Keeper is an open-source application that enables secure, private AI chat interactions using your own Google Gemini API key." },
-      { name: "twitter:description", content: "Gemini Secret Keeper is an open-source application that enables secure, private AI chat interactions using your own Google Gemini API key." },
+      { property: "og:url", content: "https://fanstrangerthings.app" },
+      { property: "og:site_name", content: "Hawkins Frequency" },
+      { name: "twitter:card", content: "summary_large_image" },
+      { name: "twitter:title", content: "Hawkins Frequency — Stranger Things Lore Terminal" },
+      {
+        name: "twitter:description",
+        content:
+          "Retro Heathkit H-89 terminal that chats Stranger Things lore. Kid-safe Eleven mode, deep-lore Dustin mode, per-season spoiler firewall. BYOK Google Gemini.",
+      },
       { property: "og:image", content: "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/eadb3999-cad0-46bc-9c7b-f78758ab681d/id-preview-cc24fbfd--2f9672cb-1be7-4623-ad10-bdf1f5bca0f7.lovable.app-1782161459281.png" },
       { name: "twitter:image", content: "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/eadb3999-cad0-46bc-9c7b-f78758ab681d/id-preview-cc24fbfd--2f9672cb-1be7-4623-ad10-bdf1f5bca0f7.lovable.app-1782161459281.png" },
     ],
