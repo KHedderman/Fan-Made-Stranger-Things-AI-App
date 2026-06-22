@@ -49,7 +49,14 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({ messages, onSendMessage, 
 
     return (
         <div className="flex flex-col h-full">
-            <div className="flex-1 overflow-y-auto pr-2 space-y-6 terminal-scrollbar">
+            <div
+                className="flex-1 overflow-y-auto pr-2 space-y-6 terminal-scrollbar"
+                role="log"
+                aria-live="polite"
+                aria-relevant="additions text"
+                aria-atomic="false"
+                aria-label="Conversation"
+            >
                 {messages.map(renderMessage)}
                 <div ref={messagesEndRef} />
             </div>
@@ -59,7 +66,7 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({ messages, onSendMessage, 
                     type="text"
                     value={input}
                     onChange={(e) => setInput(e.target.value)}
-                    className="flex-1 bg-transparent border-none focus:ring-0 text-2xl md:text-3xl placeholder-green-800"
+                    className="flex-1 bg-transparent border-none focus:ring-0 text-2xl md:text-3xl placeholder:text-[rgba(51,255,102,0.55)]"
                     placeholder="Type your message and press Enter... (or type RESET)"
                     aria-label="Chat input"
                     disabled={isLoading}

@@ -30,6 +30,7 @@ Live: <https://fanstrangerthings.app>
 - [Build](#build)
 - [Project layout](#project-layout)
 - [Known limitations](#known-limitations)
+- [Accessibility](#accessibility)
 - [License](#license)
 
 ---
@@ -433,13 +434,56 @@ bun run format      # prettier
   no usage metrics out of the box.
 - **No multi-user accounts.** Each browser tab is its own session.
   Conversation history is not persisted across tabs or reloads.
-- **Motion-heavy CRT effects.** Scanlines, vertical-hold roll, and
-  flicker can affect users with vestibular sensitivity. A
-  `prefers-reduced-motion` opt-out is on the future-improvements list.
+- **Motion-heavy CRT effects, with an opt-out.** Scanlines,
+  vertical-hold roll, flicker, and the blinking REC dot can affect
+  users with vestibular sensitivity. The app honors the OS-level
+  `prefers-reduced-motion` setting and disables those animations
+  automatically when it is enabled.
 - **Heathkit H-89 aesthetic only.** Not a faithful emulator — no HDOS
   prompt, no keyboard remap, no serial protocol. The status strip
   (`HEATHKIT H-89 · HDOS 2.0 · 9600 BAUD · ONLINE`) is period-correct
   flavor, not an emulated environment.
+
+## Accessibility
+
+This app is a heavily-stylized retro CRT, which creates real
+accessibility risks. The following choices are intentional and
+shipped:
+
+- **`prefers-reduced-motion` is honored.** When your OS reports
+  reduced-motion preference, the scanline roll, whole-screen
+  flicker, blinking REC dot, blinking power LED, fade-ins, and
+  loading spinner all stop. Static scanlines and the phosphor glow
+  remain (they don't move), so the aesthetic still reads as a CRT.
+- **Chat is a live region.** The message list uses
+  `role="log"` with `aria-live="polite"`, so screen readers
+  announce streamed AI replies and system notices as they arrive.
+- **Keyboard focus is visible.** A phosphor-green
+  `:focus-visible` ring is shown on every interactive element when
+  navigating by keyboard. Mouse users see no extra outline.
+- **Icon-only and bracketed buttons have `aria-label`s.** The
+  settings button, mode-select buttons, loading spinner, and chat
+  input all expose accessible names.
+- **Semantic landmarks.** `<header>`, `<main>`, and `<footer>` are
+  used so screen-reader users can jump straight to the conversation.
+- **Decorative chrome is hidden from AT.** Scanlines, the Heathkit
+  badge, the `>` prompt, and CRT effects are marked `aria-hidden`.
+- **Color contrast.** Phosphor green on near-black exceeds WCAG AA
+  for body text. The input placeholder uses a mid-opacity phosphor
+  (not the previous near-black green) so the prompt is readable.
+
+Known accessibility caveats:
+
+- **VT323 pixel font** is core to the aesthetic. It's harder to
+  read than a humanist sans for some users. There is no font
+  toggle. If this is a blocker for you, please open an issue.
+- **Streaming text** is announced as it arrives, which can feel
+  chatty on a screen reader. The `polite` live-region setting
+  means it won't interrupt, but long replies will be announced in
+  chunks.
+
+If you hit an accessibility issue, please open a GitHub issue —
+this is a fan project, fixes welcome.
 
 ## License
 
