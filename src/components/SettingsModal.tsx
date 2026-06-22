@@ -94,6 +94,27 @@ const SettingsModal: React.FC<SettingsModalProps> = ({ open, onClose }) => {
                         </div>
                     </label>
 
+                    <fieldset className="border-2 border-current p-3">
+                        <legend className="px-2">MODEL</legend>
+                        <div className="space-y-2">
+                            {SUPPORTED_MODELS.map((m) => (
+                                <label key={m.id} className="flex items-start gap-2 cursor-pointer">
+                                    <input
+                                        type="radio"
+                                        name="gemini-model"
+                                        value={m.id}
+                                        checked={model === m.id}
+                                        onChange={() => setModelState(m.id)}
+                                        className="mt-1 accent-green-400"
+                                    />
+                                    <span className="text-base md:text-lg leading-snug">
+                                        {m.label}
+                                    </span>
+                                </label>
+                            ))}
+                        </div>
+                    </fieldset>
+
                     <p className="text-base md:text-lg text-green-500/90 leading-snug">
                         For your security, your API key is stored only in this browser session.
                         It will be cleared automatically when you close this tab.
