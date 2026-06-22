@@ -252,6 +252,16 @@ function Index() {
                 <main className="crt-content mx-auto w-full max-w-5xl flex-1 flex flex-col">
                     {renderContent()}
                 </main>
+
+                <footer className="crt-footer">
+                    <p>
+                        This is an unofficial, fan-made application and is not affiliated with,
+                        endorsed by, or connected to Netflix, Inc. or the Stranger Things
+                        production team. All Stranger Things characters, logos, and related marks
+                        are the property of their respective owners. This project is provided for
+                        educational and non-commercial purposes only.
+                    </p>
+                </footer>
             </div>
 
             <SettingsModal open={settingsOpen} onClose={() => setSettingsOpen(false)} />
