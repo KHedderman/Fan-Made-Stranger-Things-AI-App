@@ -116,6 +116,37 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       },
       { rel: "stylesheet", href: appCss },
     ],
+    scripts: [
+      {
+        type: "application/ld+json",
+        children: JSON.stringify({
+          "@context": "https://schema.org",
+          "@type": "SoftwareApplication",
+          name: "Fan-Made Stranger Things AI App",
+          description:
+            "A fan-made Stranger Things AI app styled as a retro Heathkit H-89 terminal. Chat as Eleven (kid-safe) or Dustin (full lore), with per-season spoiler-safe answers. Bring your own Google Gemini key — stored only in your browser.",
+          url: "https://fanstrangerthings.app",
+          applicationCategory: "MultimediaApplication",
+          operatingSystem: "Any",
+          browserRequirements: "Requires JavaScript. Requires HTML5.",
+          offers: {
+            "@type": "Offer",
+            price: "0",
+            priceCurrency: "USD",
+          },
+          image: "https://fanstrangerthings.app/og-image.png",
+        }),
+      },
+      {
+        type: "application/ld+json",
+        children: JSON.stringify({
+          "@context": "https://schema.org",
+          "@type": "WebSite",
+          name: "Fan-Made Stranger Things AI App",
+          url: "https://fanstrangerthings.app",
+        }),
+      },
+    ],
   }),
   shellComponent: RootShell,
   component: RootComponent,
