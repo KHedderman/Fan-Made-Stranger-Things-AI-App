@@ -1,6 +1,6 @@
-
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { Mode } from '../types.ts';
+import { playKeyClick } from '../lib/keyClickSound';
 
 interface BootSequenceProps {
     onModeSelect: (mode: Mode) => void;
@@ -16,35 +16,75 @@ const bootLines = [
     "/// ENCRYPTED CHANNEL OPEN ///",
     "° . * . ° . * . ° . * . °",
     "",
-    "SELECT OPERATOR MODE:"
+    "SELECT OPERATOR MODE:",
 ];
 
+const CHAR_DELAY_MS = 22;
+const LINE_PAUSE_MS = 180;
+
 const BootSequence: React.FC<BootSequenceProps> = ({ onModeSelect }) => {
-    const [lines, setLines] = useState<string[]>([]);
+    const [lines, setLines] = useState<string[]>(['']);
+    const [done, setDone] = useState(false);
     const [showButtons, setShowButtons] = useState(false);
+    const cancelledRef = useRef(false);
 
     useEffect(() => {
-        const timeouts: NodeJS.Timeout[] = [];
-        bootLines.forEach((line, index) => {
-            timeouts.push(setTimeout(() => {
-                setLines(prev => [...prev, line]);
-                if (index === bootLines.length - 1) {
-                    setTimeout(() => setShowButtons(true), 300);
-                }
-            }, index * 400));
-        });
+        cancelledRef.current = false;
+        let lineIdx = 0;
+        let charIdx = 0;
 
-        return () => timeouts.forEach(clearTimeout);
+        const tick = () => {
+            if (cancelledRef.current) return;
+            const current = bootLines[lineIdx];
+            if (charIdx < current.length) {
+                setLines((prev) => {
+                    const next = [...prev];
+                    next[lineIdx] = current.slice(0, charIdx + 1);
+                    return next;
+                });
+                if (current[charIdx] && current[charIdx] !== ' ') {
+                    playKeyClick();
+                }
+                charIdx++;
+                setTimeout(tick, CHAR_DELAY_MS);
+            } else {
+                lineIdx++;
+                charIdx = 0;
+                if (lineIdx < bootLines.length) {
+                    setLines((prev) => [...prev, '']);
+                    setTimeout(tick, LINE_PAUSE_MS);
+                } else {
+                    setDone(true);
+                    setTimeout(() => setShowButtons(true), 400);
+                }
+            }
+        };
+
+        const start = setTimeout(tick, 200);
+        return () => {
+            cancelledRef.current = true;
+            clearTimeout(start);
+        };
     }, []);
 
     return (
         <div className="flex flex-col items-center justify-center h-full animate-fadeIn">
             <div className="text-center whitespace-pre-wrap">
-                {lines.map((line, index) => (
-                    <p key={index}>{line}</p>
-                ))}
+                {lines.map((line, index) => {
+                    const isLast = index === lines.length - 1;
+                    return (
+                        <p key={index}>
+                            {line}
+                            {isLast && (
+                                <span className="animate-pulse ml-0.5" aria-hidden>
+                                    _
+                                </span>
+                            )}
+                        </p>
+                    );
+                })}
             </div>
-            {showButtons && (
+            {done && showButtons && (
                 <div className="mt-8 flex flex-col sm:flex-row gap-4 text-center animate-fadeIn">
                     <button
                         onClick={() => onModeSelect('child')}
