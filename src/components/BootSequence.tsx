@@ -9,7 +9,10 @@ interface BootSequenceProps {
 const bootLines = [
     "° . * . ° . * . ° . * . °",
     "/// PROPERTY OF HAWKINS MIDDLE SCHOOL ///",
-    "/// HEATHKIT TERMINAL H-89 ///",
+    "/// HEATHKIT ALL-IN-ONE COMPUTER MODEL H-89 ///",
+    "/// ZENITH DATA SYSTEMS Z-89 // Z80 CPU // 48K RAM ///",
+    "/// HEATH CO. · BENTON HARBOR, MICHIGAN · EST. 1926 ///",
+    "/// ASSEMBLED BY HAWKINS AV CLUB — HENDERSON, D. ///",
     "/// ENCRYPTED CHANNEL OPEN ///",
     "° . * . ° . * . ° . * . °",
     "",
