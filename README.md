@@ -2,7 +2,7 @@
 
 A fan-made *Stranger Things* AI app, styled as a retro **Heathkit H-89**
 green-phosphor terminal, that lets kids and adults explore the show's
-lore safely and at the right depth — powered by Google Gemini 2.5 Flash.
+lore safely and at the right depth — powered by Google Gemini 3.5 Flash.
 Styled after a real 1980s Heathkit H-89 all-in-one computer: charcoal
 plastic chassis, recessed CRT bezel, scanlines, slow vertical-hold roll,
 blinking cursor, and a branded orange/blue Heathkit badge.
@@ -48,7 +48,7 @@ Meanwhile his mom wanted her *own* device to explore deep lore and the
 origin story without risking spoilers for either of them.
 
 So I opened Google's Vertex AI and built this — a fan-made application
-on Gemini 2.5 Flash, dressed up like an 80s Heathkit H-89 terminal to
+on Gemini 3.5 Flash, dressed up like an 80s Heathkit H-89 terminal to
 drop them straight into the world of the show.
 
 The original build story, written while *Stranger Things* Season 5 was
@@ -306,7 +306,7 @@ This app does not bill you. Google bills you (or doesn't, if you stay in
 the free tier) for the model calls your key makes.
 
 - **Free tier (recommended for almost everyone).** Google AI Studio
-  offers a free tier on `gemini-2.5-flash` with per-minute and per-day
+  offers a free tier on `gemini-3.5-flash` with per-minute and per-day
   rate limits and no credit card required. Casual chatting — a few
   questions here and there — comfortably fits inside the free tier.
 - **Paid tier (if you exceed the free limits).** At current Gemini 2.5
@@ -353,7 +353,7 @@ remove or hide it.
 - **Build tool:** [Vite 7](https://vitejs.dev)
 - **Styling:** [Tailwind CSS v4](https://tailwindcss.com) with CSS-variable design tokens in `src/styles.css`
 - **AI SDK:** [`@google/genai`](https://www.npmjs.com/package/@google/genai) calling Gemini directly from the browser
-- **Model:** `gemini-2.5-flash`
+- **Model:** `gemini-3.5-flash`
 - **UI primitives:** [shadcn/ui](https://ui.shadcn.com) on [Radix UI](https://www.radix-ui.com)
 - **Routing:** [TanStack Router](https://tanstack.com/router) (file-based, type-safe)
 - **Data:** [TanStack Query](https://tanstack.com/query) (configured; not heavily used — this app is largely stateless)
@@ -376,7 +376,7 @@ remove or hide it.
 │        │  HTTPS                             │
 └────────┼────────────────────────────────────┘
          ▼
-   Google Gemini API  (gemini-2.5-flash)
+   Google Gemini API  (gemini-3.5-flash)
 ```
 
 - The static app is served from Lovable hosting (or your own host).
