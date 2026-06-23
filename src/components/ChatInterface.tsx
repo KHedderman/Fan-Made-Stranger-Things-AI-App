@@ -71,7 +71,7 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({ messages, onSendMessage, 
                         if (next.length > input.length) playKeyClick();
                         setInput(next);
                     }}
-                    className="flex-1 bg-transparent border-none focus:ring-0 text-2xl md:text-3xl placeholder:text-[rgba(51,255,102,0.55)]"
+                    className="flex-1 bg-transparent border-none focus:ring-0 text-base sm:text-2xl md:text-3xl placeholder:text-[rgba(51,255,102,0.55)] min-w-0"
                     placeholder="Type your message and press Enter... (or type RESET)"
                     aria-label="Chat input"
                     disabled={isLoading}
