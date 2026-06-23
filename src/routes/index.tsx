@@ -236,7 +236,7 @@ function Index() {
                         <div className="flex min-w-0 items-center gap-3 truncate">
                             <span className="rec-dot" aria-hidden />
                             <span className="truncate">
-                                HEATHKIT&nbsp;H-89 · HDOS&nbsp;2.0 · 9600&nbsp;BAUD · ONLINE
+                                HEATHKIT&nbsp;H-89 · ZENITH&nbsp;Z-89 · HDOS&nbsp;2.0 · 9600&nbsp;BAUD · ONLINE
                             </span>
                         </div>
                         <div className="flex shrink-0 items-center gap-3">
