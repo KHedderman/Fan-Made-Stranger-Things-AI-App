@@ -75,14 +75,17 @@ your browser tab.
 
 ### Live demo (video)
 
-A ~13 second screen recording of the live app — boot sequence,
-scanline roll, blinking REC dot, and Heathkit power LED, captured
-straight from <https://fanstrangerthings.app>.
+A ~21 second screen recording of the live app — boot sequence,
+scanline roll, blinking REC dot, Heathkit power LED, and a live
+Adult Mode (Dustin) interaction, captured straight from
+<https://fanstrangerthings.app>. Includes a synthesized Heathkit
+H-89 keyboard click track (layered "thock" + spring ping) on both
+streamed AI replies and user keystrokes.
 
 ![Boot screen — Heathkit H-89 green-phosphor terminal](public/og-image.png)
 
-▶ **[Download / view the demo MP4](public/demo.mp4)** (1.5 MB,
-1920×1080, no audio)
+▶ **[Download / view the demo MP4](public/demo.mp4)** (1.6 MB,
+1280×800, with audio — AAC)
 
 GitHub renders MP4s inline on the file page; on the README itself
 they appear as a download link. The same file is served live at
@@ -160,6 +163,11 @@ at any time to return to the boot screen.
 - **Slim, era-appropriate blinking cursor**.
 - **Character-by-character output rendering** so responses appear one
   character at a time like an old Heathkit terminal.
+- **Synthesized H-89 keyboard click** layered (low "thock", mid noise
+  body, high spring ping, quieter key-up tick) on every streamed AI
+  character *and* every user keystroke, with randomized pitch/gain for
+  round-robin variety. Respects `prefers-reduced-motion` via the same
+  audio gating.
 - **Clearer input placeholder text** for more intuitive onboarding.
 - Persistent **IP / legal footer** on every screen.
 
