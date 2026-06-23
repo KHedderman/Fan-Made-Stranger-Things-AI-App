@@ -186,8 +186,8 @@ function Index() {
                     } else {
                         const clarificationText =
                             mode === 'child'
-                                ? '[ 🧇 ELEVEN ]\nI do not understand. Please tell me the number. 1? 2? 3? 4? 5? Or the play?'
-                                : "[ 🧢 DUSTIN ]\nWoah, that's not a valid clearance level. Try a number like 1, 2, 3, 4, 5, or just say 'The First Shadow', over.";
+                                ? "[ 🧇 ELEVEN ]\nI do not understand. Please tell me. 1? 2? 3? 4? 5? The play? Or Tales from '85?"
+                                : "[ 🧢 DUSTIN ]\nWoah, that's not a valid clearance level. Try a number like 1, 2, 3, 4, 5, or say 'The First Shadow' or 'Tales from 85', over.";
                         setMessages((prev) => [...prev, { id: aiResponseId, sender: 'ai', text: '' }]);
                         await typeOutText(clarificationText, aiResponseId);
                     }
