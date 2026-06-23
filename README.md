@@ -309,7 +309,7 @@ the free tier) for the model calls your key makes.
   offers a free tier on `gemini-3.5-flash` with per-minute and per-day
   rate limits and no credit card required. Casual chatting — a few
   questions here and there — comfortably fits inside the free tier.
-- **Paid tier (if you exceed the free limits).** At current Gemini 2.5
+- **Paid tier (if you exceed the free limits).** At current Gemini 3.5
   Flash pricing, a typical chat turn (a short question + a few
   paragraphs of answer) costs a small fraction of a cent. A long
   evening of heavy back-and-forth is usually well under $1. Pricing
