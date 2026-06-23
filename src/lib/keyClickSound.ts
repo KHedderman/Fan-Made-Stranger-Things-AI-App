@@ -129,6 +129,15 @@ function keyUpTick(c: AudioContext, at: number, gainOut: GainNode) {
  * Internally throttled to avoid stacking on very fast type loops.
  */
 export function playKeyClick(): void {
+    // Optional capture hook for offline audio generation. No-op in
+    // production unless `window.__captureClicks = true` was set.
+    if (typeof window !== 'undefined') {
+        const w = window as unknown as { __captureClicks?: boolean; __clickTimes?: number[] };
+        if (w.__captureClicks) {
+            (w.__clickTimes ||= []).push(performance.now());
+        }
+    }
+
     const c = getCtx();
     if (!c) return;
     if (!unlocked) tryUnlock();
@@ -136,6 +145,7 @@ export function playKeyClick(): void {
     const realNow = performance.now();
     if (realNow - lastPlay < 20) return;
     lastPlay = realNow;
+
 
     try {
         const now = c.currentTime;
