@@ -129,11 +129,12 @@ const SettingsModal: React.FC<SettingsModalProps> = ({ open, onClose }) => {
                         <p>
                             <span className="text-green-300">/// COST ///</span> Google AI
                             Studio offers a generous free tier for{' '}
-                            <code>gemini-2.5-flash</code> that covers casual chat (rate-limited
+                            <code>gemini-3.5-flash</code> that covers casual chat (rate-limited
                             per minute/day, no card required). Beyond the free tier, typical
                             chat turns cost a small fraction of a cent each at current Gemini
-                            2.5 Flash pricing — a long evening of questions is usually well
-                            under $1. Check{' '}
+                            3.5 Flash pricing — a long evening of questions is usually well
+                            under $1. <code>gemini-3.1-pro</code> costs more per turn but
+                            handles deeper lore reasoning. Check{' '}
                             <a
                                 href="https://ai.google.dev/pricing"
                                 target="_blank"

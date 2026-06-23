@@ -7,17 +7,17 @@ const MODEL_KEY = 'hawkins_frequency_gemini_model';
 
 export const SUPPORTED_MODELS = [
     {
-        id: 'gemini-2.5-flash',
-        label: 'Gemini 2.5 Flash (stable, widely available)',
+        id: 'gemini-3.5-flash',
+        label: 'Gemini 3.5 Flash — Speed & Real-time UX (default, newest & fastest, snappy terminal feel)',
     },
     {
-        id: 'gemini-3-flash-preview',
-        label: 'Gemini 3 Flash (preview, latest)',
+        id: 'gemini-3.1-pro',
+        label: 'Gemini 3.1 Pro — Deep Reasoning & Lore (power-user, slower but thinks harder about complex multi-layered questions)',
     },
 ] as const;
 
 export type GeminiModelId = (typeof SUPPORTED_MODELS)[number]['id'];
-export const DEFAULT_MODEL: GeminiModelId = 'gemini-2.5-flash';
+export const DEFAULT_MODEL: GeminiModelId = 'gemini-3.5-flash';
 
 const storage = (): Storage | null => {
     if (typeof window === 'undefined') return null;
