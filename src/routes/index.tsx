@@ -30,11 +30,14 @@ export const Route = createFileRoute('/')({
     component: Index,
 });
 
-const ALL_SEASONS: readonly Season[] = ['1', '2', '3', '4', '5', 'First Shadow'];
+const ALL_SEASONS: readonly Season[] = ['1', '2', '3', '4', '5', 'First Shadow', "Tales from '85"];
 const TYPING_SPEED_MS = 30;
 
 const parseSeason = (input: string): Season | null => {
     const lowerInput = input.toLowerCase().trim();
+    if (lowerInput.includes('tales') || lowerInput.includes("85") || lowerInput.includes("'85")) {
+        return "Tales from '85";
+    }
     if (lowerInput.includes('first shadow') || lowerInput.includes('play')) {
         return 'First Shadow';
     }
