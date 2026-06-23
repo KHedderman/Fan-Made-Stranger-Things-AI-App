@@ -258,6 +258,9 @@ function Index() {
                     </main>
 
                     <footer className="crt-footer">
+                        <p style={{ marginBottom: '0.35rem', opacity: 0.85 }}>
+                            HEATH COMPANY · BENTON HARBOR, MICHIGAN · ASSEMBLED BY HAWKINS AV CLUB
+                        </p>
                         <p>
                             This is an unofficial, fan-made application and is not affiliated with,
                             endorsed by, or connected to Netflix, Inc. or the Stranger Things
