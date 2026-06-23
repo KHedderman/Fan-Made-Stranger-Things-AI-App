@@ -243,12 +243,35 @@ function Index() {
                             </span>
                         </div>
                         <div className="flex shrink-0 items-center gap-3">
-                            <span className="hidden sm:inline opacity-70">
+                            <span
+                                className={
+                                    'hidden sm:inline ' +
+                                    (hasApiKey
+                                        ? 'opacity-70'
+                                        : 'key-missing-blink font-bold')
+                                }
+                                style={hasApiKey ? undefined : { color: '#ff3b3b', textShadow: '0 0 6px rgba(255,59,59,0.7)' }}
+                            >
                                 KEY: {hasApiKey ? 'OK' : 'MISSING'}
                             </span>
                             <button
                                 onClick={() => setSettingsOpen(true)}
-                                className="border border-current px-2 py-0.5 hover:bg-[rgba(51,255,102,0.15)] transition-colors"
+                                className={
+                                    'border px-2 py-0.5 transition-colors ' +
+                                    (hasApiKey
+                                        ? 'border-current hover:bg-[rgba(51,255,102,0.15)]'
+                                        : 'key-missing-blink')
+                                }
+                                style={
+                                    hasApiKey
+                                        ? undefined
+                                        : {
+                                              color: '#ff3b3b',
+                                              borderColor: '#ff3b3b',
+                                              textShadow: '0 0 6px rgba(255,59,59,0.7)',
+                                              boxShadow: '0 0 8px rgba(255,59,59,0.45)',
+                                          }
+                                }
                                 aria-label="Open settings"
                             >
                                 [ ⚙ SETTINGS{hasApiKey ? '' : ' · KEY NEEDED'} ]
