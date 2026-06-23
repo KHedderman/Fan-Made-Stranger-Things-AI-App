@@ -227,7 +227,7 @@ function Index() {
     };
 
     return (
-        <div className="crt-case text-xl sm:text-2xl md:text-3xl">
+        <div className="crt-case text-sm sm:text-2xl md:text-3xl">
             <div className="crt-shell">
                 {/* CRT effects layered above content, scoped to the screen */}
                 <div className="scanlines-static" aria-hidden />
@@ -236,10 +236,13 @@ function Index() {
                 <div className="crt-flicker h-full w-full flex flex-col">
                     {/* Top status strip — SETTINGS docked here */}
                     <header className="crt-status grid grid-cols-[minmax(0,1fr)_auto] sm:flex sm:items-center sm:justify-between">
-                        <div className="flex min-w-0 items-center gap-3 truncate">
-                            <span className="rec-dot" aria-hidden />
+                        <div className="flex min-w-0 items-center gap-2 sm:gap-3 truncate">
+                            <span className="rec-dot shrink-0" aria-hidden />
                             <span className="truncate">
-                                HEATHKIT&nbsp;H-89 · ZENITH&nbsp;Z-89 · HDOS&nbsp;2.0 · 9600&nbsp;BAUD · ONLINE
+                                <span className="sm:hidden">H-89 · ONLINE</span>
+                                <span className="hidden sm:inline">
+                                    HEATHKIT&nbsp;H-89 · ZENITH&nbsp;Z-89 · HDOS&nbsp;2.0 · 9600&nbsp;BAUD · ONLINE
+                                </span>
                             </span>
                         </div>
                         <div className="flex shrink-0 items-center gap-3">
@@ -274,7 +277,8 @@ function Index() {
                                 }
                                 aria-label="Open settings"
                             >
-                                [ ⚙ SETTINGS{hasApiKey ? '' : ' · KEY NEEDED'} ]
+                                <span className="sm:hidden">[ ⚙{hasApiKey ? '' : '!'} ]</span>
+                                <span className="hidden sm:inline">[ ⚙ SETTINGS{hasApiKey ? '' : ' · KEY NEEDED'} ]</span>
                             </button>
                         </div>
                     </header>

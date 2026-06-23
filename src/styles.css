@@ -209,6 +209,52 @@ body {
     isolation: isolate;
 }
 
+/* === Mobile: slim the chassis bezel so the screen has room to breathe === */
+@media (max-width: 640px) {
+    .crt-case {
+        padding: 6px 6px 32px;
+    }
+    .crt-shell {
+        inset: 6px 6px 32px 6px;
+        border-radius: 16px;
+    }
+    .crt-shell::after {
+        box-shadow:
+            inset 0 0 0 2px rgba(0, 0, 0, 0.9),
+            inset 0 0 24px rgba(0, 0, 0, 0.75),
+            inset 0 0 70px rgba(0, 0, 0, 0.9);
+    }
+    .crt-content {
+        padding: 0.5rem 0.6rem !important;
+        height: calc(100% - 1.8rem) !important;
+    }
+    .crt-status {
+        padding: 0.3rem 0.55rem;
+        font-size: 0.66rem;
+        letter-spacing: 0.03em;
+        gap: 0.4rem;
+    }
+    .crt-footer {
+        padding: 0.35rem 0.55rem;
+        font-size: 0.58rem;
+        line-height: 1.3;
+    }
+    .crt-badge {
+        right: 8px;
+        bottom: 6px;
+        height: 14px;
+    }
+    .crt-badge-brand,
+    .crt-badge-model {
+        font-size: 8px;
+        padding: 0 5px;
+    }
+    .crt-badge-power {
+        width: 9px;
+        margin-right: 9px;
+    }
+}
+
 /* Subtle inner bezel ring at the screen edge */
 .crt-shell::after {
     content: "";
