@@ -48,37 +48,37 @@ const SettingsModal: React.FC<SettingsModalProps> = ({ open, onClose }) => {
 
     return (
         <div
-            className="fixed inset-0 z-[200] flex items-center justify-center bg-black/80 p-4"
+            className="fixed inset-0 z-[200] flex items-stretch sm:items-center justify-center bg-black/80 p-0 sm:p-4"
             role="dialog"
             aria-modal="true"
             aria-label="Settings"
             onClick={onClose}
         >
             <div
-                className="w-full max-w-xl border-2 border-current bg-black p-6 text-xl md:text-2xl"
+                className="w-full max-w-xl border-2 border-current bg-black p-3 sm:p-6 text-sm sm:text-xl md:text-2xl max-h-[100dvh] sm:max-h-[90vh] overflow-y-auto terminal-scrollbar"
                 onClick={(e) => e.stopPropagation()}
             >
-                <div className="flex items-center justify-between mb-4">
-                    <h2 className="tracking-wider">/// SETTINGS ///</h2>
+                <div className="flex items-center justify-between mb-3 sm:mb-4 gap-2">
+                    <h2 className="tracking-wider truncate">/// SETTINGS ///</h2>
                     <button
                         onClick={onClose}
                         aria-label="Close settings"
-                        className="border-2 border-current px-3 py-1 hover:bg-green-900/50"
+                        className="shrink-0 border-2 border-current px-2 py-0.5 sm:px-3 sm:py-1 hover:bg-green-900/50"
                     >
                         [ X ]
                     </button>
                 </div>
 
-                <form onSubmit={handleSave} className="space-y-4">
+                <form onSubmit={handleSave} className="space-y-3 sm:space-y-4">
                     <label className="block">
-                        <span className="block mb-2">GOOGLE GEMINI API KEY:</span>
-                        <div className="flex items-center gap-2">
+                        <span className="block mb-1 sm:mb-2">GOOGLE GEMINI API KEY:</span>
+                        <div className="flex flex-col sm:flex-row sm:items-center gap-2">
                             <input
                                 type={reveal ? 'text' : 'password'}
                                 value={value}
                                 onChange={(e) => setValue(e.target.value)}
                                 placeholder="Paste your key (e.g. AIza...)"
-                                className="flex-1 bg-transparent border-2 border-current px-3 py-2 focus:outline-none placeholder-green-800"
+                                className="w-full sm:flex-1 min-w-0 bg-transparent border-2 border-current px-2 py-2 sm:px-3 focus:outline-none placeholder-green-800"
                                 autoComplete="off"
                                 spellCheck={false}
                                 aria-label="Gemini API key"
@@ -86,7 +86,7 @@ const SettingsModal: React.FC<SettingsModalProps> = ({ open, onClose }) => {
                             <button
                                 type="button"
                                 onClick={() => setReveal((r) => !r)}
-                                className="border-2 border-current px-3 py-2 hover:bg-green-900/50"
+                                className="self-start sm:self-auto shrink-0 border-2 border-current px-3 py-2 hover:bg-green-900/50"
                                 aria-label={reveal ? 'Hide API key' : 'Show API key'}
                             >
                                 {reveal ? '[ HIDE ]' : '[ SHOW ]'}
@@ -94,14 +94,14 @@ const SettingsModal: React.FC<SettingsModalProps> = ({ open, onClose }) => {
                         </div>
                     </label>
 
-                    <fieldset className="border-2 border-current p-3">
+                    <fieldset className="border-2 border-current p-2 sm:p-3">
                         <legend className="px-2">MODEL</legend>
-                        <p className="text-base md:text-lg leading-snug">
+                        <p className="text-xs sm:text-base md:text-lg leading-snug">
                             gemini-3.5-flash — newest & fastest, snappy terminal feel.
                         </p>
                     </fieldset>
 
-                    <div className="border-2 border-current p-3 space-y-2 text-base md:text-lg leading-snug text-green-500/90">
+                    <div className="border-2 border-current p-2 sm:p-3 space-y-2 text-xs sm:text-base md:text-lg leading-snug text-green-500/90">
                         <p>
                             <span className="text-green-300">/// YOUR KEY, YOUR SESSION ///</span>
                         </p>
@@ -115,7 +115,7 @@ const SettingsModal: React.FC<SettingsModalProps> = ({ open, onClose }) => {
                         <p>
                             <span className="text-green-300">/// COST ///</span> Google AI
                             Studio offers a generous free tier for{' '}
-                            <code>gemini-3.5-flash</code> that covers casual chat (rate-limited
+                            <code className="break-all">gemini-3.5-flash</code> that covers casual chat (rate-limited
                             per minute/day, no card required). Beyond the free tier, typical
                             chat turns cost a small fraction of a cent each — a long evening
                             of questions is usually well under $1. Check{' '}
@@ -135,7 +135,7 @@ const SettingsModal: React.FC<SettingsModalProps> = ({ open, onClose }) => {
                                 href="https://aistudio.google.com/app/apikey"
                                 target="_blank"
                                 rel="noreferrer noopener"
-                                className="underline hover:bg-green-900/50"
+                                className="underline hover:bg-green-900/50 break-all"
                             >
                                 Google AI Studio
                             </a>
@@ -143,10 +143,10 @@ const SettingsModal: React.FC<SettingsModalProps> = ({ open, onClose }) => {
                         </p>
                     </div>
 
-                    <div className="flex flex-wrap gap-3 pt-2">
+                    <div className="flex flex-wrap gap-2 sm:gap-3 pt-2">
                         <button
                             type="submit"
-                            className="border-2 border-current px-4 py-2 hover:bg-green-900/50 disabled:opacity-50"
+                            className="border-2 border-current px-3 py-2 sm:px-4 hover:bg-green-900/50 disabled:opacity-50"
                             disabled={!value.trim()}
                         >
                             [ SAVE ]
@@ -154,7 +154,7 @@ const SettingsModal: React.FC<SettingsModalProps> = ({ open, onClose }) => {
                         <button
                             type="button"
                             onClick={handleClear}
-                            className="border-2 border-current px-4 py-2 hover:bg-green-900/50"
+                            className="border-2 border-current px-3 py-2 sm:px-4 hover:bg-green-900/50"
                         >
                             [ CLEAR ]
                         </button>
