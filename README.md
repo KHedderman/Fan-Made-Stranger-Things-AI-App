@@ -9,7 +9,16 @@ blinking cursor, and a branded orange/blue Heathkit badge.
 
 Live: <https://fanstrangerthings.app>
 
+> © 2025-2026 Kaitlyn Hedderman. Source-available under the
+> [Fan-Made Stranger Things AI App License](./LICENSE). This copyright
+> covers only the original code, UI, and assets of this fan-made app —
+> it does **not** claim any ownership of *Stranger Things* (© Netflix,
+> Inc. / the Stranger Things production team) or *Heathkit* / *H-89*
+> (© their respective owners). Unofficial fan project, not affiliated
+> with or endorsed by any rights holder.
+
 ---
+
 
 ## Table of contents
 
