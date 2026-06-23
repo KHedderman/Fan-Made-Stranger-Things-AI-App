@@ -68,7 +68,7 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({ messages, onSendMessage, 
                 <div ref={messagesEndRef} />
             </div>
             <form onSubmit={handleSend} className="mt-4 flex items-center gap-2 sm:gap-4">
-                <span className="text-xl sm:text-3xl shrink-0" aria-hidden="true">&gt;</span>
+                <span className="text-lg sm:text-xl md:text-2xl shrink-0" aria-hidden="true">&gt;</span>
                 <input
                     type="text"
                     value={input}
@@ -77,7 +77,7 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({ messages, onSendMessage, 
                         if (next.length > input.length) playKeyClick();
                         setInput(next);
                     }}
-                    className="flex-1 bg-transparent border-none focus:ring-0 text-base sm:text-2xl md:text-3xl placeholder:text-[rgba(51,255,102,0.55)] min-w-0"
+                    className="flex-1 bg-transparent border-none focus:ring-0 text-base sm:text-lg md:text-xl lg:text-2xl placeholder:text-[rgba(51,255,102,0.55)] min-w-0"
                     placeholder="Type your message and press Enter... (or type RESET)"
                     aria-label="Chat input"
                     disabled={isLoading}

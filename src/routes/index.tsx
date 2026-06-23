@@ -230,7 +230,7 @@ function Index() {
     };
 
     return (
-        <div className="crt-case text-sm sm:text-2xl md:text-3xl">
+        <div className="crt-case text-base sm:text-lg md:text-xl lg:text-2xl">
             <div className="crt-shell">
                 {/* CRT effects layered above content, scoped to the screen */}
                 <div className="scanlines-static" aria-hidden />
