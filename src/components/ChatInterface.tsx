@@ -15,7 +15,13 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({ messages, onSendMessage, 
     const messagesEndRef = useRef<HTMLDivElement>(null);
 
     const scrollToBottom = () => {
-        messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
+        // Scroll only the messages container, not the whole page — using
+        // scrollIntoView would bubble up and shift the CRT footer/header.
+        const end = messagesEndRef.current;
+        const container = end?.parentElement as HTMLElement | null;
+        if (container) {
+            container.scrollTop = container.scrollHeight;
+        }
     };
 
     useEffect(scrollToBottom, [messages]);
