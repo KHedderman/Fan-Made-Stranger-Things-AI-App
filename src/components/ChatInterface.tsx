@@ -61,8 +61,8 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({ messages, onSendMessage, 
                 {messages.map(renderMessage)}
                 <div ref={messagesEndRef} />
             </div>
-            <form onSubmit={handleSend} className="mt-4 flex items-center gap-4">
-                <span className="text-3xl" aria-hidden="true">&gt;</span>
+            <form onSubmit={handleSend} className="mt-4 flex items-center gap-2 sm:gap-4">
+                <span className="text-xl sm:text-3xl shrink-0" aria-hidden="true">&gt;</span>
                 <input
                     type="text"
                     value={input}
