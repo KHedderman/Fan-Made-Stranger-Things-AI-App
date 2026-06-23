@@ -236,7 +236,7 @@ function Index() {
                         <div className="flex min-w-0 items-center gap-3 truncate">
                             <span className="rec-dot" aria-hidden />
                             <span className="truncate">
-                                HEATHKIT&nbsp;H-89 · HDOS&nbsp;2.0 · 9600&nbsp;BAUD · ONLINE
+                                HEATHKIT&nbsp;H-89 · ZENITH&nbsp;Z-89 · HDOS&nbsp;2.0 · 9600&nbsp;BAUD · ONLINE
                             </span>
                         </div>
                         <div className="flex shrink-0 items-center gap-3">
@@ -258,6 +258,9 @@ function Index() {
                     </main>
 
                     <footer className="crt-footer">
+                        <p style={{ marginBottom: '0.35rem', opacity: 0.85 }}>
+                            HEATH COMPANY · BENTON HARBOR, MICHIGAN · ASSEMBLED BY HAWKINS AV CLUB
+                        </p>
                         <p>
                             This is an unofficial, fan-made application and is not affiliated with,
                             endorsed by, or connected to Netflix, Inc. or the Stranger Things
