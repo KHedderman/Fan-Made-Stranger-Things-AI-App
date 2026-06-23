@@ -6,6 +6,7 @@ import { useGeminiChat, MissingApiKeyError } from '../hooks/useGeminiChat';
 import BootSequence from '../components/BootSequence';
 import ChatInterface from '../components/ChatInterface';
 import SettingsModal from '../components/SettingsModal';
+import { playKeyClick } from '../lib/keyClickSound';
 
 export const Route = createFileRoute('/')({
     head: () => ({
@@ -73,6 +74,7 @@ function Index() {
                     msg.id === messageId ? { ...msg, text: msg.text + char } : msg,
                 ),
             );
+            if (char !== ' ' && char !== '\n') playKeyClick();
             await new Promise((resolve) => setTimeout(resolve, TYPING_SPEED_MS));
         }
     };
