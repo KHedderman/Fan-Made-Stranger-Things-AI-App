@@ -431,3 +431,11 @@ body {
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
 }
+
+@keyframes key-missing-blink {
+    0%, 60% { opacity: 1; }
+    61%, 100% { opacity: 0.25; }
+}
+.key-missing-blink {
+    animation: key-missing-blink 1s steps(2, end) infinite;
+}
