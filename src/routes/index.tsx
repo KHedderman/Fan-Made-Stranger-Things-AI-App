@@ -164,6 +164,7 @@ function Index() {
                                         : msg,
                                 ),
                             );
+                            if (char !== ' ' && char !== '\n') playKeyClick();
                             await new Promise((resolve) => setTimeout(resolve, TYPING_SPEED_MS));
                         }
                     }
