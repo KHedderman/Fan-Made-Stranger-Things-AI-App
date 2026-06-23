@@ -277,7 +277,8 @@ function Index() {
                                 }
                                 aria-label="Open settings"
                             >
-                                [ ⚙ SETTINGS{hasApiKey ? '' : ' · KEY NEEDED'} ]
+                                <span className="sm:hidden">[ ⚙{hasApiKey ? '' : '!'} ]</span>
+                                <span className="hidden sm:inline">[ ⚙ SETTINGS{hasApiKey ? '' : ' · KEY NEEDED'} ]</span>
                             </button>
                         </div>
                     </header>
