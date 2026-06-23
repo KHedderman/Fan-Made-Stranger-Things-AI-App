@@ -2,6 +2,7 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { Message } from '../types.ts';
 import { UserIcon, LoadingIcon } from './icons.tsx';
+import { playKeyClick } from '../lib/keyClickSound';
 
 interface ChatInterfaceProps {
     messages: Message[];
@@ -65,7 +66,11 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({ messages, onSendMessage, 
                 <input
                     type="text"
                     value={input}
-                    onChange={(e) => setInput(e.target.value)}
+                    onChange={(e) => {
+                        const next = e.target.value;
+                        if (next.length > input.length) playKeyClick();
+                        setInput(next);
+                    }}
                     className="flex-1 bg-transparent border-none focus:ring-0 text-2xl md:text-3xl placeholder:text-[rgba(51,255,102,0.55)]"
                     placeholder="Type your message and press Enter... (or type RESET)"
                     aria-label="Chat input"
