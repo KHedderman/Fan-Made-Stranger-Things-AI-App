@@ -96,23 +96,9 @@ const SettingsModal: React.FC<SettingsModalProps> = ({ open, onClose }) => {
 
                     <fieldset className="border-2 border-current p-3">
                         <legend className="px-2">MODEL</legend>
-                        <div className="space-y-2">
-                            {SUPPORTED_MODELS.map((m) => (
-                                <label key={m.id} className="flex items-start gap-2 cursor-pointer">
-                                    <input
-                                        type="radio"
-                                        name="gemini-model"
-                                        value={m.id}
-                                        checked={model === m.id}
-                                        onChange={() => setModelState(m.id)}
-                                        className="mt-1 accent-green-400"
-                                    />
-                                    <span className="text-base md:text-lg leading-snug">
-                                        {m.label}
-                                    </span>
-                                </label>
-                            ))}
-                        </div>
+                        <p className="text-base md:text-lg leading-snug">
+                            gemini-3.5-flash — newest & fastest, snappy terminal feel.
+                        </p>
                     </fieldset>
 
                     <div className="border-2 border-current p-3 space-y-2 text-base md:text-lg leading-snug text-green-500/90">
@@ -131,10 +117,8 @@ const SettingsModal: React.FC<SettingsModalProps> = ({ open, onClose }) => {
                             Studio offers a generous free tier for{' '}
                             <code>gemini-3.5-flash</code> that covers casual chat (rate-limited
                             per minute/day, no card required). Beyond the free tier, typical
-                            chat turns cost a small fraction of a cent each at current Gemini
-                            3.5 Flash pricing — a long evening of questions is usually well
-                            under $1. <code>gemini-3.1-pro</code> costs more per turn but
-                            handles deeper lore reasoning. Check{' '}
+                            chat turns cost a small fraction of a cent each — a long evening
+                            of questions is usually well under $1. Check{' '}
                             <a
                                 href="https://ai.google.dev/pricing"
                                 target="_blank"

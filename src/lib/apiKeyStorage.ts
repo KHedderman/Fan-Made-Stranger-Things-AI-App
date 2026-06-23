@@ -8,11 +8,7 @@ const MODEL_KEY = 'hawkins_frequency_gemini_model';
 export const SUPPORTED_MODELS = [
     {
         id: 'gemini-3.5-flash',
-        label: 'Gemini 3.5 Flash — Speed & Real-time UX (default, newest & fastest, snappy terminal feel)',
-    },
-    {
-        id: 'gemini-3.1-pro',
-        label: 'Gemini 3.1 Pro — Deep Reasoning & Lore (power-user, slower but thinks harder about complex multi-layered questions)',
+        label: 'Gemini 3.5 Flash — newest & fastest, snappy terminal feel',
     },
 ] as const;
 
@@ -62,19 +58,12 @@ export const clearApiKey = (): void => {
 };
 
 export const getModel = (): GeminiModelId => {
-    try {
-        const v = storage()?.getItem(MODEL_KEY) as GeminiModelId | null;
-        if (v && SUPPORTED_MODELS.some((m) => m.id === v)) return v;
-    } catch {
-        /* ignore */
-    }
     return DEFAULT_MODEL;
 };
 
-export const setModel = (model: GeminiModelId): void => {
+export const setModel = (_model: GeminiModelId): void => {
     try {
-        storage()?.setItem(MODEL_KEY, model);
-        window.dispatchEvent(new Event('hawkins-apikey-changed'));
+        storage()?.setItem(MODEL_KEY, DEFAULT_MODEL);
     } catch {
         /* ignore */
     }
