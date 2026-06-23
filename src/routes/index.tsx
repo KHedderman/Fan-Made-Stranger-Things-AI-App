@@ -30,11 +30,14 @@ export const Route = createFileRoute('/')({
     component: Index,
 });
 
-const ALL_SEASONS: readonly Season[] = ['1', '2', '3', '4', '5', 'First Shadow'];
+const ALL_SEASONS: readonly Season[] = ['1', '2', '3', '4', '5', 'First Shadow', "Tales from '85"];
 const TYPING_SPEED_MS = 30;
 
 const parseSeason = (input: string): Season | null => {
     const lowerInput = input.toLowerCase().trim();
+    if (lowerInput.includes('tales') || lowerInput.includes("85") || lowerInput.includes("'85")) {
+        return "Tales from '85";
+    }
     if (lowerInput.includes('first shadow') || lowerInput.includes('play')) {
         return 'First Shadow';
     }
@@ -106,8 +109,8 @@ function Index() {
             setIsLoading(true);
             const initialText =
                 selectedMode === 'child'
-                    ? "[ 🧇 ELEVEN ]\nHi. I am Eleven. Friends don't lie. What season did you watch? 1? 2? 3? 4? 5? Or First Shadow?"
-                    : "[ 🧢 DUSTIN ]\nDustin Henderson here! Gold Leader standing by. Need your clearance level so I don't spoil the campaign. Did you see Season 1, 2, 3, 4, 5, or The First Shadow?";
+                    ? "[ 🧇 ELEVEN ]\nHi. I am Eleven. Friends don't lie. What did you watch? 1? 2? 3? 4? 5? First Shadow? Or Tales from '85?"
+                    : "[ 🧢 DUSTIN ]\nDustin Henderson here! Gold Leader standing by. Need your clearance level so I don't spoil the campaign. Did you see Season 1, 2, 3, 4, 5, The First Shadow, or Tales from '85?";
 
             const aiResponseId = Date.now();
             setMessages([{ id: aiResponseId, sender: 'ai', text: '' }]);
@@ -183,8 +186,8 @@ function Index() {
                     } else {
                         const clarificationText =
                             mode === 'child'
-                                ? '[ 🧇 ELEVEN ]\nI do not understand. Please tell me the number. 1? 2? 3? 4? 5? Or the play?'
-                                : "[ 🧢 DUSTIN ]\nWoah, that's not a valid clearance level. Try a number like 1, 2, 3, 4, 5, or just say 'The First Shadow', over.";
+                                ? "[ 🧇 ELEVEN ]\nI do not understand. Please tell me. 1? 2? 3? 4? 5? The play? Or Tales from '85?"
+                                : "[ 🧢 DUSTIN ]\nWoah, that's not a valid clearance level. Try a number like 1, 2, 3, 4, 5, or say 'The First Shadow' or 'Tales from 85', over.";
                         setMessages((prev) => [...prev, { id: aiResponseId, sender: 'ai', text: '' }]);
                         await typeOutText(clarificationText, aiResponseId);
                     }
