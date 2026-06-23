@@ -90,7 +90,7 @@ function Index() {
                 id,
                 sender: 'system',
                 text:
-                    '/// NO API KEY DETECTED ///\nAdd your Google Gemini API key in the SETTINGS menu (top-right) to begin transmission.\nYour key is stored only in your local browser.',
+                    '/// NO API KEY DETECTED ///\nAdd your Google Gemini API key in the SETTINGS menu (top-right) to bring the terminal online.\nYour key is stored only in your local browser.',
             },
         ]);
     }, []);
