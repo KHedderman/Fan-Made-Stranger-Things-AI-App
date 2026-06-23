@@ -163,6 +163,11 @@ at any time to return to the boot screen.
 - **Slim, era-appropriate blinking cursor**.
 - **Character-by-character output rendering** so responses appear one
   character at a time like an old Heathkit terminal.
+- **Synthesized H-89 keyboard click** layered (low "thock", mid noise
+  body, high spring ping, quieter key-up tick) on every streamed AI
+  character *and* every user keystroke, with randomized pitch/gain for
+  round-robin variety. Respects `prefers-reduced-motion` via the same
+  audio gating.
 - **Clearer input placeholder text** for more intuitive onboarding.
 - Persistent **IP / legal footer** on every screen.
 
