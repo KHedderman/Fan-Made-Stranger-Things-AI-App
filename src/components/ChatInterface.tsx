@@ -3,7 +3,6 @@ import React, { useState, useRef, useEffect } from 'react';
 import { Message } from '../types.ts';
 import { UserIcon, LoadingIcon } from './icons.tsx';
 import { playKeyClick } from '../lib/keyClickSound';
-import PixelAvatar from './PixelAvatar';
 
 interface ChatInterfaceProps {
     messages: Message[];
@@ -48,15 +47,53 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({ messages, onSendMessage, 
             <div key={msg.id} className={`flex items-start gap-4 ${isUser ? 'justify-end' : ''}`}>
                 {isUser && <UserIcon />}
                 <div className={`max-w-[90%] ${isUser ? 'text-right' : ''} ${isSystem ? 'text-amber-400 text-center w-full' : ''}`}>
-                    {msg.avatar && (
-                        <div className="mb-3">
-                            <PixelAvatar character={msg.avatar} size={320} />
-                        </div>
-                    )}
                     <p className="whitespace-pre-wrap">
                         {msg.text}
                         {showBlinkingCursor && <span className="animate-pulse ml-1">▌</span>}
                     </p>
+                    {msg.asciiArts && msg.asciiArts.length > 0 && (
+                        <div className="mt-3 space-y-3">
+                            {msg.asciiArts.map((art, i) => (
+                                <figure
+                                    key={i}
+                                    className="border border-[rgba(51,255,102,0.5)] bg-black/60 p-2 inline-block max-w-full overflow-x-auto"
+                                >
+                                    {art.status === 'ready' && art.art ? (
+                                        <pre
+                                            style={{
+                                                fontFamily:
+                                                    "'VT323', 'Courier New', ui-monospace, SFMono-Regular, Menlo, monospace",
+                                                fontSize: '10px',
+                                                lineHeight: 1,
+                                                margin: 0,
+                                                whiteSpace: 'pre',
+                                                color: '#33ff66',
+                                                textShadow:
+                                                    '0 0 3px rgba(51,255,102,0.85), 0 0 8px rgba(51,255,102,0.45)',
+                                                letterSpacing: '0.05em',
+                                            }}
+                                            aria-label={art.subject}
+                                        >
+                                            {art.art}
+                                        </pre>
+                                    ) : art.status === 'error' ? (
+                                        <div className="text-xs text-amber-400 px-3 py-6">
+                                            /// ASCII RENDER LOST ///<br />
+                                            {art.error ?? 'unknown error'}
+                                        </div>
+                                    ) : (
+                                        <div className="text-xs px-3 py-6 animate-pulse">
+                                            ░▒▓ RENDERING ASCII ▓▒░<br />
+                                            <span className="opacity-70">"{art.subject}"</span>
+                                        </div>
+                                    )}
+                                    <figcaption className="text-[10px] mt-1 opacity-60 uppercase tracking-wider">
+                                        &gt; ascii :: {art.subject}
+                                    </figcaption>
+                                </figure>
+                            ))}
+                        </div>
+                    )}
                     {msg.images && msg.images.length > 0 && (
                         <div className="mt-3 space-y-3">
                             {msg.images.map((img, i) => (

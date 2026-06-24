@@ -8,6 +8,7 @@ import ChatInterface from '../components/ChatInterface';
 import SettingsModal from '../components/SettingsModal';
 import { playKeyClick } from '../lib/keyClickSound';
 import { extractImageTags, stripImageTags, generateH89Image } from '../lib/imageGen';
+import { extractAsciiTags, stripAsciiTags, generateAsciiArt } from '../lib/asciiGen';
 import chassisPhoto from '../assets/heathkit-h89.png.asset.json';
 
 export const Route = createFileRoute('/')({
@@ -122,7 +123,6 @@ function Index() {
                     id: aiResponseId,
                     sender: 'ai',
                     text: '',
-                    avatar: selectedMode === 'child' ? 'eleven' : 'dustin',
                 },
             ]);
             await typeOutText(initialText, aiResponseId);
@@ -185,23 +185,40 @@ function Index() {
                         }
                     }
                 }
-                // After streaming completes, extract any <<IMG: ...>> tags and kick off Nano Banana renders.
-                const tags = extractImageTags(accumulated);
-                if (tags.length > 0) {
-                    const cleaned = stripImageTags(accumulated);
-                    const pendingImages = tags.map((t) => ({
+                // After streaming completes, extract <<IMG: ...>> and <<ASCII: ...>> tags
+                // and kick off renders for each.
+                const imgTags = extractImageTags(accumulated);
+                const asciiTags = extractAsciiTags(accumulated);
+
+                if (imgTags.length > 0 || asciiTags.length > 0) {
+                    let cleaned = accumulated;
+                    if (imgTags.length > 0) cleaned = stripImageTags(cleaned);
+                    if (asciiTags.length > 0) cleaned = stripAsciiTags(cleaned);
+
+                    const pendingImages = imgTags.map((t) => ({
                         prompt: t.prompt,
                         status: 'pending' as const,
                     }));
+                    const pendingAscii = asciiTags.map((t) => ({
+                        subject: t.subject,
+                        status: 'pending' as const,
+                    }));
+
                     setMessages((prev) =>
                         prev.map((msg) =>
                             msg.id === aiResponseId
-                                ? { ...msg, text: cleaned, images: pendingImages }
+                                ? {
+                                      ...msg,
+                                      text: cleaned,
+                                      images: pendingImages.length ? pendingImages : msg.images,
+                                      asciiArts: pendingAscii.length ? pendingAscii : msg.asciiArts,
+                                  }
                                 : msg,
                         ),
                     );
-                    // Render each image in parallel; update message as each resolves.
-                    tags.forEach((tag, idx) => {
+
+                    // Render images in parallel.
+                    imgTags.forEach((tag, idx) => {
                         generateH89Image(tag.prompt)
                             .then((img) => {
                                 setMessages((prev) =>
@@ -229,6 +246,40 @@ function Index() {
                                             error: err instanceof Error ? err.message : 'render failed',
                                         };
                                         return { ...msg, images: next };
+                                    }),
+                                );
+                            });
+                    });
+
+                    // Render ASCII art in parallel.
+                    asciiTags.forEach((tag, idx) => {
+                        generateAsciiArt(tag.subject)
+                            .then((art) => {
+                                setMessages((prev) =>
+                                    prev.map((msg) => {
+                                        if (msg.id !== aiResponseId || !msg.asciiArts) return msg;
+                                        const next = msg.asciiArts.slice();
+                                        next[idx] = {
+                                            ...next[idx],
+                                            status: 'ready',
+                                            art,
+                                        };
+                                        return { ...msg, asciiArts: next };
+                                    }),
+                                );
+                            })
+                            .catch((err) => {
+                                console.error('ASCII render failed:', err);
+                                setMessages((prev) =>
+                                    prev.map((msg) => {
+                                        if (msg.id !== aiResponseId || !msg.asciiArts) return msg;
+                                        const next = msg.asciiArts.slice();
+                                        next[idx] = {
+                                            ...next[idx],
+                                            status: 'error',
+                                            error: err instanceof Error ? err.message : 'render failed',
+                                        };
+                                        return { ...msg, asciiArts: next };
                                     }),
                                 );
                             });
