@@ -46,10 +46,48 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({ messages, onSendMessage, 
         return (
             <div key={msg.id} className={`flex items-start gap-4 ${isUser ? 'justify-end' : ''}`}>
                 {isUser && <UserIcon />}
-                <p className={`max-w-[90%] whitespace-pre-wrap ${isUser ? 'text-right' : ''} ${isSystem ? 'text-amber-400 text-center w-full' : ''}`}>
-                    {msg.text}
-                    {showBlinkingCursor && <span className="animate-pulse ml-1">▌</span>}
-                </p>
+                <div className={`max-w-[90%] ${isUser ? 'text-right' : ''} ${isSystem ? 'text-amber-400 text-center w-full' : ''}`}>
+                    <p className="whitespace-pre-wrap">
+                        {msg.text}
+                        {showBlinkingCursor && <span className="animate-pulse ml-1">▌</span>}
+                    </p>
+                    {msg.images && msg.images.length > 0 && (
+                        <div className="mt-3 space-y-3">
+                            {msg.images.map((img, i) => (
+                                <figure
+                                    key={i}
+                                    className="border border-[rgba(51,255,102,0.5)] bg-black/60 p-2 inline-block max-w-full"
+                                >
+                                    {img.status === 'ready' && img.dataUrl ? (
+                                        <img
+                                            src={img.dataUrl}
+                                            alt={img.prompt}
+                                            loading="lazy"
+                                            className="block max-w-[320px] w-full h-auto"
+                                            style={{
+                                                imageRendering: 'pixelated',
+                                                filter: 'sepia(1) hue-rotate(70deg) saturate(6) brightness(1.05) contrast(1.1)',
+                                            }}
+                                        />
+                                    ) : img.status === 'error' ? (
+                                        <div className="text-xs text-amber-400 px-3 py-6">
+                                            /// IMAGE FEED LOST ///<br />
+                                            {img.error ?? 'unknown error'}
+                                        </div>
+                                    ) : (
+                                        <div className="text-xs px-3 py-6 animate-pulse">
+                                            ░▒▓ RENDERING ON H-89 ▓▒░<br />
+                                            <span className="opacity-70">"{img.prompt}"</span>
+                                        </div>
+                                    )}
+                                    <figcaption className="text-[10px] mt-1 opacity-60 uppercase tracking-wider">
+                                        &gt; nano_banana :: {img.prompt}
+                                    </figcaption>
+                                </figure>
+                            ))}
+                        </div>
+                    )}
+                </div>
             </div>
         );
     };
