@@ -55,6 +55,7 @@ function Index() {
     const [appState, setAppState] = useState<AppState>('BOOTING');
     const [mode, setMode] = useState<Mode | null>(null);
     const [, setSeason] = useState<Season | null>(null);
+    const [childReadingLevel, setChildReadingLevel] = useState<string | null>(null);
     const [messages, setMessages] = useState<Message[]>([]);
     const [isLoading, setIsLoading] = useState(false);
     const [settingsOpen, setSettingsOpen] = useState(false);
@@ -65,6 +66,7 @@ function Index() {
         setAppState('BOOTING');
         setMode(null);
         setSeason(null);
+        setChildReadingLevel(null);
         setMessages([]);
         setIsLoading(false);
         chatRef.current = null;
@@ -109,7 +111,7 @@ function Index() {
             setIsLoading(true);
             const initialText =
                 selectedMode === 'child'
-                    ? "[ 🧇 ELEVEN ]\nHi. I am Eleven. Friends don't lie. What did you watch? 1? 2? 3? 4? 5? First Shadow? Or Tales from '85?"
+                    ? "[ 🧇 ELEVEN ]\nHi. I am Eleven. Friends don't lie. How old are you? Or what grade?"
                     : "[ 🧢 DUSTIN ]\nDustin Henderson here! Gold Leader standing by. Need your clearance level so I don't spoil the campaign. Did you see Season 1, 2, 3, 4, 5, The First Shadow, or Tales from '85?";
 
             const aiResponseId = Date.now();
@@ -175,11 +177,16 @@ function Index() {
             };
 
             try {
-                if (!chatRef.current && mode) {
+                if (!chatRef.current && mode === 'child' && !childReadingLevel) {
+                    setChildReadingLevel(userInput.trim());
+                    const askSeason = "[ 🧇 ELEVEN ]\nOkay. Friend. Now tell me. What did you watch? 1? 2? 3? 4? 5? First Shadow? Or Tales from '85?";
+                    setMessages((prev) => [...prev, { id: aiResponseId, sender: 'ai', text: '' }]);
+                    await typeOutText(askSeason, aiResponseId);
+                } else if (!chatRef.current && mode) {
                     const detectedSeason = parseSeason(userInput);
                     if (detectedSeason) {
                         setSeason(detectedSeason);
-                        const newChat = startChat(mode, detectedSeason);
+                        const newChat = startChat(mode, detectedSeason, childReadingLevel ?? undefined);
                         chatRef.current = newChat;
                         const stream = await newChat.sendMessageStream({ message: userInput });
                         await typeStream(stream);
@@ -209,7 +216,7 @@ function Index() {
                 setIsLoading(false);
             }
         },
-        [mode, startChat, handleReset, hasApiKey, pushApiKeyNotice],
+        [mode, startChat, handleReset, hasApiKey, pushApiKeyNotice, childReadingLevel],
     );
 
     const renderContent = () => {
