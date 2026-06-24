@@ -197,32 +197,103 @@ body {
     isolation: isolate;
 }
 
-/* Flat charcoal border around the screen — no bevel, no recess shadow */
+/* Gray plastic bezel surrounding a recessed CRT screen well.
+   --bezel-* drives both the bezel thickness and the inset of screen-scoped
+   overlays (scanlines, glow), so everything stays aligned at any breakpoint. */
 .crt-shell {
+    --bezel-top: clamp(34px, 5vmin, 68px);
+    --bezel-side: clamp(40px, 6vmin, 80px);
+    --bezel-bottom: clamp(46px, 6.5vmin, 90px);
+    --screen-radius: clamp(28px, 4vmin, 52px);
+
     position: absolute;
     inset: clamp(18px, 2.6vmin, 34px) clamp(28px, 4vmin, 60px)
            clamp(60px, 7vmin, 86px) clamp(28px, 4vmin, 60px);
     border-radius: clamp(36px, 5vmin, 60px);
+    padding: var(--bezel-top) var(--bezel-side) var(--bezel-bottom);
+    /* Molded gray plastic bezel: top-lit highlight, deeper falloff at sides
+       and bottom, and a faint horizontal grain to suggest texture. */
     background:
-        radial-gradient(ellipse at center, #061410 0%, #020604 60%, #000 100%);
+        repeating-linear-gradient(92deg,
+            rgba(255, 255, 255, 0.014) 0 1px,
+            rgba(0, 0, 0, 0.030) 1px 2px),
+        radial-gradient(ellipse at 50% 0%,
+            rgba(255, 255, 255, 0.14) 0%,
+            rgba(255, 255, 255, 0.03) 25%,
+            transparent 55%),
+        linear-gradient(180deg,
+            #6b6b6e 0%,
+            #5a5a5d 18%,
+            #4d4d50 55%,
+            #3d3d40 100%);
     overflow: hidden;
     isolation: isolate;
 }
 
-/* === Mobile: slim the chassis bezel so the screen has room to breathe === */
+/* The recessed dark screen well. Inset on all sides creates the bezel.
+   Deep inner shadows simulate the curved CRT tube sitting back inside the
+   plastic housing. The outward green box-shadow casts phosphor light onto
+   the inner bezel walls — strongest at the top where overhead room light
+   would fall, matching the reference photo. */
+.crt-shell::before {
+    content: "";
+    position: absolute;
+    inset: var(--bezel-top) var(--bezel-side) var(--bezel-bottom);
+    border-radius: var(--screen-radius);
+    pointer-events: none;
+    background:
+        radial-gradient(ellipse at 50% 45%,
+            #0a1a12 0%,
+            #04100a 55%,
+            #01060a 100%);
+    box-shadow:
+        /* hard inner rim — front face of the tube glass */
+        inset 0 0 0 2px rgba(0, 0, 0, 0.95),
+        /* recessed top wall — deepest shadow at the top edge */
+        inset 0 18px 28px -8px rgba(0, 0, 0, 0.95),
+        /* bottom wall */
+        inset 0 -14px 24px -8px rgba(0, 0, 0, 0.85),
+        /* side walls of the recess */
+        inset 16px 0 26px -10px rgba(0, 0, 0, 0.75),
+        inset -16px 0 26px -10px rgba(0, 0, 0, 0.75),
+        /* soft corner darkening */
+        inset 0 0 90px rgba(0, 0, 0, 0.55),
+        /* === green phosphor spill onto the surrounding bezel === */
+        0 0 0 1px rgba(51, 255, 102, 0.22),
+        0 -4px 22px 2px rgba(51, 255, 102, 0.32),
+        0 0 36px 6px rgba(51, 255, 102, 0.22),
+        0 0 90px 18px rgba(51, 255, 102, 0.12);
+    z-index: 1;
+}
+
+/* Centered phosphor bloom inside the screen */
+.crt-shell::after {
+    content: "";
+    position: absolute;
+    inset: var(--bezel-top) var(--bezel-side) var(--bezel-bottom);
+    border-radius: var(--screen-radius);
+    pointer-events: none;
+    background: radial-gradient(
+        ellipse at center,
+        rgba(51, 255, 102, 0.12) 0%,
+        rgba(51, 255, 102, 0.04) 35%,
+        rgba(0, 0, 0, 0) 70%
+    );
+    z-index: 50;
+}
+
+/* === Mobile: slim the bezel so the screen has room to breathe === */
 @media (max-width: 640px) {
     .crt-case {
         padding: 6px 6px 32px;
     }
     .crt-shell {
+        --bezel-top: 14px;
+        --bezel-side: 12px;
+        --bezel-bottom: 18px;
+        --screen-radius: 12px;
         inset: 6px 6px 32px 6px;
-        border-radius: 16px;
-    }
-    .crt-shell::after {
-        box-shadow:
-            inset 0 0 0 2px rgba(0, 0, 0, 0.9),
-            inset 0 0 24px rgba(0, 0, 0, 0.75),
-            inset 0 0 70px rgba(0, 0, 0, 0.9);
+        border-radius: 18px;
     }
     .crt-content {
         padding: 0.5rem 0.6rem !important;
@@ -253,36 +324,6 @@ body {
         width: 9px;
         margin-right: 9px;
     }
-}
-
-/* Subtle inner bezel ring at the screen edge */
-.crt-shell::after {
-    content: "";
-    position: absolute;
-    inset: 0;
-    pointer-events: none;
-    border-radius: inherit;
-    box-shadow:
-        inset 0 0 0 4px rgba(0, 0, 0, 0.9),
-        inset 0 0 60px rgba(0, 0, 0, 0.75),
-        inset 0 0 220px rgba(0, 0, 0, 0.9);
-    z-index: 90;
-}
-
-/* Phosphor glow vignette (centered bloom) */
-.crt-shell::before {
-    content: "";
-    position: absolute;
-    inset: 0;
-    pointer-events: none;
-    border-radius: inherit;
-    background: radial-gradient(
-        ellipse at center,
-        rgba(51, 255, 102, 0.10) 0%,
-        rgba(51, 255, 102, 0.04) 35%,
-        rgba(0, 0, 0, 0) 70%
-    );
-    z-index: 50;
 }
 
 /* Static fine scanlines — scoped to screen */
