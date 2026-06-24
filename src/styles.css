@@ -220,19 +220,25 @@ body {
        6. Vertical depth gradient
        7. Base warm putty-gray plastic */
     background:
-        /* (0) Power LED — small red glow on the chin, bottom-center */
-        radial-gradient(circle at 50% calc(100% - var(--bezel-bottom) / 2),
-            rgba(255, 70, 40, 0.95) 0px,
-            rgba(255, 70, 40, 0.85) 2px,
-            rgba(255, 90, 40, 0.35) 5px,
-            rgba(255, 90, 40, 0.10) 9px,
-            transparent 14px),
-        /* (1) Vent slots — narrow dark lines, ~20px tall band near top */
+        /* (0) Power LED — red glow on the chin, bottom-center */
+        radial-gradient(circle at 50% calc(100% - var(--bezel-bottom) * 0.45),
+            rgba(255, 240, 220, 1) 0px,
+            rgba(255, 90, 50, 1) 3px,
+            rgba(255, 70, 30, 0.95) 6px,
+            rgba(255, 60, 20, 0.6) 12px,
+            rgba(255, 50, 10, 0.25) 22px,
+            transparent 36px),
+        /* (1) Vent slots — strong dark cuts near the top edge of the bezel */
         repeating-linear-gradient(90deg,
-            transparent 0 8px,
-            rgba(0, 0, 0, 0.55) 8px 11px,
-            rgba(0, 0, 0, 0.15) 11px 13px,
-            transparent 13px 22px) 50% 18px / 38% 8px no-repeat,
+            transparent 0 6px,
+            rgba(0, 0, 0, 0.85) 6px 9px,
+            transparent 9px 18px) 50% 14px / 42% 10px no-repeat,
+        /* (1b) faint highlight just below the vents to read as molded slots */
+        linear-gradient(180deg,
+            transparent 0,
+            transparent 22px,
+            rgba(255, 255, 255, 0.18) 23px,
+            transparent 25px) 50% 0 / 42% 26px no-repeat,
         /* (2) molded plastic grain */
         repeating-linear-gradient(92deg,
             rgba(255, 255, 255, 0.020) 0 1px,
