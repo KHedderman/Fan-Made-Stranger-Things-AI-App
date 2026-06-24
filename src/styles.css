@@ -211,19 +211,25 @@ body {
            clamp(60px, 7vmin, 86px) clamp(28px, 4vmin, 60px);
     border-radius: clamp(36px, 5vmin, 60px);
     padding: var(--bezel-top) var(--bezel-side) var(--bezel-bottom);
-    /* Light molded gray plastic bezel. Layered top-down:
-       1. Faint horizontal molding grain
-       2. Overhead room-light highlight on the upper bezel
-       3. Dark halo around the screen rect — reads as the angled inner
-          walls of the recess receding into shadow
-       4. Soft downward gradient under the screen (bottom wall darker)
-       5. Base gray plastic gradient */
+    border: 1px solid rgba(255, 255, 255, 0.16);
+    /* Molded gray plastic bezel with directional room lighting. Layered top-down:
+       1. Faint molded plastic grain
+       2. hard top-left highlight and bottom-right falloff to make the case convex
+       3. broader overhead reflection across the upper face
+       4. dark halo around the screen well
+       5. base warm-gray plastic */
     background:
         repeating-linear-gradient(92deg,
             rgba(255, 255, 255, 0.020) 0 1px,
             rgba(0, 0, 0, 0.040) 1px 2px),
+        linear-gradient(135deg,
+            rgba(255, 255, 255, 0.38) 0%,
+            rgba(255, 255, 255, 0.12) 17%,
+            transparent 34%,
+            rgba(0, 0, 0, 0.12) 66%,
+            rgba(0, 0, 0, 0.55) 100%),
         radial-gradient(ellipse at 50% -25%,
-            rgba(255, 255, 255, 0.32) 0%,
+            rgba(255, 255, 255, 0.42) 0%,
             rgba(255, 255, 255, 0.05) 32%,
             transparent 60%),
         radial-gradient(ellipse 72% 82% at 50% 50%,
@@ -236,10 +242,20 @@ body {
             rgba(0, 0, 0, 0.18) 80%,
             rgba(0, 0, 0, 0.35) 100%),
         linear-gradient(180deg,
-            #b8b6ad 0%,
-            #a3a198 22%,
-            #8d8b83 60%,
-            #6f6d66 100%);
+            #c6c3b9 0%,
+            #aaa79d 18%,
+            #8b887f 58%,
+            #615f58 100%);
+    box-shadow:
+        0 42px 80px rgba(0, 0, 0, 0.64),
+        0 15px 28px rgba(0, 0, 0, 0.52),
+        0 2px 0 rgba(255, 255, 255, 0.20),
+        inset 0 2px 2px rgba(255, 255, 255, 0.55),
+        inset 2px 0 2px rgba(255, 255, 255, 0.20),
+        inset -2px 0 4px rgba(0, 0, 0, 0.42),
+        inset 0 -4px 8px rgba(0, 0, 0, 0.48),
+        inset 0 0 0 4px rgba(255, 255, 255, 0.045),
+        inset 0 0 0 9px rgba(0, 0, 0, 0.13);
     overflow: hidden;
     isolation: isolate;
 }
