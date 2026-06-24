@@ -150,7 +150,7 @@ export function playKeyClick(): void {
     try {
         const now = c.currentTime;
         const master = c.createGain();
-        master.gain.value = 0.55;
+        master.gain.value = 0.38;
         master.connect(c.destination);
 
         thock(c, now, master);
