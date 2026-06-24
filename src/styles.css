@@ -211,21 +211,35 @@ body {
            clamp(60px, 7vmin, 86px) clamp(28px, 4vmin, 60px);
     border-radius: clamp(36px, 5vmin, 60px);
     padding: var(--bezel-top) var(--bezel-side) var(--bezel-bottom);
-    /* Light molded gray plastic bezel — top-lit highlight from overhead room
-       light, gentle falloff toward the bottom, faint horizontal grain. */
+    /* Light molded gray plastic bezel. Layered top-down:
+       1. Faint horizontal molding grain
+       2. Overhead room-light highlight on the upper bezel
+       3. Dark halo around the screen rect — reads as the angled inner
+          walls of the recess receding into shadow
+       4. Soft downward gradient under the screen (bottom wall darker)
+       5. Base gray plastic gradient */
     background:
         repeating-linear-gradient(92deg,
             rgba(255, 255, 255, 0.020) 0 1px,
-            rgba(0, 0, 0, 0.035) 1px 2px),
-        radial-gradient(ellipse at 50% -20%,
-            rgba(255, 255, 255, 0.30) 0%,
-            rgba(255, 255, 255, 0.05) 30%,
+            rgba(0, 0, 0, 0.040) 1px 2px),
+        radial-gradient(ellipse at 50% -25%,
+            rgba(255, 255, 255, 0.32) 0%,
+            rgba(255, 255, 255, 0.05) 32%,
             transparent 60%),
+        radial-gradient(ellipse 72% 82% at 50% 50%,
+            transparent 56%,
+            rgba(0, 0, 0, 0.60) 76%,
+            rgba(0, 0, 0, 0.35) 88%,
+            transparent 100%),
+        linear-gradient(180deg,
+            transparent 55%,
+            rgba(0, 0, 0, 0.18) 80%,
+            rgba(0, 0, 0, 0.35) 100%),
         linear-gradient(180deg,
             #b8b6ad 0%,
             #a3a198 22%,
             #8d8b83 60%,
-            #76746d 100%);
+            #6f6d66 100%);
     overflow: hidden;
     isolation: isolate;
 }
