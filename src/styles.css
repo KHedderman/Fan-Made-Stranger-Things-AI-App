@@ -348,7 +348,8 @@ body {
 .crt-content {
     position: relative;
     z-index: 100;
-    height: calc(100% - 2.4rem);
+    flex: 1;
+    min-height: 0;
     padding: 1rem 1.25rem 1rem;
     overflow: hidden;
 }
