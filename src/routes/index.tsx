@@ -111,7 +111,7 @@ function Index() {
             setIsLoading(true);
             const initialText =
                 selectedMode === 'child'
-                    ? "[ 🧇 ELEVEN ]\nHi. I am Eleven. Friends don't lie. What did you watch? 1? 2? 3? 4? 5? First Shadow? Or Tales from '85?"
+                    ? "[ 🧇 ELEVEN ]\nHi. I am Eleven. Friends don't lie. How old are you? Or what grade?"
                     : "[ 🧢 DUSTIN ]\nDustin Henderson here! Gold Leader standing by. Need your clearance level so I don't spoil the campaign. Did you see Season 1, 2, 3, 4, 5, The First Shadow, or Tales from '85?";
 
             const aiResponseId = Date.now();
