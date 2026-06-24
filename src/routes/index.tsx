@@ -7,6 +7,7 @@ import BootSequence from '../components/BootSequence';
 import ChatInterface from '../components/ChatInterface';
 import SettingsModal from '../components/SettingsModal';
 import { playKeyClick } from '../lib/keyClickSound';
+import chassisPhoto from '../assets/heathkit-h89.png.asset.json';
 
 export const Route = createFileRoute('/')({
     head: () => ({
@@ -237,83 +238,81 @@ function Index() {
     };
 
     return (
-        <div className="crt-case text-base sm:text-lg md:text-xl lg:text-2xl">
-            <div className="crt-shell">
-                {/* CRT effects layered above content, scoped to the screen */}
-                <div className="scanlines-static" aria-hidden />
-                <div className="scanline-roll" aria-hidden />
+        <div
+            className="crt-case text-base sm:text-lg md:text-xl lg:text-2xl"
+            style={{ ['--chassis-image' as string]: `url(${chassisPhoto.url})` }}
+        >
+            <div className="crt-frame">
+                <div className="crt-shell">
+                    {/* CRT effects layered above content, scoped to the screen */}
+                    <div className="scanlines-static" aria-hidden />
+                    <div className="scanline-roll" aria-hidden />
 
-                <div className="crt-flicker h-full w-full flex flex-col">
-                    {/* Top status strip — SETTINGS docked here */}
-                    <header className="crt-status grid grid-cols-[minmax(0,1fr)_auto] sm:flex sm:items-center sm:justify-between">
-                        <div className="flex min-w-0 items-center gap-2 sm:gap-3 truncate">
-                            <span className="rec-dot shrink-0" aria-hidden />
-                            <span className="truncate">
-                                <span className="sm:hidden">H-89 · ONLINE</span>
-                                <span className="hidden sm:inline">
-                                    HEATHKIT&nbsp;H-89 · ZENITH&nbsp;Z-89 · HDOS&nbsp;2.0 · 9600&nbsp;BAUD · ONLINE
+                    <div className="crt-flicker h-full w-full flex flex-col">
+                        {/* Top status strip — SETTINGS docked here */}
+                        <header className="crt-status grid grid-cols-[minmax(0,1fr)_auto] sm:flex sm:items-center sm:justify-between">
+                            <div className="flex min-w-0 items-center gap-2 sm:gap-3 truncate">
+                                <span className="rec-dot shrink-0" aria-hidden />
+                                <span className="truncate">
+                                    <span className="sm:hidden">H-89 · ONLINE</span>
+                                    <span className="hidden sm:inline">
+                                        HEATHKIT&nbsp;H-89 · ZENITH&nbsp;Z-89 · HDOS&nbsp;2.0 · 9600&nbsp;BAUD · ONLINE
+                                    </span>
                                 </span>
-                            </span>
-                        </div>
-                        <div className="flex shrink-0 items-center gap-3">
-                            <span
-                                className={
-                                    'hidden sm:inline ' +
-                                    (hasApiKey
-                                        ? 'opacity-70'
-                                        : 'key-missing-blink font-bold')
-                                }
-                                style={hasApiKey ? undefined : { color: '#ff3b3b', textShadow: '0 0 6px rgba(255,59,59,0.7)' }}
-                            >
-                                KEY: {hasApiKey ? 'OK' : 'MISSING'}
-                            </span>
-                            <button
-                                onClick={() => setSettingsOpen(true)}
-                                className={
-                                    'border px-2 py-0.5 transition-colors ' +
-                                    (hasApiKey
-                                        ? 'border-current hover:bg-[rgba(51,255,102,0.15)]'
-                                        : 'key-missing-blink')
-                                }
-                                style={
-                                    hasApiKey
-                                        ? undefined
-                                        : {
-                                              color: '#ff3b3b',
-                                              borderColor: '#ff3b3b',
-                                              textShadow: '0 0 6px rgba(255,59,59,0.7)',
-                                              boxShadow: '0 0 8px rgba(255,59,59,0.45)',
-                                          }
-                                }
-                                aria-label="Open settings"
-                            >
-                                <span className="sm:hidden">[ ⚙{hasApiKey ? '' : '!'} ]</span>
-                                <span className="hidden sm:inline">[ ⚙ SETTINGS{hasApiKey ? '' : ' · KEY NEEDED'} ]</span>
-                            </button>
-                        </div>
-                    </header>
+                            </div>
+                            <div className="flex shrink-0 items-center gap-3">
+                                <span
+                                    className={
+                                        'hidden sm:inline ' +
+                                        (hasApiKey
+                                            ? 'opacity-70'
+                                            : 'key-missing-blink font-bold')
+                                    }
+                                    style={hasApiKey ? undefined : { color: '#ff3b3b', textShadow: '0 0 6px rgba(255,59,59,0.7)' }}
+                                >
+                                    KEY: {hasApiKey ? 'OK' : 'MISSING'}
+                                </span>
+                                <button
+                                    onClick={() => setSettingsOpen(true)}
+                                    className={
+                                        'border px-2 py-0.5 transition-colors ' +
+                                        (hasApiKey
+                                            ? 'border-current hover:bg-[rgba(51,255,102,0.15)]'
+                                            : 'key-missing-blink')
+                                    }
+                                    style={
+                                        hasApiKey
+                                            ? undefined
+                                            : {
+                                                  color: '#ff3b3b',
+                                                  borderColor: '#ff3b3b',
+                                                  textShadow: '0 0 6px rgba(255,59,59,0.7)',
+                                                  boxShadow: '0 0 8px rgba(255,59,59,0.45)',
+                                              }
+                                    }
+                                    aria-label="Open settings"
+                                >
+                                    <span className="sm:hidden">[ ⚙{hasApiKey ? '' : '!'} ]</span>
+                                    <span className="hidden sm:inline">[ ⚙ SETTINGS{hasApiKey ? '' : ' · KEY NEEDED'} ]</span>
+                                </button>
+                            </div>
+                        </header>
 
-                    <main className="crt-content mx-auto w-full max-w-5xl flex-1 flex flex-col">
-                        {renderContent()}
-                    </main>
+                        <main className="crt-content mx-auto w-full max-w-5xl flex-1 flex flex-col">
+                            {renderContent()}
+                        </main>
 
-                    <footer className="crt-footer">
-                        <p>
-                            This is an unofficial, fan-made application and is not affiliated with,
-                            endorsed by, or connected to Netflix, Inc. or the Stranger Things
-                            production team. All Stranger Things characters, logos, and related
-                            marks are the property of their respective owners. This project is
-                            provided for educational and non-commercial purposes only.
-                        </p>
-                    </footer>
+                        <footer className="crt-footer">
+                            <p>
+                                This is an unofficial, fan-made application and is not affiliated with,
+                                endorsed by, or connected to Netflix, Inc. or the Stranger Things
+                                production team. All Stranger Things characters, logos, and related
+                                marks are the property of their respective owners. This project is
+                                provided for educational and non-commercial purposes only.
+                            </p>
+                        </footer>
+                    </div>
                 </div>
-            </div>
-
-            {/* Heathkit brand badge on bezel */}
-            <div className="crt-badge" aria-hidden>
-                <span className="crt-badge-power" />
-                <span className="crt-badge-brand">Heathkit</span>
-                <span className="crt-badge-model">H-89</span>
             </div>
 
             <SettingsModal open={settingsOpen} onClose={() => setSettingsOpen(false)} />
