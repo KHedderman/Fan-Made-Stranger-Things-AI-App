@@ -206,13 +206,14 @@ body {
    real glass on screen. */
 .crt-shell {
     position: absolute;
-    left: 13%;
-    top: 17.5%;
-    width: 50%;
-    height: 67%;
+    left: 10.5%;
+    top: 14.5%;
+    width: 55%;
+    height: 74%;
     /* Match the H-89's barrel-shaped glass: heavy rounding so the app's
        corners follow the CRT curve instead of squaring off into the bezel. */
-    border-radius: 14% / 20%;
+    border-radius: 12% / 18%;
+
     /* CRT barrel mask — all four sides bow outward like a real cathode-ray
        tube. The SVG path's control points pull each edge past a smaller
        inner base rectangle, giving every side a gentle convex curve. */
