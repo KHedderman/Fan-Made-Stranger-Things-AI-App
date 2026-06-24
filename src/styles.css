@@ -197,32 +197,102 @@ body {
     isolation: isolate;
 }
 
-/* Flat charcoal border around the screen — no bevel, no recess shadow */
+/* Gray plastic bezel surrounding a recessed CRT screen well.
+   --bezel-* drives both the bezel thickness and the inset of screen-scoped
+   overlays (scanlines, glow), so everything stays aligned at any breakpoint. */
 .crt-shell {
+    --bezel-top: clamp(40px, 6vmin, 80px);
+    --bezel-side: clamp(46px, 6.5vmin, 90px);
+    --bezel-bottom: clamp(54px, 7.5vmin, 100px);
+    --screen-radius: clamp(28px, 4vmin, 52px);
+
     position: absolute;
     inset: clamp(18px, 2.6vmin, 34px) clamp(28px, 4vmin, 60px)
            clamp(60px, 7vmin, 86px) clamp(28px, 4vmin, 60px);
     border-radius: clamp(36px, 5vmin, 60px);
+    padding: var(--bezel-top) var(--bezel-side) var(--bezel-bottom);
+    /* Light molded gray plastic bezel — top-lit highlight from overhead room
+       light, gentle falloff toward the bottom, faint horizontal grain. */
     background:
-        radial-gradient(ellipse at center, #061410 0%, #020604 60%, #000 100%);
+        repeating-linear-gradient(92deg,
+            rgba(255, 255, 255, 0.020) 0 1px,
+            rgba(0, 0, 0, 0.035) 1px 2px),
+        radial-gradient(ellipse at 50% -20%,
+            rgba(255, 255, 255, 0.30) 0%,
+            rgba(255, 255, 255, 0.05) 30%,
+            transparent 60%),
+        linear-gradient(180deg,
+            #b8b6ad 0%,
+            #a3a198 22%,
+            #8d8b83 60%,
+            #76746d 100%);
     overflow: hidden;
     isolation: isolate;
 }
 
-/* === Mobile: slim the chassis bezel so the screen has room to breathe === */
+/* The recessed dark screen well. Deep inner shadows simulate the curved CRT
+   tube sitting back inside the plastic housing. A small outward green
+   box-shadow casts phosphor light onto the inner bezel wall right at the
+   screen edge — strongest at the top hood, fading down the sides. */
+.crt-shell::before {
+    content: "";
+    position: absolute;
+    inset: var(--bezel-top) var(--bezel-side) var(--bezel-bottom);
+    border-radius: var(--screen-radius);
+    pointer-events: none;
+    background:
+        radial-gradient(ellipse at 50% 45%,
+            #0a1a12 0%,
+            #04100a 55%,
+            #01060a 100%);
+    box-shadow:
+        /* hard inner rim — front face of the tube glass */
+        inset 0 0 0 2px rgba(0, 0, 0, 0.95),
+        /* recessed top wall — deepest shadow at the top edge (hood) */
+        inset 0 22px 30px -10px rgba(0, 0, 0, 0.98),
+        /* bottom wall */
+        inset 0 -16px 26px -10px rgba(0, 0, 0, 0.9),
+        /* side walls of the recess */
+        inset 18px 0 28px -12px rgba(0, 0, 0, 0.85),
+        inset -18px 0 28px -12px rgba(0, 0, 0, 0.85),
+        /* soft corner darkening inside the tube */
+        inset 0 0 110px rgba(0, 0, 0, 0.6),
+        /* === phosphor spill onto the inner bezel wall (tight) === */
+        0 0 0 1.5px rgba(51, 255, 102, 0.35),
+        0 -2px 10px 0 rgba(51, 255, 102, 0.5),
+        0 2px 14px 1px rgba(51, 255, 102, 0.3),
+        0 0 28px 4px rgba(51, 255, 102, 0.18);
+    z-index: 1;
+}
+
+/* Centered phosphor bloom inside the screen */
+.crt-shell::after {
+    content: "";
+    position: absolute;
+    inset: var(--bezel-top) var(--bezel-side) var(--bezel-bottom);
+    border-radius: var(--screen-radius);
+    pointer-events: none;
+    background: radial-gradient(
+        ellipse at center,
+        rgba(51, 255, 102, 0.12) 0%,
+        rgba(51, 255, 102, 0.04) 35%,
+        rgba(0, 0, 0, 0) 70%
+    );
+    z-index: 50;
+}
+
+/* === Mobile: slim the bezel so the screen has room to breathe === */
 @media (max-width: 640px) {
     .crt-case {
         padding: 6px 6px 32px;
     }
     .crt-shell {
+        --bezel-top: 14px;
+        --bezel-side: 12px;
+        --bezel-bottom: 18px;
+        --screen-radius: 12px;
         inset: 6px 6px 32px 6px;
-        border-radius: 16px;
-    }
-    .crt-shell::after {
-        box-shadow:
-            inset 0 0 0 2px rgba(0, 0, 0, 0.9),
-            inset 0 0 24px rgba(0, 0, 0, 0.75),
-            inset 0 0 70px rgba(0, 0, 0, 0.9);
+        border-radius: 18px;
     }
     .crt-content {
         padding: 0.5rem 0.6rem !important;
@@ -255,40 +325,12 @@ body {
     }
 }
 
-/* Subtle inner bezel ring at the screen edge */
-.crt-shell::after {
-    content: "";
-    position: absolute;
-    inset: 0;
-    pointer-events: none;
-    border-radius: inherit;
-    box-shadow:
-        inset 0 0 0 4px rgba(0, 0, 0, 0.9),
-        inset 0 0 60px rgba(0, 0, 0, 0.75),
-        inset 0 0 220px rgba(0, 0, 0, 0.9);
-    z-index: 90;
-}
-
-/* Phosphor glow vignette (centered bloom) */
-.crt-shell::before {
-    content: "";
-    position: absolute;
-    inset: 0;
-    pointer-events: none;
-    border-radius: inherit;
-    background: radial-gradient(
-        ellipse at center,
-        rgba(51, 255, 102, 0.10) 0%,
-        rgba(51, 255, 102, 0.04) 35%,
-        rgba(0, 0, 0, 0) 70%
-    );
-    z-index: 50;
-}
-
-/* Static fine scanlines — scoped to screen */
+/* Static fine scanlines — scoped to the recessed screen area */
 .scanlines-static {
     position: absolute;
-    inset: 0;
+    inset: var(--bezel-top) var(--bezel-side) var(--bezel-bottom);
+    border-radius: var(--screen-radius);
+    overflow: hidden;
     pointer-events: none;
     background: repeating-linear-gradient(
         to bottom,
@@ -301,12 +343,20 @@ body {
     mix-blend-mode: multiply;
 }
 
-/* Slow rolling "vertical hold" band */
+/* Slow rolling "vertical hold" band — clipped to screen well */
 .scanline-roll {
+    position: absolute;
+    inset: var(--bezel-top) var(--bezel-side) var(--bezel-bottom);
+    border-radius: var(--screen-radius);
+    overflow: hidden;
+    pointer-events: none;
+    z-index: 96;
+}
+.scanline-roll::before {
+    content: "";
     position: absolute;
     inset: 0 0 auto 0;
     height: 35%;
-    pointer-events: none;
     background: linear-gradient(
         to bottom,
         transparent 0%,
@@ -316,7 +366,6 @@ body {
         transparent 100%
     );
     animation: roll 7s linear infinite;
-    z-index: 96;
 }
 @keyframes roll {
     0%   { transform: translateY(-120%); }
@@ -383,6 +432,10 @@ body {
 
 /* Whole-screen subtle 60Hz flicker */
 .crt-flicker {
+    /* opacity animation creates a stacking context — lift above the
+       ::before/::after pseudo layers on .crt-shell so content stays visible */
+    position: relative;
+    z-index: 60;
     animation: flicker 4.5s infinite steps(1);
 }
 @keyframes flicker {
