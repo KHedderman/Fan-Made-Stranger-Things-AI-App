@@ -210,7 +210,10 @@ body {
     top: 17.5%;
     width: 50%;
     height: 67%;
-    border-radius: 6% / 10%;
+    /* Match the H-89's barrel-shaped glass: heavy rounding so the app's
+       corners follow the CRT curve instead of squaring off into the bezel. */
+    border-radius: 14% / 20%;
+
 
 
     background:
