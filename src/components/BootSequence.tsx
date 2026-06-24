@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { Mode } from '../types.ts';
 import { playKeyClick } from '../lib/keyClickSound';
+import { playBootSound } from '../lib/bootSound';
 
 interface BootSequenceProps {
     onModeSelect: (mode: Mode) => void;
@@ -30,6 +31,7 @@ const BootSequence: React.FC<BootSequenceProps> = ({ onModeSelect }) => {
 
     useEffect(() => {
         cancelledRef.current = false;
+        const stopBoot = playBootSound();
         let lineIdx = 0;
         let charIdx = 0;
 
@@ -64,6 +66,7 @@ const BootSequence: React.FC<BootSequenceProps> = ({ onModeSelect }) => {
         return () => {
             cancelledRef.current = true;
             clearTimeout(start);
+            stopBoot();
         };
     }, []);
 
