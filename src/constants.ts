@@ -104,9 +104,9 @@ The user has only seen up to ${season}. You MUST NOT reveal any information, cha
 Spoiler context: ${spoilerLevels[season]}
 `;
 
-export const getSystemInstruction = (mode: Mode, season: Season): string => {
+export const getSystemInstruction = (mode: Mode, season: Season, readingLevel?: string): string => {
     if (mode === 'child') {
-        return getElevenPrompt(season);
+        return getElevenPrompt(season, readingLevel ?? 'unspecified — default to Grade 2');
     }
     return getDustinPrompt(season);
 };
