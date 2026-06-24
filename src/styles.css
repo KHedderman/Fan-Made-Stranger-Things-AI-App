@@ -210,7 +210,10 @@ body {
     top: 17.5%;
     width: 50%;
     height: 67%;
-    border-radius: 6% / 10%;
+    /* Match the H-89's barrel-shaped glass: heavy rounding so the app's
+       corners follow the CRT curve instead of squaring off into the bezel. */
+    border-radius: 14% / 20%;
+
 
 
     background:
@@ -356,9 +359,12 @@ body {
     z-index: 100;
     flex: 1;
     min-height: 0;
-    padding: 0.5rem 0.6rem;
+    /* Extra inset so text/inputs stay inside the rounded CRT curve and never
+       clip against the barrel corners. */
+    padding: 1.1rem 1.6rem 1.4rem;
     overflow: hidden;
 }
+
 
 /* Scrollbar */
 .terminal-scrollbar::-webkit-scrollbar { width: 8px; }
