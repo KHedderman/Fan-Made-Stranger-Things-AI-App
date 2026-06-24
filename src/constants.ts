@@ -10,12 +10,12 @@ FIREWALL (STRICT PROHIBITIONS):
 `;
 
 const spoilerLevels = {
-    '1': "Up to Season 1: Will is missing then found. Eleven has powers. The Demogorgon is the monster.",
-    '2': "Up to Season 2: The Mind Flayer is a big shadow monster. Max and Billy are new. Bob is Joyce's friend.",
-    '3': "Up to Season 3: The Starcourt Mall. The monster is made of goo (Meat Flayer). There are Russians under the mall.",
-    '4': "Up to Season 4: A new monster named Vecna. A new friend named Eddie.",
-    '5': "Up to Season 5: Only officially confirmed news. No leaks or fan theories presented as fact. HISTORY RECALL UNLOCKED: the user has watched every prior season, so you may freely recap and reference any character, event, or plot point from Seasons 1, 2, 3, and 4 to help them remember context (e.g. 'Wait, who was that guy again?'). Treat yourself as the full Seasons 1-5 archive.",
-    'First Shadow': "Up to The First Shadow: Henry Creel's story when he was a boy in 1959.",
+    '1': "Up to Season 1 ONLY: Will is missing then found. Eleven has powers. The Demogorgon is the monster. The user has NOT seen Tales from '85 — do not reference any of its characters, creatures, or plot points.",
+    '2': "Up to Season 2: The Mind Flayer is a big shadow monster. Max and Billy are new. Bob is Joyce's friend. The user has NOT seen Tales from '85 — do not reference any of its characters, creatures, or plot points.",
+    '3': "Up to Season 3 (which means Seasons 1, 2, AND the animated Tales from '85 set between S2 and S3 are all cleared): The Starcourt Mall. The monster is made of goo (Meat Flayer). There are Russians under the mall. You may freely reference Tales from '85.",
+    '4': "Up to Season 4 (Seasons 1, 2, Tales from '85, and 3 are all cleared): A new monster named Vecna. A new friend named Eddie. You may freely reference Tales from '85.",
+    '5': "Up to Season 5: Only officially confirmed news. No leaks or fan theories presented as fact. HISTORY RECALL UNLOCKED: the user has watched every prior season AND the animated Tales from '85, so you may freely recap and reference any character, event, or plot point from Seasons 1, 2, Tales from '85, 3, and 4 to help them remember context (e.g. 'Wait, who was that guy again?'). Treat yourself as the full Seasons 1-5 + Tales from '85 archive.",
+    'First Shadow': "Up to The First Shadow ONLY: Henry Creel's story when he was a boy in 1959. The user has NOT seen Tales from '85 — do not reference any of its characters, creatures, or plot points.",
     "Tales from '85": "Up to Stranger Things: Tales from '85 (the animated Netflix series released in 2025, set in the winter of 1985 between Season 2 and Season 3). The Party — Dustin, Mike, Lucas, Max, Will, Eleven, plus Steve, Robin, Erica, Nancy, Jonathan and the Hawkins crew — investigate a new Upside Down mystery during the cold months after the Mind Flayer was pushed back. Treat this as fully canon and fits between S2 and S3. You may freely reference everything from Seasons 1 and 2, and you may discuss characters, creatures, locations, and plot points introduced in Tales from '85 (the animated series). Do NOT reveal anything from Season 3, 4, 5, or The First Shadow unless the user has also cleared those seasons."
 };
 
