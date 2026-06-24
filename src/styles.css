@@ -201,6 +201,19 @@ body {
     image-rendering: -webkit-optimize-contrast;
 }
 
+/* Mobile (portrait phones): the H-89 photo is landscape (1356x784) so a
+   `cover` fit on a portrait viewport would push the screen rectangle off
+   to one side. Instead, fit the whole chassis into the available width
+   and center it vertically. The terminal still renders inside the
+   calibrated screen rectangle. */
+@media (max-width: 640px) {
+    .crt-frame {
+        width: 100vw;
+        height: calc(100vw * 784 / 1356);
+        max-height: calc(100vh - var(--footer-h));
+    }
+}
+
 /* The CRT screen rectangle inside the photo. Percentages are calibrated
    against the H-89 photo so the green phosphor surface lines up with the
    real glass on screen. */
