@@ -369,7 +369,7 @@ body {
     min-height: 0;
     /* Extra inset so text/inputs stay inside the rounded CRT curve and never
        clip against the barrel corners. */
-    padding: 1.1rem 1.6rem 1.4rem;
+    padding: clamp(1rem, 3%, 2rem) clamp(2rem, 6%, 4.5rem) clamp(1.2rem, 4%, 2.5rem);
     overflow: hidden;
 }
 
