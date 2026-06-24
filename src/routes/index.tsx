@@ -117,7 +117,14 @@ function Index() {
                     : "[ 🧢 DUSTIN ]\nDustin Henderson here! Gold Leader standing by. Need your clearance level so I don't spoil the campaign. Did you see Season 1, 2, 3, 4, 5, The First Shadow, or Tales from '85?";
 
             const aiResponseId = Date.now();
-            setMessages([{ id: aiResponseId, sender: 'ai', text: '' }]);
+            setMessages([
+                {
+                    id: aiResponseId,
+                    sender: 'ai',
+                    text: '',
+                    avatar: selectedMode === 'child' ? 'eleven' : 'dustin',
+                },
+            ]);
             await typeOutText(initialText, aiResponseId);
             setIsLoading(false);
         },

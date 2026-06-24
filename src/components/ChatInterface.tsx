@@ -3,6 +3,7 @@ import React, { useState, useRef, useEffect } from 'react';
 import { Message } from '../types.ts';
 import { UserIcon, LoadingIcon } from './icons.tsx';
 import { playKeyClick } from '../lib/keyClickSound';
+import PixelAvatar from './PixelAvatar';
 
 interface ChatInterfaceProps {
     messages: Message[];
@@ -47,6 +48,11 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({ messages, onSendMessage, 
             <div key={msg.id} className={`flex items-start gap-4 ${isUser ? 'justify-end' : ''}`}>
                 {isUser && <UserIcon />}
                 <div className={`max-w-[90%] ${isUser ? 'text-right' : ''} ${isSystem ? 'text-amber-400 text-center w-full' : ''}`}>
+                    {msg.avatar && (
+                        <div className="mb-2">
+                            <PixelAvatar character={msg.avatar} size={88} />
+                        </div>
+                    )}
                     <p className="whitespace-pre-wrap">
                         {msg.text}
                         {showBlinkingCursor && <span className="animate-pulse ml-1">▌</span>}
