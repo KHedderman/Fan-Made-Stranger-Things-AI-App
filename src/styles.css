@@ -326,10 +326,12 @@ body {
     }
 }
 
-/* Static fine scanlines — scoped to screen */
+/* Static fine scanlines — scoped to the recessed screen area */
 .scanlines-static {
     position: absolute;
-    inset: 0;
+    inset: var(--bezel-top) var(--bezel-side) var(--bezel-bottom);
+    border-radius: var(--screen-radius);
+    overflow: hidden;
     pointer-events: none;
     background: repeating-linear-gradient(
         to bottom,
@@ -342,11 +344,12 @@ body {
     mix-blend-mode: multiply;
 }
 
-/* Slow rolling "vertical hold" band */
+/* Slow rolling "vertical hold" band — clipped to screen */
 .scanline-roll {
     position: absolute;
-    inset: 0 0 auto 0;
-    height: 35%;
+    inset: var(--bezel-top) var(--bezel-side) auto var(--bezel-side);
+    height: 28%;
+    border-radius: var(--screen-radius) var(--screen-radius) 0 0;
     pointer-events: none;
     background: linear-gradient(
         to bottom,
