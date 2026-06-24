@@ -177,11 +177,16 @@ function Index() {
             };
 
             try {
-                if (!chatRef.current && mode) {
+                if (!chatRef.current && mode === 'child' && !childReadingLevel) {
+                    setChildReadingLevel(userInput.trim());
+                    const askSeason = "[ 🧇 ELEVEN ]\nOkay. Friend. Now tell me. What did you watch? 1? 2? 3? 4? 5? First Shadow? Or Tales from '85?";
+                    setMessages((prev) => [...prev, { id: aiResponseId, sender: 'ai', text: '' }]);
+                    await typeOutText(askSeason, aiResponseId);
+                } else if (!chatRef.current && mode) {
                     const detectedSeason = parseSeason(userInput);
                     if (detectedSeason) {
                         setSeason(detectedSeason);
-                        const newChat = startChat(mode, detectedSeason);
+                        const newChat = startChat(mode, detectedSeason, childReadingLevel ?? undefined);
                         chatRef.current = newChat;
                         const stream = await newChat.sendMessageStream({ message: userInput });
                         await typeStream(stream);
