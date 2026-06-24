@@ -1,136 +1,133 @@
-// Animated ASCII / block-graphic portraits for Eleven and Dustin.
-// Rendered as plain monospace green text so they sit inside the H-89 CRT
-// instead of looking like an imported sprite. Two frames per character
-// swap in place via the existing pixel-wave-a / pixel-wave-b keyframes
-// in src/styles.css (steps(1) — true 8-bit cadence, no blending).
-import React from 'react';
+// Static, character-text ("ASCII") portraits of Stranger Things characters,
+// generated on demand by the user's Gemini model (BYOK) and cached in the
+// browser so we only spend one request per character per browser. No motion.
+// Style target: dense typewriter-art portraits like jp2a output (the dog
+// reference the user shared), rendered as glowing green phosphor text on
+// the H-89 CRT.
+import React, { useEffect, useState } from 'react';
+import { GoogleGenAI } from '@google/genai';
+import { getApiKey, getModel } from '../lib/apiKeyStorage';
 
 type CharacterId = 'eleven' | 'dustin';
 
 interface Props {
     character: CharacterId;
-    /** Approximate avatar height in pixels. Used to pick a font size. */
+    /** Approximate avatar height in pixels (used only to pick a font size). */
     size?: number;
 }
 
-// ---------- DUSTIN -----------------------------------------------------------
-// 14 rows × 33 cols. Both frames are EXACTLY the same width per line so the
-// swap doesn't jitter. Frame A: arms down at sides. Frame B: arms up waving.
-// Reads as: red-bill trucker cap, "HFC" cap front, curls bursting out the
-// sides, big toothy grin, Hellfire Club tee.
-const DUSTIN_FRAME_A = String.raw`
-        ______________
-       /=:=:=:=:=:=:=:\
-      /  WHITE  ||BLU  \
-     /====[ HFC ]=======\
-     '~~~~~~~~~~~~~~~~~~'
-    (((  o      o  )))
-   (((    \____/     )))
-    (((   \____/    )))
-      ((( '------' )))
-        '~~~~~~~~~~'
-        | HELLFIRE |
-        | / \  / \ |
-        |  V    V  |
-        |__________|
-`;
+const CACHE_VERSION = 'v2';
+const cacheKey = (c: CharacterId) => `hawkins_ascii_portrait_${CACHE_VERSION}_${c}`;
 
-const DUSTIN_FRAME_B = String.raw`
-   \o    ______________    o/
-    \   /=:=:=:=:=:=:=:\   /
-     \ /  WHITE  ||BLU  \ /
-      /====[ HFC ]=======\
-     '~~~~~~~~~~~~~~~~~~'
-    (((  ^      ^  )))
-   (((    \____/     )))
-    (((   \____/    )))
-      ((( '------' )))
-        '~~~~~~~~~~'
-        | HELLFIRE |
-        | / \  / \ |
-        |  V    V  |
-        |__________|
-`;
+const SUBJECT: Record<CharacterId, string> = {
+    eleven:
+        'Eleven from Stranger Things — a young girl with a shaved buzzcut, big serious eyes, wearing the iconic pink dress with a navy blue collared jacket. Bust-up portrait, front-facing.',
+    dustin:
+        'Dustin Henderson from Stranger Things — a teen boy with a wide gap-toothed grin, curly hair bursting out from under a red-and-blue trucker cap (Hellfire Club / "HFC" front), wearing a Hellfire Club t-shirt. Bust-up portrait, front-facing.',
+};
 
-// ---------- ELEVEN (placeholder — refresh when refs arrive) ------------------
-// Same grid as Dustin so the layout doesn't shift between characters.
-const ELEVEN_FRAME_A = String.raw`
-         __________
-        /::::::::::\
-       / shaved cut \
-      /==============\
-       (  o    o  )
-       (    /\    )
-       (   '--'   )
-       (   \__/   )
-        \________/
-        /        \
-       /  PINK    \
-      |   DRESS    |
-       \__________/
-        ||      ||
-`;
+const buildPrompt = (character: CharacterId) => `
+Generate a HIGHLY DETAILED ASCII art portrait of ${SUBJECT[character]}
 
-const ELEVEN_FRAME_B = String.raw`
-   \o    __________    o/
-    \   /::::::::::\   /
-     \ / shaved cut \ /
-      /==============\
-       (  o    o  )
-       (    /\    )
-       (   '--'   )
-       (   \__/   )
-        \________/
-        /        \
-       /  PINK    \
-      |   DRESS    |
-       \__________/
-        ||      ||
-`;
+STRICT RULES:
+- Output ONLY the ASCII art. No prose, no commentary, no markdown fences, no backticks.
+- Use ONLY printable ASCII characters from this density ramp (light -> dark):
+   .,:;i1rsXA25HGB#@
+  Plus spaces for the background. Brighter = lighter character. Darker = denser character.
+- Use varied character density to render shading, hair, fabric, and facial features (like jp2a / image-to-ASCII converters).
+- Image dimensions: EXACTLY 60 columns wide, 45 rows tall. Every row must be 60 characters (pad with spaces if needed).
+- Centered on a blank background. Recognizable face. Looks like a photo converted to ASCII.
+- Do NOT use box-drawing, Unicode, emoji, or any non-ASCII glyph.
+`.trim();
 
-const FRAMES: Record<CharacterId, [string, string]> = {
-    dustin: [DUSTIN_FRAME_A.trim(), DUSTIN_FRAME_B.trim()],
-    eleven: [ELEVEN_FRAME_A.trim(), ELEVEN_FRAME_B.trim()],
+const fetchAsciiPortrait = async (character: CharacterId): Promise<string> => {
+    const key = getApiKey();
+    if (!key) throw new Error('Missing API key');
+    const ai = new GoogleGenAI({ apiKey: key });
+    const res = await ai.models.generateContent({
+        model: getModel(),
+        contents: buildPrompt(character),
+        config: { temperature: 0.4 },
+    });
+    const text = (res?.text ?? '').trim();
+    // Strip any accidental code fences.
+    return text
+        .replace(/^```[a-zA-Z]*\n?/, '')
+        .replace(/\n?```\s*$/, '')
+        .replace(/^\s*\n/, '');
+};
+
+const loadCached = (character: CharacterId): string | null => {
+    try {
+        return window.localStorage.getItem(cacheKey(character));
+    } catch {
+        return null;
+    }
+};
+
+const saveCached = (character: CharacterId, art: string) => {
+    try {
+        window.localStorage.setItem(cacheKey(character), art);
+    } catch {
+        /* ignore */
+    }
 };
 
 const PixelAvatar: React.FC<Props> = ({ character, size = 200 }) => {
-    const [frameA, frameB] = FRAMES[character];
-    const label =
-        character === 'eleven' ? 'Eleven waving (ASCII)' : 'Dustin waving (ASCII)';
+    const [art, setArt] = useState<string | null>(() => loadCached(character));
+    const [error, setError] = useState<string | null>(null);
 
-    // Pick a font size that roughly fits the requested visual height.
-    // 14 rows of monospace text → ~size/15 per row works on most terminals.
-    const fontSize = Math.max(8, Math.round(size / 16));
+    useEffect(() => {
+        if (art) return;
+        let cancelled = false;
+        fetchAsciiPortrait(character)
+            .then((result) => {
+                if (cancelled) return;
+                saveCached(character, result);
+                setArt(result);
+            })
+            .catch((err) => {
+                if (cancelled) return;
+                console.error('ASCII portrait failed:', err);
+                setError(err instanceof Error ? err.message : 'render failed');
+            });
+        return () => {
+            cancelled = true;
+        };
+    }, [character, art]);
 
-    const preBase: React.CSSProperties = {
-        fontFamily:
-            "'VT323', 'Courier New', ui-monospace, SFMono-Regular, Menlo, monospace",
+    // Tighter line-height + smaller cells so the 60x45 grid actually reads
+    // as a portrait rather than a stretched billboard.
+    const fontSize = Math.max(6, Math.round(size / 22));
+
+    const preStyle: React.CSSProperties = {
+        fontFamily: "'VT323', 'Courier New', ui-monospace, SFMono-Regular, Menlo, monospace",
         fontSize: `${fontSize}px`,
         lineHeight: 1,
         margin: 0,
         whiteSpace: 'pre',
         color: '#33ff66',
-        textShadow:
-            '0 0 4px rgba(51,255,102,0.85), 0 0 10px rgba(51,255,102,0.45)',
-        letterSpacing: '0.02em',
+        textShadow: '0 0 3px rgba(51,255,102,0.85), 0 0 8px rgba(51,255,102,0.45)',
+        letterSpacing: '0.05em',
     };
 
     return (
         <div
-            className="relative inline-block align-top select-none"
-            aria-label={label}
+            className="inline-block align-top select-none"
             role="img"
-            style={{ minHeight: `${fontSize * 14}px` }}
+            aria-label={`${character === 'eleven' ? 'Eleven' : 'Dustin'} ASCII portrait`}
         >
-            <pre className="pixel-wave-a" style={{ ...preBase }}>
-                {frameA}
-            </pre>
-            <pre
-                className="pixel-wave-b absolute top-0 left-0"
-                style={{ ...preBase }}
-            >
-                {frameB}
-            </pre>
+            {art ? (
+                <pre style={preStyle}>{art}</pre>
+            ) : error ? (
+                <pre style={{ ...preStyle, opacity: 0.7 }}>
+                    {`/// PORTRAIT FEED LOST ///\n${error}`}
+                </pre>
+            ) : (
+                <pre style={{ ...preStyle, opacity: 0.7 }} className="animate-pulse">
+                    {`░▒▓ RENDERING ${character.toUpperCase()} ▓▒░\n   (ASCII portrait, one-time)`}
+                </pre>
+            )}
         </div>
     );
 };
