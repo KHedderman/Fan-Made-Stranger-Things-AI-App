@@ -201,9 +201,9 @@ body {
    --bezel-* drives both the bezel thickness and the inset of screen-scoped
    overlays (scanlines, glow), so everything stays aligned at any breakpoint. */
 .crt-shell {
-    --bezel-top: clamp(34px, 5vmin, 68px);
-    --bezel-side: clamp(40px, 6vmin, 80px);
-    --bezel-bottom: clamp(46px, 6.5vmin, 90px);
+    --bezel-top: clamp(40px, 6vmin, 80px);
+    --bezel-side: clamp(46px, 6.5vmin, 90px);
+    --bezel-bottom: clamp(54px, 7.5vmin, 100px);
     --screen-radius: clamp(28px, 4vmin, 52px);
 
     position: absolute;
@@ -211,30 +211,29 @@ body {
            clamp(60px, 7vmin, 86px) clamp(28px, 4vmin, 60px);
     border-radius: clamp(36px, 5vmin, 60px);
     padding: var(--bezel-top) var(--bezel-side) var(--bezel-bottom);
-    /* Molded gray plastic bezel: top-lit highlight, deeper falloff at sides
-       and bottom, and a faint horizontal grain to suggest texture. */
+    /* Light molded gray plastic bezel — top-lit highlight from overhead room
+       light, gentle falloff toward the bottom, faint horizontal grain. */
     background:
         repeating-linear-gradient(92deg,
-            rgba(255, 255, 255, 0.014) 0 1px,
-            rgba(0, 0, 0, 0.030) 1px 2px),
-        radial-gradient(ellipse at 50% 0%,
-            rgba(255, 255, 255, 0.14) 0%,
-            rgba(255, 255, 255, 0.03) 25%,
-            transparent 55%),
+            rgba(255, 255, 255, 0.020) 0 1px,
+            rgba(0, 0, 0, 0.035) 1px 2px),
+        radial-gradient(ellipse at 50% -20%,
+            rgba(255, 255, 255, 0.30) 0%,
+            rgba(255, 255, 255, 0.05) 30%,
+            transparent 60%),
         linear-gradient(180deg,
-            #6b6b6e 0%,
-            #5a5a5d 18%,
-            #4d4d50 55%,
-            #3d3d40 100%);
+            #b8b6ad 0%,
+            #a3a198 22%,
+            #8d8b83 60%,
+            #76746d 100%);
     overflow: hidden;
     isolation: isolate;
 }
 
-/* The recessed dark screen well. Inset on all sides creates the bezel.
-   Deep inner shadows simulate the curved CRT tube sitting back inside the
-   plastic housing. The outward green box-shadow casts phosphor light onto
-   the inner bezel walls — strongest at the top where overhead room light
-   would fall, matching the reference photo. */
+/* The recessed dark screen well. Deep inner shadows simulate the curved CRT
+   tube sitting back inside the plastic housing. A small outward green
+   box-shadow casts phosphor light onto the inner bezel wall right at the
+   screen edge — strongest at the top hood, fading down the sides. */
 .crt-shell::before {
     content: "";
     position: absolute;
@@ -249,20 +248,20 @@ body {
     box-shadow:
         /* hard inner rim — front face of the tube glass */
         inset 0 0 0 2px rgba(0, 0, 0, 0.95),
-        /* recessed top wall — deepest shadow at the top edge */
-        inset 0 18px 28px -8px rgba(0, 0, 0, 0.95),
+        /* recessed top wall — deepest shadow at the top edge (hood) */
+        inset 0 22px 30px -10px rgba(0, 0, 0, 0.98),
         /* bottom wall */
-        inset 0 -14px 24px -8px rgba(0, 0, 0, 0.85),
+        inset 0 -16px 26px -10px rgba(0, 0, 0, 0.9),
         /* side walls of the recess */
-        inset 16px 0 26px -10px rgba(0, 0, 0, 0.75),
-        inset -16px 0 26px -10px rgba(0, 0, 0, 0.75),
-        /* soft corner darkening */
-        inset 0 0 90px rgba(0, 0, 0, 0.55),
-        /* === green phosphor spill onto the surrounding bezel === */
-        0 0 0 1px rgba(51, 255, 102, 0.22),
-        0 -4px 22px 2px rgba(51, 255, 102, 0.32),
-        0 0 36px 6px rgba(51, 255, 102, 0.22),
-        0 0 90px 18px rgba(51, 255, 102, 0.12);
+        inset 18px 0 28px -12px rgba(0, 0, 0, 0.85),
+        inset -18px 0 28px -12px rgba(0, 0, 0, 0.85),
+        /* soft corner darkening inside the tube */
+        inset 0 0 110px rgba(0, 0, 0, 0.6),
+        /* === phosphor spill onto the inner bezel wall (tight) === */
+        0 0 0 1.5px rgba(51, 255, 102, 0.35),
+        0 -2px 10px 0 rgba(51, 255, 102, 0.5),
+        0 2px 14px 1px rgba(51, 255, 102, 0.3),
+        0 0 28px 4px rgba(51, 255, 102, 0.18);
     z-index: 1;
 }
 
