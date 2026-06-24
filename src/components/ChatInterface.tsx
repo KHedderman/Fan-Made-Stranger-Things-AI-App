@@ -3,6 +3,7 @@ import React, { useState, useRef, useEffect } from 'react';
 import { Message } from '../types.ts';
 import { UserIcon, LoadingIcon } from './icons.tsx';
 import { playKeyClick } from '../lib/keyClickSound';
+import PixelAvatar from './PixelAvatar';
 
 interface ChatInterfaceProps {
     messages: Message[];
