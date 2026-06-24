@@ -194,20 +194,8 @@ body {
     background-position: center;
 }
 
-/* Portrait / narrow viewports: the H-89 photo is much wider than it is
-   tall. If we shrink it to fit the viewport width, the screen rectangle
-   becomes too small to read. Instead, scale the photo by height so the
-   chassis fills the viewport vertically, and anchor it to the left so the
-   CRT screen (which sits on the left half of the H-89) stays in view. */
-@media (max-aspect-ratio: 1 / 1) and (max-width: 900px) {
-    .crt-frame {
-        height: 100vh;
-        width: calc(100vh * 1560 / 915);
-        /* Center the on-screen CRT glass (which sits at ~38% across the
-           full H-89 photo) on the viewport's horizontal centerline. */
-        margin-left: calc(50vw - 0.3805 * 100vh * 1560 / 915);
-    }
-}
+
+
 
 /* The CRT screen rectangle inside the photo. Percentages are calibrated
    against the H-89 photo so the green phosphor surface lines up with the
