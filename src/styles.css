@@ -213,8 +213,15 @@ body {
     /* Match the H-89's barrel-shaped glass: heavy rounding so the app's
        corners follow the CRT curve instead of squaring off into the bezel. */
     border-radius: 14% / 20%;
-
-
+    /* CRT barrel mask — all four sides bow outward like a real cathode-ray
+       tube. The SVG path's control points pull each edge past a smaller
+       inner base rectangle, giving every side a gentle convex curve. */
+    -webkit-mask-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100' preserveAspectRatio='none'><path d='M4,50 C4,8 8,4 50,0 C92,4 96,8 96,50 C96,92 92,96 50,100 C8,96 4,92 4,50 Z' fill='black'/></svg>");
+    mask-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100' preserveAspectRatio='none'><path d='M4,50 C4,8 8,4 50,0 C92,4 96,8 96,50 C96,92 92,96 50,100 C8,96 4,92 4,50 Z' fill='black'/></svg>");
+    -webkit-mask-size: 100% 100%;
+    mask-size: 100% 100%;
+    -webkit-mask-repeat: no-repeat;
+    mask-repeat: no-repeat;
 
     background:
         radial-gradient(ellipse at center, #061410 0%, #020604 60%, #000 100%);
