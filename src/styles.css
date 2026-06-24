@@ -206,11 +206,12 @@ body {
    real glass on screen. */
 .crt-shell {
     position: absolute;
-    left: 11.5%;
-    top: 15%;
-    width: 53%;
-    height: 72%;
+    left: 13%;
+    top: 17.5%;
+    width: 50%;
+    height: 67%;
     border-radius: 6% / 10%;
+
 
     background:
         radial-gradient(ellipse at center, #061410 0%, #020604 60%, #000 100%);
