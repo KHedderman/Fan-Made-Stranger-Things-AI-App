@@ -6,7 +6,14 @@ export type AppState = 'BOOTING' | 'CHATTING';
 
 export interface GeneratedImageData {
     prompt: string;
-    dataUrl?: string;       // populated when the image finishes rendering
+    dataUrl?: string;
+    status: 'pending' | 'ready' | 'error';
+    error?: string;
+}
+
+export interface GeneratedAsciiData {
+    subject: string;
+    art?: string;
     status: 'pending' | 'ready' | 'error';
     error?: string;
 }
@@ -16,6 +23,5 @@ export interface Message {
     sender: 'user' | 'ai' | 'system';
     text: string;
     images?: GeneratedImageData[];
-    /** Show an animated pixel-art waving avatar above the message text. */
-    avatar?: 'eleven' | 'dustin';
+    asciiArts?: GeneratedAsciiData[];
 }
