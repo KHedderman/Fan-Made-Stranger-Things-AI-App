@@ -168,97 +168,121 @@ body {
     -webkit-font-smoothing: antialiased;
 }
 
-/* === Heathkit H-89 gray plastic chassis === */
+/* === Room / desk surround behind the monitor === */
 .crt-case {
     position: fixed;
     inset: 0;
     padding: clamp(18px, 2.6vmin, 34px) clamp(28px, 4vmin, 60px) clamp(34px, 5vmin, 64px);
-    /* Charcoal plastic chassis with subtle realistic shading:
-       - top-light highlight (overhead room light)
-       - darker falloff at bottom and side edges
-       - faint molded plastic grain */
+    /* Dim room: warm wall light up top, darker desk surface below with a soft
+       elliptical shadow pooling under where the monitor sits. */
     background:
-        /* fine plastic grain / noise */
-        repeating-linear-gradient(127deg,
-            rgba(255, 255, 255, 0.012) 0 1px,
-            rgba(0, 0, 0, 0.025) 1px 2px),
-        /* left edge shadow */
-        linear-gradient(90deg, rgba(0, 0, 0, 0.35) 0%, transparent 12%, transparent 88%, rgba(0, 0, 0, 0.35) 100%),
-        /* top highlight + bottom shadow */
+        /* desk shadow pool under the monitor */
+        radial-gradient(ellipse 60% 8% at 50% 96%,
+            rgba(0, 0, 0, 0.85) 0%,
+            rgba(0, 0, 0, 0.45) 40%,
+            transparent 75%),
+        /* warm room glow from above */
+        radial-gradient(ellipse 80% 60% at 50% 0%,
+            rgba(80, 60, 40, 0.35) 0%,
+            transparent 60%),
+        /* wall-to-desk horizon */
         linear-gradient(180deg,
-            rgba(255, 255, 255, 0.10) 0%,
-            rgba(255, 255, 255, 0.03) 8%,
-            transparent 35%,
-            rgba(0, 0, 0, 0.25) 80%,
-            rgba(0, 0, 0, 0.45) 100%),
-        /* base color */
-        #3a3a3c;
+            #1a1612 0%,
+            #15110d 55%,
+            #0a0806 78%,
+            #050402 100%);
     overflow: hidden;
     isolation: isolate;
 }
 
-/* Gray plastic bezel surrounding a recessed CRT screen well.
-   --bezel-* drives both the bezel thickness and the inset of screen-scoped
-   overlays (scanlines, glow), so everything stays aligned at any breakpoint. */
+/* === The physical CRT monitor box ===
+   Heathkit-style cream/putty plastic enclosure with a deep recessed screen,
+   ventilation slots across the top, and a chin housing a power LED. */
 .crt-shell {
-    --bezel-top: clamp(40px, 6vmin, 80px);
-    --bezel-side: clamp(46px, 6.5vmin, 90px);
-    --bezel-bottom: clamp(54px, 7.5vmin, 100px);
+    --bezel-top: clamp(56px, 8vmin, 110px);     /* taller top — houses vents */
+    --bezel-side: clamp(50px, 7vmin, 100px);
+    --bezel-bottom: clamp(80px, 11vmin, 150px); /* deep chin for badge + LED */
     --screen-radius: clamp(28px, 4vmin, 52px);
 
     position: absolute;
-    inset: clamp(18px, 2.6vmin, 34px) clamp(28px, 4vmin, 60px)
-           clamp(60px, 7vmin, 86px) clamp(28px, 4vmin, 60px);
-    border-radius: clamp(36px, 5vmin, 60px);
+    inset: clamp(22px, 3vmin, 40px) clamp(36px, 5vmin, 72px)
+           clamp(56px, 7vmin, 90px) clamp(36px, 5vmin, 72px);
+    /* Chunky molded corners — real CRTs have a tight outer radius, not pillowy */
+    border-radius: clamp(18px, 2.4vmin, 28px);
     padding: var(--bezel-top) var(--bezel-side) var(--bezel-bottom);
-    border: 1px solid rgba(255, 255, 255, 0.16);
-    /* Molded gray plastic bezel with directional room lighting. Layered top-down:
-       1. Faint molded plastic grain
-       2. hard top-left highlight and bottom-right falloff to make the case convex
-       3. broader overhead reflection across the upper face
-       4. dark halo around the screen well
-       5. base warm-gray plastic */
+    border: 1px solid rgba(255, 255, 255, 0.18);
+    /* Layered top-down:
+       1. Top ventilation slots (positioned strip)
+       2. Faint molded plastic grain
+       3. Convex directional lighting (top-left highlight, bottom-right falloff)
+       4. Broad overhead reflection across the upper face
+       5. Dark halo around the screen well
+       6. Vertical depth gradient
+       7. Base warm putty-gray plastic */
     background:
+        /* (1) Vent slots — narrow dark lines, ~20px tall band near top */
+        repeating-linear-gradient(90deg,
+            transparent 0 8px,
+            rgba(0, 0, 0, 0.55) 8px 11px,
+            rgba(0, 0, 0, 0.15) 11px 13px,
+            transparent 13px 22px) 50% 18px / 38% 8px no-repeat,
+        /* (2) molded plastic grain */
         repeating-linear-gradient(92deg,
             rgba(255, 255, 255, 0.020) 0 1px,
             rgba(0, 0, 0, 0.040) 1px 2px),
+        /* (3) convex directional lighting */
         linear-gradient(135deg,
-            rgba(255, 255, 255, 0.38) 0%,
+            rgba(255, 255, 255, 0.40) 0%,
             rgba(255, 255, 255, 0.12) 17%,
             transparent 34%,
-            rgba(0, 0, 0, 0.12) 66%,
-            rgba(0, 0, 0, 0.55) 100%),
+            rgba(0, 0, 0, 0.14) 66%,
+            rgba(0, 0, 0, 0.60) 100%),
+        /* (4) overhead reflection */
         radial-gradient(ellipse at 50% -25%,
             rgba(255, 255, 255, 0.42) 0%,
             rgba(255, 255, 255, 0.05) 32%,
             transparent 60%),
+        /* (5) dark halo cradling the screen well */
         radial-gradient(ellipse 72% 82% at 50% 50%,
             transparent 56%,
             rgba(0, 0, 0, 0.60) 76%,
             rgba(0, 0, 0, 0.35) 88%,
             transparent 100%),
+        /* (6) vertical depth — chin sits in shadow */
         linear-gradient(180deg,
             transparent 55%,
-            rgba(0, 0, 0, 0.18) 80%,
-            rgba(0, 0, 0, 0.35) 100%),
+            rgba(0, 0, 0, 0.20) 80%,
+            rgba(0, 0, 0, 0.42) 100%),
+        /* (7) base putty plastic */
         linear-gradient(180deg,
-            #c6c3b9 0%,
-            #aaa79d 18%,
-            #8b887f 58%,
-            #615f58 100%);
+            #cdc9bd 0%,
+            #b1ad9f 18%,
+            #8e8b81 58%,
+            #5e5c55 100%);
     box-shadow:
-        0 42px 80px rgba(0, 0, 0, 0.64),
-        0 15px 28px rgba(0, 0, 0, 0.52),
-        0 2px 0 rgba(255, 255, 255, 0.20),
+        /* Cast shadow on the desk behind */
+        0 60px 90px -10px rgba(0, 0, 0, 0.85),
+        0 30px 50px rgba(0, 0, 0, 0.6),
+        0 12px 24px rgba(0, 0, 0, 0.5),
+        /* outer bright top edge */
+        0 2px 0 rgba(255, 255, 255, 0.22),
+        /* molded edges */
         inset 0 2px 2px rgba(255, 255, 255, 0.55),
         inset 2px 0 2px rgba(255, 255, 255, 0.20),
         inset -2px 0 4px rgba(0, 0, 0, 0.42),
-        inset 0 -4px 8px rgba(0, 0, 0, 0.48),
+        inset 0 -4px 8px rgba(0, 0, 0, 0.55),
         inset 0 0 0 4px rgba(255, 255, 255, 0.045),
-        inset 0 0 0 9px rgba(0, 0, 0, 0.13);
+        inset 0 0 0 9px rgba(0, 0, 0, 0.15);
     overflow: hidden;
     isolation: isolate;
 }
+
+/* Chin badge: power LED + faint brand plate, rendered on the bottom-center
+   of the shell using a layered radial-gradient background overlay. */
+.crt-shell {
+    background-blend-mode: normal;
+}
+
 
 /* The recessed dark screen well. The deep box-shadow stack does the heavy
    lifting for the 3D illusion: inset shadows curve the CRT tube inward; the
