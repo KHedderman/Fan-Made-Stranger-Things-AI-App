@@ -301,11 +301,15 @@ body {
     mix-blend-mode: multiply;
 }
 
-/* Slow rolling "vertical hold" band */
+/* Slow rolling "vertical hold" band — confined well inside the screen,
+   never reaching the top or bottom edge so it can't appear to ride into
+   the charcoal bezel. */
 .scanline-roll {
     position: absolute;
-    inset: 0 0 auto 0;
-    height: 35%;
+    /* Pull the band inward from the screen edges so even the faint
+       gradient tails stay off the bezel. */
+    inset: 8% 0 auto 0;
+    height: 28%;
     pointer-events: none;
     background: linear-gradient(
         to bottom,
@@ -319,9 +323,12 @@ body {
     z-index: 96;
 }
 @keyframes roll {
-    0%   { transform: translateY(-120%); }
-    100% { transform: translateY(380%); }
+    /* Travel only within the safe inner band: brightest line stays
+       between ~15% and ~85% of the screen height. */
+    0%   { transform: translateY(-30%); }
+    100% { transform: translateY(220%); }
 }
+
 
 /* Hide vents — H-89 front bezel is clean */
 .crt-vents { display: none; }
