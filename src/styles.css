@@ -230,10 +230,11 @@ body {
     isolation: isolate;
 }
 
-/* The recessed dark screen well. Deep inner shadows simulate the curved CRT
-   tube sitting back inside the plastic housing. A small outward green
-   box-shadow casts phosphor light onto the inner bezel wall right at the
-   screen edge — strongest at the top hood, fading down the sides. */
+/* The recessed dark screen well. The deep box-shadow stack does the heavy
+   lifting for the 3D illusion: inset shadows curve the CRT tube inward; the
+   outward shadows project a dark "tunnel" onto the surrounding bezel (the
+   inner walls of the recess); a thin bright rim just outside the screen
+   catches overhead room light off the angled bezel lip. */
 .crt-shell::before {
     content: "";
     position: absolute;
@@ -246,22 +247,35 @@ body {
             #04100a 55%,
             #01060a 100%);
     box-shadow:
-        /* hard inner rim — front face of the tube glass */
-        inset 0 0 0 2px rgba(0, 0, 0, 0.95),
-        /* recessed top wall — deepest shadow at the top edge (hood) */
-        inset 0 22px 30px -10px rgba(0, 0, 0, 0.98),
-        /* bottom wall */
-        inset 0 -16px 26px -10px rgba(0, 0, 0, 0.9),
-        /* side walls of the recess */
-        inset 18px 0 28px -12px rgba(0, 0, 0, 0.85),
-        inset -18px 0 28px -12px rgba(0, 0, 0, 0.85),
-        /* soft corner darkening inside the tube */
-        inset 0 0 110px rgba(0, 0, 0, 0.6),
-        /* === phosphor spill onto the inner bezel wall (tight) === */
+        /* glass face — hard black rim */
+        inset 0 0 0 2px rgba(0, 0, 0, 1),
+        /* CRT tube curvature: strong directional inner vignette */
+        inset 0 28px 36px -8px rgba(0, 0, 0, 0.98),
+        inset 0 -22px 32px -8px rgba(0, 0, 0, 0.94),
+        inset 26px 0 34px -10px rgba(0, 0, 0, 0.9),
+        inset -26px 0 34px -10px rgba(0, 0, 0, 0.9),
+        inset 0 0 130px rgba(0, 0, 0, 0.7),
+
+        /* === RECESS TUNNEL — outward shadows projected onto the bezel,
+           simulating the inner walls of the screen well angling back === */
+        /* Hood overhang above the screen — deepest cast */
+        0 -14px 24px -4px rgba(0, 0, 0, 0.88),
+        0 -28px 48px 4px rgba(0, 0, 0, 0.55),
+        /* Bottom lip — softer because overhead light reaches it */
+        0 16px 26px -4px rgba(0, 0, 0, 0.78),
+        0 30px 50px 4px rgba(0, 0, 0, 0.45),
+        /* Side walls */
+        -18px 0 30px -4px rgba(0, 0, 0, 0.78),
+        18px 0 30px -4px rgba(0, 0, 0, 0.78),
+
+        /* === BEZEL LIP HIGHLIGHT — thin bright catch of room light on the
+           angled top of the inner bezel wall, just outside the screen === */
+        0 -1px 0 0.5px rgba(255, 255, 255, 0.22),
+
+        /* === Phosphor spill on the inner bezel === */
+        0 -2px 10px 0 rgba(51, 255, 102, 0.48),
         0 0 0 1.5px rgba(51, 255, 102, 0.35),
-        0 -2px 10px 0 rgba(51, 255, 102, 0.5),
-        0 2px 14px 1px rgba(51, 255, 102, 0.3),
-        0 0 28px 4px rgba(51, 255, 102, 0.18);
+        0 0 28px 2px rgba(51, 255, 102, 0.18);
     z-index: 1;
 }
 
