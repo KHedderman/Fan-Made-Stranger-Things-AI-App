@@ -494,16 +494,3 @@ body {
 .key-missing-blink {
     animation: key-missing-blink 1s steps(2, end) infinite;
 }
-
-/* Pixel-art 2-frame wave loop — classic 8-bit sprite cadence.
-   Frame A visible 0-50%, Frame B visible 50-100%, no in-between blending. */
-@keyframes pixel-wave-a {
-    0%, 49.99% { opacity: 1; }
-    50%, 100%  { opacity: 0; }
-}
-@keyframes pixel-wave-b {
-    0%, 49.99% { opacity: 0; }
-    50%, 100%  { opacity: 1; }
-}
-.pixel-wave-a { animation: pixel-wave-a 0.7s steps(1, end) infinite; }
-.pixel-wave-b { animation: pixel-wave-b 0.7s steps(1, end) infinite; }
