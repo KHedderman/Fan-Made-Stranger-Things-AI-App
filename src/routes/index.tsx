@@ -232,15 +232,10 @@ function Index() {
     return (
         <div className="crt-case text-base sm:text-lg md:text-xl lg:text-2xl">
             <div className="crt-shell">
-                {/* Physical monitor anatomy — vents on top, brand chin on bottom */}
-                <div className="crt-vents" aria-hidden />
-                <div className="crt-chin" aria-hidden>
-                    <span className="crt-led" />
-                    <span className="crt-brand">HEATHKIT · H-89</span>
-                </div>
                 {/* CRT effects layered above content, scoped to the screen */}
                 <div className="scanlines-static" aria-hidden />
                 <div className="scanline-roll" aria-hidden />
+
 
 
                 <div className="crt-flicker h-full w-full flex flex-col">
