@@ -12,10 +12,11 @@ export class MissingApiKeyError extends Error {
 }
 
 export const useGeminiChat = () => {
-    const [hasApiKey, setHasApiKey] = useState<boolean>(() => !!getApiKey());
+    const [hasApiKey, setHasApiKey] = useState(false);
 
     useEffect(() => {
         const sync = () => setHasApiKey(!!getApiKey());
+        sync();
         window.addEventListener('hawkins-apikey-changed', sync);
         window.addEventListener('storage', sync);
         return () => {
