@@ -302,18 +302,19 @@ function Index() {
                             {renderContent()}
                         </main>
 
-                        <footer className="crt-footer">
-                            <p>
-                                This is an unofficial, fan-made application and is not affiliated with,
-                                endorsed by, or connected to Netflix, Inc. or the Stranger Things
-                                production team. All Stranger Things characters, logos, and related
-                                marks are the property of their respective owners. This project is
-                                provided for educational and non-commercial purposes only.
-                            </p>
-                        </footer>
                     </div>
                 </div>
             </div>
+
+            <footer className="crt-footer-global">
+                <p>
+                    This is an unofficial, fan-made application and is not affiliated with,
+                    endorsed by, or connected to Netflix, Inc. or the Stranger Things
+                    production team. All Stranger Things characters, logos, and related
+                    marks are the property of their respective owners. Provided for
+                    educational and non-commercial purposes only.
+                </p>
+            </footer>
 
             <SettingsModal open={settingsOpen} onClose={() => setSettingsOpen(false)} />
         </div>

@@ -172,9 +172,12 @@ body {
    The full preview is filled with a real photo of an H-89. The terminal
    UI is rendered inside the screen rectangle of that photo so the chassis
    border is photo-realistic. */
+:root { --footer-h: 2.5rem; }
+@media (max-width: 640px) { :root { --footer-h: 4rem; } }
+
 .crt-case {
     position: fixed;
-    inset: 0;
+    inset: 0 0 var(--footer-h) 0;
     background: #050402;
     display: grid;
     place-items: center;
@@ -182,20 +185,18 @@ body {
     isolation: isolate;
 }
 
-/* Photo frame — locked to the photo aspect ratio (1560 x 915) and sized to
-   fit the viewport on both desktop and mobile. */
+/* Photo frame — keeps the H-89 photo aspect ratio (1560 x 915) but scales
+   up to fully cover the available viewport (no black letterbox bars). The
+   overflowing axis is clipped by the .crt-case overflow:hidden. */
 .crt-frame {
     position: relative;
-    width: min(100vw, calc(100vh * 1560 / 915));
-    height: min(calc(100vw * 915 / 1560), 100vh);
+    width: max(100vw, calc((100vh - var(--footer-h)) * 1560 / 915));
+    height: max(calc(100vw * 915 / 1560), calc(100vh - var(--footer-h)));
     background-image: var(--chassis-image);
     background-size: 100% 100%;
     background-repeat: no-repeat;
     background-position: center;
 }
-
-
-
 
 /* The CRT screen rectangle inside the photo. Percentages are calibrated
    against the H-89 photo so the green phosphor surface lines up with the
@@ -211,25 +212,16 @@ body {
         radial-gradient(ellipse at center, #061410 0%, #020604 60%, #000 100%);
     overflow: hidden;
     isolation: isolate;
+    display: flex;
+    flex-direction: column;
 }
 
-/* === Mobile: keep the photo as-is, just tighten interior padding so the
-   tiny inner screen still fits the terminal UI. === */
 @media (max-width: 640px) {
-    .crt-content {
-        padding: 0.4rem 0.5rem !important;
-        height: calc(100% - 1.6rem) !important;
-    }
     .crt-status {
         padding: 0.25rem 0.45rem;
         font-size: 0.55rem;
         letter-spacing: 0.02em;
         gap: 0.35rem;
-    }
-    .crt-footer {
-        padding: 0.25rem 0.45rem;
-        font-size: 0.5rem;
-        line-height: 1.25;
     }
 }
 
@@ -356,7 +348,8 @@ body {
 .crt-content {
     position: relative;
     z-index: 100;
-    height: calc(100% - 2.4rem);
+    flex: 1;
+    min-height: 0;
     padding: 1rem 1.25rem 1rem;
     overflow: hidden;
 }
@@ -392,22 +385,31 @@ body {
 }
 
 
-.crt-footer {
-    position: relative;
-    z-index: 110;
-    padding: 0.5rem 1rem 0.5rem 2.5rem;
-    border-top: 1px solid rgba(51, 255, 102, 0.25);
-    background: rgba(0, 0, 0, 0.55);
+.crt-footer-global {
+    position: fixed;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    height: var(--footer-h);
+    z-index: 200;
+    display: flex;
+    align-items: center;
+    padding: 0.4rem 1rem;
+    background: #050402;
+    border-top: 1px solid rgba(51, 255, 102, 0.18);
     font-family: 'Inter', system-ui, sans-serif;
     font-size: 0.72rem;
-    line-height: 1.4;
-    text-align: left;
-    color: #cfd6cf;
+    line-height: 1.3;
+    text-align: center;
+    color: #9aa39a;
     letter-spacing: 0.01em;
-    /* Override the body-wide phosphor glow so the legal text stays crisp */
     text-shadow: none;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+}
+.crt-footer-global p { margin: 0 auto; max-width: 80rem; }
+@media (max-width: 640px) {
+    .crt-footer-global { font-size: 0.6rem; padding: 0.3rem 0.6rem; }
 }
 
 @keyframes key-missing-blink {
