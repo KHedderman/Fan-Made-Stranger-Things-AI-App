@@ -210,14 +210,16 @@ body {
     top: 12.5%;
     width: 58%;
     height: 78%;
-    /* Match the H-89's barrel-shaped glass — gentler corner rounding so the
-       app reaches further into the CRT corners. */
-    border-radius: 7% / 11%;
+    /* Tighter corner rounding so the app reaches further into the CRT
+       corners and the header bar isn't clipped at the edges. */
+    border-radius: 4% / 6%;
 
-    /* CRT barrel mask — all four sides bow outward like a real cathode-ray
-       tube. Reduced curvature so the app uses more of the screen. */
-    -webkit-mask-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100' preserveAspectRatio='none'><path d='M2,50 C2,4 4,2 50,0 C96,2 98,4 98,50 C98,96 96,98 50,100 C4,98 2,96 2,50 Z' fill='black'/></svg>");
-    mask-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100' preserveAspectRatio='none'><path d='M2,50 C2,4 4,2 50,0 C96,2 98,4 98,50 C98,96 96,98 50,100 C4,98 2,96 2,50 Z' fill='black'/></svg>");
+    /* CRT barrel mask — every side bows out slightly, but corners are kept
+       tight (small radius) so content like the settings button doesn't get
+       clipped at the upper-right. */
+    -webkit-mask-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100' preserveAspectRatio='none'><path d='M2,50 C2,5 5,2 50,1 C95,2 98,5 98,50 C98,95 95,98 50,99 C5,98 2,95 2,50 Z' fill='black'/></svg>");
+    mask-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100' preserveAspectRatio='none'><path d='M2,50 C2,5 5,2 50,1 C95,2 98,5 98,50 C98,95 95,98 50,99 C5,98 2,95 2,50 Z' fill='black'/></svg>");
+
 
     -webkit-mask-size: 100% 100%;
     mask-size: 100% 100%;
