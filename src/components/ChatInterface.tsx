@@ -49,8 +49,8 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({ messages, onSendMessage, 
                 {isUser && <UserIcon />}
                 <div className={`max-w-[90%] ${isUser ? 'text-right' : ''} ${isSystem ? 'text-amber-400 text-center w-full' : ''}`}>
                     {msg.avatar && (
-                        <div className="mb-2">
-                            <PixelAvatar character={msg.avatar} size={88} />
+                        <div className="mb-3">
+                            <PixelAvatar character={msg.avatar} size={320} />
                         </div>
                     )}
                     <p className="whitespace-pre-wrap">
