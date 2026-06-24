@@ -24,13 +24,13 @@ export const useGeminiChat = () => {
         };
     }, []);
 
-    const startChat = useCallback((mode: Mode, season: Season): Chat => {
+    const startChat = useCallback((mode: Mode, season: Season, readingLevel?: string): Chat => {
         const key = getApiKey();
         if (!key) {
             throw new MissingApiKeyError();
         }
         const ai = new GoogleGenAI({ apiKey: key });
-        const systemInstruction = getSystemInstruction(mode, season);
+        const systemInstruction = getSystemInstruction(mode, season, readingLevel);
         return ai.chats.create({
             model: getModel(),
             config: {
