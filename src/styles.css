@@ -220,6 +220,13 @@ body {
        6. Vertical depth gradient
        7. Base warm putty-gray plastic */
     background:
+        /* (0) Power LED — small red glow on the chin, bottom-center */
+        radial-gradient(circle at 50% calc(100% - var(--bezel-bottom) / 2),
+            rgba(255, 70, 40, 0.95) 0px,
+            rgba(255, 70, 40, 0.85) 2px,
+            rgba(255, 90, 40, 0.35) 5px,
+            rgba(255, 90, 40, 0.10) 9px,
+            transparent 14px),
         /* (1) Vent slots — narrow dark lines, ~20px tall band near top */
         repeating-linear-gradient(90deg,
             transparent 0 8px,
