@@ -7,6 +7,7 @@ import BootSequence from '../components/BootSequence';
 import ChatInterface from '../components/ChatInterface';
 import SettingsModal from '../components/SettingsModal';
 import { playKeyClick } from '../lib/keyClickSound';
+import { extractImageTags, stripImageTags, generateH89Image } from '../lib/imageGen';
 import chassisPhoto from '../assets/heathkit-h89.png.asset.json';
 
 export const Route = createFileRoute('/')({
@@ -159,10 +160,12 @@ function Index() {
 
             const typeStream = async (stream: AsyncGenerator<GenerateContentResponse>) => {
                 setMessages((prev) => [...prev, { id: aiResponseId, sender: 'ai', text: '' }]);
+                let accumulated = '';
                 for await (const chunk of stream) {
                     const chunkText = chunk.text;
                     if (chunkText) {
                         for (const char of chunkText) {
+                            accumulated += char;
                             setMessages((prev) =>
                                 prev.map((msg) =>
                                     msg.id === aiResponseId
@@ -174,6 +177,55 @@ function Index() {
                             await new Promise((resolve) => setTimeout(resolve, TYPING_SPEED_MS));
                         }
                     }
+                }
+                // After streaming completes, extract any <<IMG: ...>> tags and kick off Nano Banana renders.
+                const tags = extractImageTags(accumulated);
+                if (tags.length > 0) {
+                    const cleaned = stripImageTags(accumulated);
+                    const pendingImages = tags.map((t) => ({
+                        prompt: t.prompt,
+                        status: 'pending' as const,
+                    }));
+                    setMessages((prev) =>
+                        prev.map((msg) =>
+                            msg.id === aiResponseId
+                                ? { ...msg, text: cleaned, images: pendingImages }
+                                : msg,
+                        ),
+                    );
+                    // Render each image in parallel; update message as each resolves.
+                    tags.forEach((tag, idx) => {
+                        generateH89Image(tag.prompt)
+                            .then((img) => {
+                                setMessages((prev) =>
+                                    prev.map((msg) => {
+                                        if (msg.id !== aiResponseId || !msg.images) return msg;
+                                        const next = msg.images.slice();
+                                        next[idx] = {
+                                            ...next[idx],
+                                            status: 'ready',
+                                            dataUrl: img.dataUrl,
+                                        };
+                                        return { ...msg, images: next };
+                                    }),
+                                );
+                            })
+                            .catch((err) => {
+                                console.error('Nano Banana render failed:', err);
+                                setMessages((prev) =>
+                                    prev.map((msg) => {
+                                        if (msg.id !== aiResponseId || !msg.images) return msg;
+                                        const next = msg.images.slice();
+                                        next[idx] = {
+                                            ...next[idx],
+                                            status: 'error',
+                                            error: err instanceof Error ? err.message : 'render failed',
+                                        };
+                                        return { ...msg, images: next };
+                                    }),
+                                );
+                            });
+                    });
                 }
             };
 
