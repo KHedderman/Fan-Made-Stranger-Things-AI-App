@@ -359,9 +359,12 @@ body {
     z-index: 100;
     flex: 1;
     min-height: 0;
-    padding: 0.5rem 0.6rem;
+    /* Extra inset so text/inputs stay inside the rounded CRT curve and never
+       clip against the barrel corners. */
+    padding: 1.1rem 1.6rem 1.4rem;
     overflow: hidden;
 }
+
 
 /* Scrollbar */
 .terminal-scrollbar::-webkit-scrollbar { width: 8px; }
