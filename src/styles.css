@@ -344,13 +344,20 @@ body {
     mix-blend-mode: multiply;
 }
 
-/* Slow rolling "vertical hold" band — clipped to screen */
+/* Slow rolling "vertical hold" band — clipped to screen well */
 .scanline-roll {
     position: absolute;
-    inset: var(--bezel-top) var(--bezel-side) auto var(--bezel-side);
-    height: 28%;
-    border-radius: var(--screen-radius) var(--screen-radius) 0 0;
+    inset: var(--bezel-top) var(--bezel-side) var(--bezel-bottom);
+    border-radius: var(--screen-radius);
+    overflow: hidden;
     pointer-events: none;
+    z-index: 96;
+}
+.scanline-roll::before {
+    content: "";
+    position: absolute;
+    inset: 0 0 auto 0;
+    height: 35%;
     background: linear-gradient(
         to bottom,
         transparent 0%,
@@ -360,7 +367,6 @@ body {
         transparent 100%
     );
     animation: roll 7s linear infinite;
-    z-index: 96;
 }
 @keyframes roll {
     0%   { transform: translateY(-120%); }
