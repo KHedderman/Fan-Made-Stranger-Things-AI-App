@@ -4,7 +4,7 @@
 import { GoogleGenAI } from '@google/genai';
 import { getApiKey } from './apiKeyStorage';
 
-const NANO_BANANA_MODEL = 'gemini-2.5-flash-image-preview';
+const NANO_BANANA_MODEL = 'gemini-2.5-flash-image';
 
 // Locked-in style preamble so EVERY generated image looks like it was drawn
 // on the H-89's monochrome amber/green CRT in 1982. Keep this short — the
