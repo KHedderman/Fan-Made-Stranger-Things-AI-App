@@ -301,33 +301,33 @@ body {
     mix-blend-mode: multiply;
 }
 
-/* Slow rolling "vertical hold" band — spans the full green screen
-   (header to footer), clipped by crt-shell's overflow:hidden so it can
-   never bleed onto the charcoal bezel. */
+/* Slow rolling "vertical hold" band — authentic chunky H-89 roll.
+   Spans the full green screen (header to footer); crt-shell's
+   overflow:hidden clips it from the charcoal bezel. */
 .scanline-roll {
     position: absolute;
-    inset: 0;
+    inset: 0 0 auto 0;
+    height: 35%;
     pointer-events: none;
     background: linear-gradient(
         to bottom,
         transparent 0%,
-        rgba(51, 255, 102, 0.05) 45%,
+        rgba(51, 255, 102, 0.05) 40%,
         rgba(51, 255, 102, 0.10) 50%,
-        rgba(51, 255, 102, 0.05) 55%,
+        rgba(51, 255, 102, 0.05) 60%,
         transparent 100%
     );
-    background-size: 100% 35%;
-    background-repeat: no-repeat;
-    background-position: 0 -35%;
     animation: roll 7s linear infinite;
     z-index: 96;
 }
 @keyframes roll {
-    /* The band starts just above the top of the screen and ends just
-       below the bottom, traveling the full header-to-footer height. */
-    0%   { background-position: 0% -35%; }
-    100% { background-position: 0% 100%; }
+    /* Band fully above the screen (transparent edge at top) to fully
+       below the screen (transparent edge at bottom). Brightest line
+       sweeps from the header down to the footer. */
+    0%   { transform: translateY(-100%); }
+    100% { transform: translateY(286%); }
 }
+
 
 
 
