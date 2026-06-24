@@ -7,6 +7,7 @@ import BootSequence from '../components/BootSequence';
 import ChatInterface from '../components/ChatInterface';
 import SettingsModal from '../components/SettingsModal';
 import { playKeyClick } from '../lib/keyClickSound';
+import { extractImageTags, stripImageTags, generateH89Image } from '../lib/imageGen';
 import chassisPhoto from '../assets/heathkit-h89.png.asset.json';
 
 export const Route = createFileRoute('/')({
