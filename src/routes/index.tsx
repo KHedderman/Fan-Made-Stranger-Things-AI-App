@@ -236,8 +236,6 @@ function Index() {
                 <div className="scanlines-static" aria-hidden />
                 <div className="scanline-roll" aria-hidden />
 
-
-
                 <div className="crt-flicker h-full w-full flex flex-col">
                     {/* Top status strip — SETTINGS docked here */}
                     <header className="crt-status grid grid-cols-[minmax(0,1fr)_auto] sm:flex sm:items-center sm:justify-between">

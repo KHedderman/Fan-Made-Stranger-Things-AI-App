@@ -168,189 +168,61 @@ body {
     -webkit-font-smoothing: antialiased;
 }
 
-/* === Room / desk surround behind the monitor === */
+/* === Heathkit H-89 gray plastic chassis === */
 .crt-case {
     position: fixed;
     inset: 0;
     padding: clamp(18px, 2.6vmin, 34px) clamp(28px, 4vmin, 60px) clamp(34px, 5vmin, 64px);
-    /* Dim room: warm wall light up top, darker desk surface below with a soft
-       elliptical shadow pooling under where the monitor sits. */
+    /* Charcoal plastic chassis with subtle realistic shading:
+       - top-light highlight (overhead room light)
+       - darker falloff at bottom and side edges
+       - faint molded plastic grain */
     background:
-        /* desk shadow pool under the monitor */
-        radial-gradient(ellipse 60% 8% at 50% 96%,
-            rgba(0, 0, 0, 0.85) 0%,
-            rgba(0, 0, 0, 0.45) 40%,
-            transparent 75%),
-        /* warm room glow from above */
-        radial-gradient(ellipse 80% 60% at 50% 0%,
-            rgba(80, 60, 40, 0.35) 0%,
-            transparent 60%),
-        /* wall-to-desk horizon */
+        /* fine plastic grain / noise */
+        repeating-linear-gradient(127deg,
+            rgba(255, 255, 255, 0.012) 0 1px,
+            rgba(0, 0, 0, 0.025) 1px 2px),
+        /* left edge shadow */
+        linear-gradient(90deg, rgba(0, 0, 0, 0.35) 0%, transparent 12%, transparent 88%, rgba(0, 0, 0, 0.35) 100%),
+        /* top highlight + bottom shadow */
         linear-gradient(180deg,
-            #1a1612 0%,
-            #15110d 55%,
-            #0a0806 78%,
-            #050402 100%);
+            rgba(255, 255, 255, 0.10) 0%,
+            rgba(255, 255, 255, 0.03) 8%,
+            transparent 35%,
+            rgba(0, 0, 0, 0.25) 80%,
+            rgba(0, 0, 0, 0.45) 100%),
+        /* base color */
+        #3a3a3c;
     overflow: hidden;
     isolation: isolate;
 }
 
-/* === The physical CRT monitor box ===
-   Heathkit-style cream/putty plastic enclosure with a deep recessed screen,
-   ventilation slots across the top, and a chin housing a power LED. */
+/* Flat charcoal border around the screen — no bevel, no recess shadow */
 .crt-shell {
-    --bezel-top: clamp(56px, 8vmin, 110px);     /* taller top — houses vents */
-    --bezel-side: clamp(50px, 7vmin, 100px);
-    --bezel-bottom: clamp(80px, 11vmin, 150px); /* deep chin for badge + LED */
-    --screen-radius: clamp(28px, 4vmin, 52px);
-
     position: absolute;
-    inset: clamp(22px, 3vmin, 40px) clamp(36px, 5vmin, 72px)
-           clamp(56px, 7vmin, 90px) clamp(36px, 5vmin, 72px);
-    /* Chunky molded corners — real CRTs have a tight outer radius, not pillowy */
-    border-radius: clamp(18px, 2.4vmin, 28px);
-    padding: var(--bezel-top) var(--bezel-side) var(--bezel-bottom);
-    border: 1px solid rgba(255, 255, 255, 0.18);
-    /* Layered top-down:
-       1. Top ventilation slots (positioned strip)
-       2. Faint molded plastic grain
-       3. Convex directional lighting (top-left highlight, bottom-right falloff)
-       4. Broad overhead reflection across the upper face
-       5. Dark halo around the screen well
-       6. Vertical depth gradient
-       7. Base warm putty-gray plastic */
+    inset: clamp(18px, 2.6vmin, 34px) clamp(28px, 4vmin, 60px)
+           clamp(60px, 7vmin, 86px) clamp(28px, 4vmin, 60px);
+    border-radius: clamp(36px, 5vmin, 60px);
     background:
-        /* molded plastic grain */
-        repeating-linear-gradient(92deg,
-            rgba(255, 255, 255, 0.020) 0 1px,
-            rgba(0, 0, 0, 0.040) 1px 2px),
-        /* convex directional lighting */
-        linear-gradient(135deg,
-            rgba(255, 255, 255, 0.40) 0%,
-            rgba(255, 255, 255, 0.12) 17%,
-            transparent 34%,
-            rgba(0, 0, 0, 0.14) 66%,
-            rgba(0, 0, 0, 0.60) 100%),
-        /* overhead reflection */
-        radial-gradient(ellipse at 50% -25%,
-            rgba(255, 255, 255, 0.42) 0%,
-            rgba(255, 255, 255, 0.05) 32%,
-            transparent 60%),
-        /* (5) dark halo cradling the screen well */
-        radial-gradient(ellipse 72% 82% at 50% 50%,
-            transparent 56%,
-            rgba(0, 0, 0, 0.60) 76%,
-            rgba(0, 0, 0, 0.35) 88%,
-            transparent 100%),
-        /* (6) vertical depth — chin sits in shadow */
-        linear-gradient(180deg,
-            transparent 55%,
-            rgba(0, 0, 0, 0.20) 80%,
-            rgba(0, 0, 0, 0.42) 100%),
-        /* (7) base putty plastic */
-        linear-gradient(180deg,
-            #cdc9bd 0%,
-            #b1ad9f 18%,
-            #8e8b81 58%,
-            #5e5c55 100%);
-    box-shadow:
-        /* Cast shadow on the desk behind */
-        0 60px 90px -10px rgba(0, 0, 0, 0.85),
-        0 30px 50px rgba(0, 0, 0, 0.6),
-        0 12px 24px rgba(0, 0, 0, 0.5),
-        /* outer bright top edge */
-        0 2px 0 rgba(255, 255, 255, 0.22),
-        /* molded edges */
-        inset 0 2px 2px rgba(255, 255, 255, 0.55),
-        inset 2px 0 2px rgba(255, 255, 255, 0.20),
-        inset -2px 0 4px rgba(0, 0, 0, 0.42),
-        inset 0 -4px 8px rgba(0, 0, 0, 0.55),
-        inset 0 0 0 4px rgba(255, 255, 255, 0.045),
-        inset 0 0 0 9px rgba(0, 0, 0, 0.15);
+        radial-gradient(ellipse at center, #061410 0%, #020604 60%, #000 100%);
     overflow: hidden;
     isolation: isolate;
 }
 
-
-
-
-/* The recessed dark screen well. The deep box-shadow stack does the heavy
-   lifting for the 3D illusion: inset shadows curve the CRT tube inward; the
-   outward shadows project a dark "tunnel" onto the surrounding bezel (the
-   inner walls of the recess); a thin bright rim just outside the screen
-   catches overhead room light off the angled bezel lip. */
-.crt-shell::before {
-    content: "";
-    position: absolute;
-    inset: var(--bezel-top) var(--bezel-side) var(--bezel-bottom);
-    border-radius: var(--screen-radius);
-    pointer-events: none;
-    background:
-        radial-gradient(ellipse at 50% 45%,
-            #0a1a12 0%,
-            #04100a 55%,
-            #01060a 100%);
-    box-shadow:
-        /* glass face — hard black rim */
-        inset 0 0 0 2px rgba(0, 0, 0, 1),
-        /* CRT tube curvature: strong directional inner vignette */
-        inset 0 28px 36px -8px rgba(0, 0, 0, 0.98),
-        inset 0 -22px 32px -8px rgba(0, 0, 0, 0.94),
-        inset 26px 0 34px -10px rgba(0, 0, 0, 0.9),
-        inset -26px 0 34px -10px rgba(0, 0, 0, 0.9),
-        inset 0 0 130px rgba(0, 0, 0, 0.7),
-
-        /* === RECESS TUNNEL — outward shadows projected onto the bezel,
-           simulating the inner walls of the screen well angling back === */
-        /* Hood overhang above the screen — deepest cast */
-        0 -14px 24px -4px rgba(0, 0, 0, 0.88),
-        0 -28px 48px 4px rgba(0, 0, 0, 0.55),
-        /* Bottom lip — softer because overhead light reaches it */
-        0 16px 26px -4px rgba(0, 0, 0, 0.78),
-        0 30px 50px 4px rgba(0, 0, 0, 0.45),
-        /* Side walls */
-        -18px 0 30px -4px rgba(0, 0, 0, 0.78),
-        18px 0 30px -4px rgba(0, 0, 0, 0.78),
-
-        /* === BEZEL LIP HIGHLIGHT — thin bright catch of room light on the
-           angled top of the inner bezel wall, just outside the screen === */
-        0 -1px 0 0.5px rgba(255, 255, 255, 0.22),
-
-        /* === Phosphor spill on the inner bezel === */
-        0 -2px 10px 0 rgba(51, 255, 102, 0.48),
-        0 0 0 1.5px rgba(51, 255, 102, 0.35),
-        0 0 28px 2px rgba(51, 255, 102, 0.18);
-    z-index: 1;
-}
-
-/* Centered phosphor bloom inside the screen */
-.crt-shell::after {
-    content: "";
-    position: absolute;
-    inset: var(--bezel-top) var(--bezel-side) var(--bezel-bottom);
-    border-radius: var(--screen-radius);
-    pointer-events: none;
-    background: radial-gradient(
-        ellipse at center,
-        rgba(51, 255, 102, 0.12) 0%,
-        rgba(51, 255, 102, 0.04) 35%,
-        rgba(0, 0, 0, 0) 70%
-    );
-    z-index: 50;
-}
-
-/* === Mobile: slim the bezel so the screen has room to breathe === */
+/* === Mobile: slim the chassis bezel so the screen has room to breathe === */
 @media (max-width: 640px) {
     .crt-case {
         padding: 6px 6px 32px;
     }
     .crt-shell {
-        --bezel-top: 14px;
-        --bezel-side: 12px;
-        --bezel-bottom: 18px;
-        --screen-radius: 12px;
         inset: 6px 6px 32px 6px;
-        border-radius: 18px;
+        border-radius: 16px;
+    }
+    .crt-shell::after {
+        box-shadow:
+            inset 0 0 0 2px rgba(0, 0, 0, 0.9),
+            inset 0 0 24px rgba(0, 0, 0, 0.75),
+            inset 0 0 70px rgba(0, 0, 0, 0.9);
     }
     .crt-content {
         padding: 0.5rem 0.6rem !important;
@@ -383,12 +255,40 @@ body {
     }
 }
 
-/* Static fine scanlines — scoped to the recessed screen area */
+/* Subtle inner bezel ring at the screen edge */
+.crt-shell::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    border-radius: inherit;
+    box-shadow:
+        inset 0 0 0 4px rgba(0, 0, 0, 0.9),
+        inset 0 0 60px rgba(0, 0, 0, 0.75),
+        inset 0 0 220px rgba(0, 0, 0, 0.9);
+    z-index: 90;
+}
+
+/* Phosphor glow vignette (centered bloom) */
+.crt-shell::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    border-radius: inherit;
+    background: radial-gradient(
+        ellipse at center,
+        rgba(51, 255, 102, 0.10) 0%,
+        rgba(51, 255, 102, 0.04) 35%,
+        rgba(0, 0, 0, 0) 70%
+    );
+    z-index: 50;
+}
+
+/* Static fine scanlines — scoped to screen */
 .scanlines-static {
     position: absolute;
-    inset: var(--bezel-top) var(--bezel-side) var(--bezel-bottom);
-    border-radius: var(--screen-radius);
-    overflow: hidden;
+    inset: 0;
     pointer-events: none;
     background: repeating-linear-gradient(
         to bottom,
@@ -401,20 +301,12 @@ body {
     mix-blend-mode: multiply;
 }
 
-/* Slow rolling "vertical hold" band — clipped to screen well */
+/* Slow rolling "vertical hold" band */
 .scanline-roll {
-    position: absolute;
-    inset: var(--bezel-top) var(--bezel-side) var(--bezel-bottom);
-    border-radius: var(--screen-radius);
-    overflow: hidden;
-    pointer-events: none;
-    z-index: 96;
-}
-.scanline-roll::before {
-    content: "";
     position: absolute;
     inset: 0 0 auto 0;
     height: 35%;
+    pointer-events: none;
     background: linear-gradient(
         to bottom,
         transparent 0%,
@@ -424,6 +316,7 @@ body {
         transparent 100%
     );
     animation: roll 7s linear infinite;
+    z-index: 96;
 }
 @keyframes roll {
     0%   { transform: translateY(-120%); }
@@ -490,10 +383,6 @@ body {
 
 /* Whole-screen subtle 60Hz flicker */
 .crt-flicker {
-    /* opacity animation creates a stacking context — lift above the
-       ::before/::after pseudo layers on .crt-shell so content stays visible */
-    position: relative;
-    z-index: 60;
     animation: flicker 4.5s infinite steps(1);
 }
 @keyframes flicker {
