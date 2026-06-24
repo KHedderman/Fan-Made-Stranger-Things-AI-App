@@ -210,21 +210,9 @@ body {
     top: 12.5%;
     width: 58%;
     height: 78%;
-    /* Tighter corner rounding so the app reaches further into the CRT
-       corners and the header bar isn't clipped at the edges. */
-    border-radius: 4% / 6%;
-
-    /* CRT barrel mask — every side bows out slightly, but corners are kept
-       tight (small radius) so content like the settings button doesn't get
-       clipped at the upper-right. */
-    -webkit-mask-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100' preserveAspectRatio='none'><path d='M2,50 C2,5 5,2 50,1 C95,2 98,5 98,50 C98,95 95,98 50,99 C5,98 2,95 2,50 Z' fill='black'/></svg>");
-    mask-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100' preserveAspectRatio='none'><path d='M2,50 C2,5 5,2 50,1 C95,2 98,5 98,50 C98,95 95,98 50,99 C5,98 2,95 2,50 Z' fill='black'/></svg>");
-
-
-    -webkit-mask-size: 100% 100%;
-    mask-size: 100% 100%;
-    -webkit-mask-repeat: no-repeat;
-    mask-repeat: no-repeat;
+    /* Keep the visible screen corners tight, but do not mask the shell itself:
+       masking this parent can crop the live header/settings controls. */
+    border-radius: 2.5% / 4%;
 
     background:
         radial-gradient(ellipse at center, #061410 0%, #020604 60%, #000 100%);
@@ -272,6 +260,29 @@ body {
         rgba(0, 0, 0, 0) 70%
     );
     z-index: 50;
+}
+
+/* Non-destructive CRT shaping: these overlays darken the extreme curved glass
+   edges without clipping any usable app UI. */
+.crt-flicker {
+    position: relative;
+    z-index: 10;
+}
+
+.crt-shell .crt-flicker::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    z-index: 80;
+    border-radius: inherit;
+    background:
+        radial-gradient(ellipse at top left, rgba(0, 0, 0, 0.34) 0 11%, transparent 23%),
+        radial-gradient(ellipse at top right, rgba(0, 0, 0, 0.34) 0 11%, transparent 23%),
+        radial-gradient(ellipse at bottom left, rgba(0, 0, 0, 0.34) 0 11%, transparent 23%),
+        radial-gradient(ellipse at bottom right, rgba(0, 0, 0, 0.34) 0 11%, transparent 23%),
+        linear-gradient(to right, rgba(0, 0, 0, 0.16), transparent 7%, transparent 93%, rgba(0, 0, 0, 0.16)),
+        linear-gradient(to bottom, rgba(0, 0, 0, 0.14), transparent 8%, transparent 92%, rgba(0, 0, 0, 0.14));
 }
 
 /* Static fine scanlines — scoped to screen */
