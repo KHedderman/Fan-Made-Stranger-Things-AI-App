@@ -206,10 +206,10 @@ body {
    real glass on screen. */
 .crt-shell {
     position: absolute;
-    left: 11.5%;
-    top: 15.5%;
-    width: 53%;
-    height: 70%;
+    left: 12.5%;
+    top: 14%;
+    width: 51%;
+    height: 73%;
     border-radius: 4% / 6%;
 
     background:
