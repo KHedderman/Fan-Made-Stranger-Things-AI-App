@@ -16,4 +16,6 @@ export interface Message {
     sender: 'user' | 'ai' | 'system';
     text: string;
     images?: GeneratedImageData[];
+    /** Show an animated pixel-art waving avatar above the message text. */
+    avatar?: 'eleven' | 'dustin';
 }
