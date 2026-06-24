@@ -8,6 +8,7 @@ import ChatInterface from '../components/ChatInterface';
 import SettingsModal from '../components/SettingsModal';
 import { playKeyClick } from '../lib/keyClickSound';
 import { extractImageTags, stripImageTags, generateH89Image } from '../lib/imageGen';
+import { extractAsciiTags, stripAsciiTags, generateAsciiArt } from '../lib/asciiGen';
 import chassisPhoto from '../assets/heathkit-h89.png.asset.json';
 
 export const Route = createFileRoute('/')({
@@ -122,7 +123,6 @@ function Index() {
                     id: aiResponseId,
                     sender: 'ai',
                     text: '',
-                    avatar: selectedMode === 'child' ? 'eleven' : 'dustin',
                 },
             ]);
             await typeOutText(initialText, aiResponseId);
