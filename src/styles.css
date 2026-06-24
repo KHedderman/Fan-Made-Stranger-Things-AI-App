@@ -432,6 +432,10 @@ body {
 
 /* Whole-screen subtle 60Hz flicker */
 .crt-flicker {
+    /* opacity animation creates a stacking context — lift above the
+       ::before/::after pseudo layers on .crt-shell so content stays visible */
+    position: relative;
+    z-index: 60;
     animation: flicker 4.5s infinite steps(1);
 }
 @keyframes flicker {
