@@ -10,6 +10,8 @@ let ctx: AudioContext | null = null;
 let unlocked = false;
 let lastPlay = 0;
 
+const KEY_CLICK_MASTER_GAIN = 0.18;
+
 function getCtx(): AudioContext | null {
     if (typeof window === 'undefined') return null;
     if (ctx) return ctx;
@@ -96,7 +98,7 @@ function springPing(c: AudioContext, at: number, gainOut: GainNode) {
     osc.type = 'sine';
     osc.frequency.value = 3200 + Math.random() * 700;
     const g = c.createGain();
-    const peak = 0.08 + Math.random() * 0.05;
+    const peak = 0.055 + Math.random() * 0.035;
     g.gain.setValueAtTime(0, at);
     g.gain.linearRampToValueAtTime(peak, at + 0.001);
     g.gain.exponentialRampToValueAtTime(0.0005, at + 0.025);
@@ -114,7 +116,7 @@ function keyUpTick(c: AudioContext, at: number, gainOut: GainNode) {
     bp.frequency.value = 1400 + Math.random() * 400;
     bp.Q.value = 1.6;
     const g = c.createGain();
-    const peak = 0.12 + Math.random() * 0.05;
+    const peak = 0.08 + Math.random() * 0.035;
     g.gain.setValueAtTime(0, at);
     g.gain.linearRampToValueAtTime(peak, at + 0.001);
     g.gain.exponentialRampToValueAtTime(0.0005, at + 0.025);
@@ -150,7 +152,7 @@ export function playKeyClick(): void {
     try {
         const now = c.currentTime;
         const master = c.createGain();
-        master.gain.value = 0.28;
+        master.gain.value = KEY_CLICK_MASTER_GAIN;
         master.connect(c.destination);
 
         thock(c, now, master);
