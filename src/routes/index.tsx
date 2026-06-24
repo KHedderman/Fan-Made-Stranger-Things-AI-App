@@ -55,6 +55,7 @@ function Index() {
     const [appState, setAppState] = useState<AppState>('BOOTING');
     const [mode, setMode] = useState<Mode | null>(null);
     const [, setSeason] = useState<Season | null>(null);
+    const [childReadingLevel, setChildReadingLevel] = useState<string | null>(null);
     const [messages, setMessages] = useState<Message[]>([]);
     const [isLoading, setIsLoading] = useState(false);
     const [settingsOpen, setSettingsOpen] = useState(false);
@@ -65,6 +66,7 @@ function Index() {
         setAppState('BOOTING');
         setMode(null);
         setSeason(null);
+        setChildReadingLevel(null);
         setMessages([]);
         setIsLoading(false);
         chatRef.current = null;
