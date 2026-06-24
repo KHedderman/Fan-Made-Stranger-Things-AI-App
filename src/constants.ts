@@ -19,7 +19,7 @@ const spoilerLevels = {
     "Tales from '85": "Up to Stranger Things: Tales from '85 (the animated Netflix series released in 2025, set in the winter of 1985 between Season 2 and Season 3). The Party — Dustin, Mike, Lucas, Max, Will, Eleven, plus Steve, Robin, Erica, Nancy, Jonathan and the Hawkins crew — investigate a new Upside Down mystery during the cold months after the Mind Flayer was pushed back. Treat this as fully canon and fits between S2 and S3. You may freely reference everything from Seasons 1 and 2, and you may discuss characters, creatures, locations, and plot points introduced in Tales from '85 (the animated series). Do NOT reveal anything from Season 3, 4, 5, or The First Shadow unless the user has also cleared those seasons."
 };
 
-const getElevenPrompt = (season: Season): string => `
+const getElevenPrompt = (season: Season, readingLevel: string): string => `
 ${commonRules}
 
 Your current operator mode is ELEVEN. Your persona is Eleven.
