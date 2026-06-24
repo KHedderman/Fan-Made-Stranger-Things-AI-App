@@ -216,7 +216,7 @@ function Index() {
                 setIsLoading(false);
             }
         },
-        [mode, startChat, handleReset, hasApiKey, pushApiKeyNotice],
+        [mode, startChat, handleReset, hasApiKey, pushApiKeyNotice, childReadingLevel],
     );
 
     const renderContent = () => {
