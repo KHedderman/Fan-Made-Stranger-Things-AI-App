@@ -339,7 +339,7 @@ body {
     align-items: center;
     justify-content: space-between;
     gap: 1rem;
-    padding: 0.4rem 0.9rem;
+    padding: 0.5rem clamp(2.5rem, 6%, 5rem);
     border-bottom: 1px solid rgba(51, 255, 102, 0.25);
     font-size: 0.95rem;
     letter-spacing: 0.08em;
@@ -369,7 +369,7 @@ body {
     min-height: 0;
     /* Extra inset so text/inputs stay inside the rounded CRT curve and never
        clip against the barrel corners. */
-    padding: 1.1rem 1.6rem 1.4rem;
+    padding: clamp(1rem, 3%, 2rem) clamp(2rem, 6%, 4.5rem) clamp(1.2rem, 4%, 2.5rem);
     overflow: hidden;
 }
 
